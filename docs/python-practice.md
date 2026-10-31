@@ -1,4 +1,4 @@
-# Optional Python consolidation: Chapters 1–2
+# Optional Python consolidation: Chapters 1–4
 
 You can practise real Python in the course's Python workspace or run the same scripts locally. The browser route needs no installation or account. On first execution it downloads the pinned Pyodide runtime from jsDelivr; that provider receives ordinary asset requests. Learner code is executed on your device, not sent to a course execution server. Use the supplied classroom values, not personal data or credentials. Browser code can use Python/JavaScript network features if you add them yourself; the supplied scripts make no network calls.
 
@@ -11,7 +11,7 @@ You can practise real Python in the course's Python workspace or run the same sc
 5. Change an input or assumption, predict again, and compare the output.
 6. Save a short reflection: what changed, what you checked, and what the model leaves out.
 
-All activities are formative. Numerical checks validate the supplied test cases, not all possible programs or the quality of a financial claim. Reference solutions are available separately after an explicit reveal. The learner ZIP includes starters and local check tools, not the complete reference solutions. The first Chapter 1 percentage activity is a completed worked example, not an independent coding assessment.
+All activities are formative. Numerical checks validate the supplied test cases, not all possible programs or the quality of a financial claim. Reference solutions are available separately after an explicit reveal. The learner ZIP includes starters and local check tools, not the complete reference solutions. Chapter 3 CSV activities embed their teaching CSV text in the script so they run without uploading or fetching files. The first Chapter 1 percentage activity is a completed worked example, not an independent coding assessment.
 
 ## Browser route
 
@@ -45,7 +45,7 @@ python3 ch1-allocation.py
 python3 check.py ch1-allocation
 ```
 
-Choose any of the eight activity IDs listed below. Each `.py` file can run alone; `check.py`, `checker.py` and `exercises.json` should stay together for local checks. Python `*` multiplies, `/` divides and `**` raises to a power. Python `^` is not exponentiation. Lines beginning with `#` are comments. Indented lines belong to the function or loop above them. `return` sends a result back; `print` displays it.
+Choose an activity ID from the workspace or the table below. Each `.py` file can run alone; `check.py`, `checker.py` and `exercises.json` should stay together for local checks. Python `*` multiplies, `/` divides and `**` raises to a power. Python `^` is not exponentiation. Lines beginning with `#` are comments. Indented lines belong to the function or loop above them. `return` sends a result back; `print` displays it.
 
 ## Activities and suggested extra time
 
@@ -59,8 +59,14 @@ Choose any of the eight activity IDs listed below. Each `.py` file can run alone
 | ch2-discount | Dated cash flows and bond present value | Guided practice | 15 |
 | ch2-inflation | Exact real returns and purchasing power | Guided practice | 10 |
 | ch2-transfer | Reproduce the lab and change only inflation | Transfer challenge | 15 |
+| ch3-order | Parse CSV and order dates before returns | Guided practice | 15 |
+| ch3-audit | Audit duplicates and missing observations | Guided practice | 20 |
+| ch3-split | Use a consistent split-adjusted basis | Transfer challenge | 15 |
+| ch4-summary | Mean, median and sample spread | Guided practice | 15 |
+| ch4-quantile | Explicitly interpolated quantiles | Guided practice | 15 |
+| ch4-correlation | Paired Pearson correlation | Transfer challenge | 15 |
 
-Allow another 10–15 minutes once for first-time Python setup. These are optional additions: about 40 minutes in Chapter 1 and 65 in Chapter 2, beyond the existing three-hour core chapter estimates. The original 30-hour core remains the noncoding path. A future timed pilot can determine which exercises can replace equivalent core practice without increasing total workload. These estimates are not learner-validated.
+Allow another 10–15 minutes once for first-time Python setup. These are optional additions: about 40 minutes in Chapter 1, 65 in Chapter 2, 50 in Chapter 3 and 45 in Chapter 4, beyond the existing three-hour core chapter estimates. The original 30-hour core remains the noncoding path. A future timed pilot can determine which exercises can replace equivalent core practice without increasing total workload. These estimates are not learner-validated.
 
 ## Hypothetical data and conventions
 
@@ -69,6 +75,8 @@ Chapter 1 asset order is cash, bonds, shares. Weights are percentages adding to 
 Chapter 2 uses annual effective growth/discount rates, year-end cash flows, constant assumed inflation and no external deposits. Distributions in the total-return script are held to the period end, with no reinvestment return. Bond principal is included in the final scheduled payment. Keep full calculation precision and round only printed output. Growth, inflation and discounting are conditional teaching assumptions, not forecasts or claims of suitability. No historical data, random seed or train/test split applies to these deterministic arithmetic exercises.
 
 Functions use the stated teaching domain: positive starting values, unleveraged returns, nonnegative cash receipts/fees, annual positive whole-year horizons and discount/inflation rates above −100%. They are learner exercises, not hardened financial production libraries. Their small supplied tests do not establish correctness on every input. Do not interpret a positive return or a passed check as proof of an investment strategy.
+
+Chapter 3 adds original embedded CSV strings with ISO dates, split-only adjustments, conservative duplicate quarantine and transparent gaps. Split-adjusted price returns exclude dividends. Chapter 4 uses hypothetical monthly percentage returns, sample SD with n−1 in percentage points, and inclusive quantiles with h=(n−1)p; correlation preserves observation pairs and is undefined for constant inputs. These statistics describe a sample, not reliable forecasts.
 
 ## Reset, retention and troubleshooting
 
@@ -85,4 +93,4 @@ Browser answers, code, checks and reflections use a separate Python-practice sto
 
 Original tasks and scripts. Runtime design follows [Pyodide worker guidance](https://pyodide.org/en/stable/usage/webworker.html); Python syntax follows the [official Python tutorial](https://docs.python.org/3/tutorial/introduction.html). No third-party course questions or datasets are copied. The runtime has its own upstream licence; it is loaded from its official documented CDN, not redistributed in the learner ZIP.
 
-For Chapters 3–10, the curriculum should pair suitable tasks with Python: CSV inspection and missing data; descriptive statistics; risk metrics; portfolio weights; seeded simulation; timing-aware backtests; trial/cost audits; and a reproducible capstone. Those chapters and scripts remain planned, not implemented in this update. Keep an interpretation route and a worked → guided → transfer sequence for each new lab.
+Chapters 3–4 now add CSV inspection, cleaning and descriptive-statistics exercises. For Chapters 5–10, the curriculum should pair suitable tasks with Python: CSV inspection and missing data; descriptive statistics; risk metrics; portfolio weights; seeded simulation; timing-aware backtests; trial/cost audits; and a reproducible capstone. Chapters 5–10 and their scripts remain planned. Keep an interpretation route and a worked → guided → transfer sequence for each new lab.

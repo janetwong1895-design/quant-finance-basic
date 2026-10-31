@@ -1,12 +1,14 @@
 # Quantitative Finance Foundations
 
-A proposed 30-hour beginner course, with the first two chapters implemented as self-paced, browser-based learning experiences.
+A proposed 30-hour beginner course, with the first four chapters implemented as self-paced, browser-based learning experiences.
 
 | Chapter | Content | Status |
 | --- | --- | --- |
 | [1 · Start with a good question](dist/index.html) | Markets, instruments, benchmarks, an allocation lab and a research card | Interactive prototype |
 | [2 · Make the numbers comparable](dist/chapter-02/index.html) | Total returns, compounding/CAGR, present value, bond cash flows and purchasing power | Interactive prototype |
-| 3–10 | Data, statistics, risk, portfolios, simulation, backtesting, research reliability and capstone | Course proposal |
+| [3 · Trust the table](dist/chapter-03/index.html) | CSV inspection, dates, duplicates, missing prices, split adjustments and a cleaning audit | Interactive prototype |
+| [4 · Describe the evidence](dist/chapter-04/index.html) | Probability, mean/median, sample spread, quantiles, correlation and resampling | Interactive prototype |
+| 5–10 | Risk, portfolios, simulation, backtesting, research reliability and capstone | Course proposal |
 
 Each implemented chapter has worked examples, guided practice, independent self-checks, targeted feedback, revisions, local progress and a text/paper alternative. Suggested chapter time is three hours, including activities and assessment. Learner timings and educational effectiveness have not yet been validated.
 
@@ -18,9 +20,9 @@ Use Python 3 to serve the static learner site:
 python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 ```
 
-Open [Chapter 1](http://127.0.0.1:8765/) or [Chapter 2](http://127.0.0.1:8765/chapter-02/). JavaScript modules require HTTP(S); double-clicking `index.html` is not a supported way to launch the interactive route. Learners visiting a hosted copy need no installation.
+Open [Chapter 1](http://127.0.0.1:8765/), [Chapter 2](http://127.0.0.1:8765/chapter-02/), [Chapter 3](http://127.0.0.1:8765/chapter-03/) or [Chapter 4](http://127.0.0.1:8765/chapter-04/). JavaScript modules require HTTP(S); double-clicking `index.html` is not a supported way to launch the interactive route. Learners visiting a hosted copy need no installation.
 
-The core chapters have no runtime npm dependencies, external fonts, remote calculation APIs or required market-data accounts. The optional Python workspace downloads pinned Pyodide from jsDelivr on first execution; the downloadable scripts run locally without third-party Python packages. Text/paper alternatives are available at `dist/chapter-guide.html` and `dist/chapter-02/guide.html`.
+The core chapters have no runtime npm dependencies, external fonts, remote calculation APIs or required market-data accounts. The optional Python workspace downloads pinned Pyodide from jsDelivr on first execution; the downloadable scripts run locally without third-party Python packages. Text/paper alternatives are available at `dist/chapter-guide.html` and each later chapter’s `guide.html`.
 
 ## Verify and regenerate
 
@@ -33,13 +35,13 @@ npm run build:python
 npm run test:python
 ```
 
-The tests cover both chapters, including financial arithmetic, input validation, critical assessment criteria, saved-state recovery and completion invalidation. The Chapter 2 text route is generated from the same lesson and assessment definitions as the interactive route.
+The tests cover the implemented chapters, including financial arithmetic, input validation, critical assessment criteria, saved-state recovery and completion invalidation. The Chapter 2–4 text routes are generated from the same lesson and assessment definitions as their interactive routes.
 
 ## Optional Python consolidation
 
-Open [Python practice](dist/python/index.html) from the chapter links. Eight activities offer prediction, a real Python editor, changed-input checks, hints, references and self-reviewed reflection. A [complete text/setup guide](dist/python/guide.html) and [downloadable learner pack](dist/python/learner-pack.zip) support local Python. See [the design and future chapter mapping](docs/python-practice.md).
+Open [Python practice](dist/python/index.html) from the chapter links. Chapter-linked activities offer prediction, a real Python editor, changed-input checks, hints, references and self-reviewed reflection. A [complete text/setup guide](dist/python/guide.html) and [downloadable learner pack](dist/python/learner-pack.zip) support local Python. See [the design and future chapter mapping](docs/python-practice.md).
 
-Allow an additional 40 minutes for Chapter 1, 65 minutes for Chapter 2 and 10–15 minutes for first setup, beyond the proposed 30-hour core. These estimates are unvalidated. Python progress is separate from core completion. Chapters 3–10 remain proposed.
+Allow an additional 40 minutes for Chapter 1, 65 minutes for Chapter 2 and 10–15 minutes for first setup, beyond the proposed 30-hour core. These estimates are unvalidated. Python progress is separate from core completion. Chapters 3–4 add an estimated 50 and 45 minutes of data and statistics scripts; Chapters 5–10 remain proposed.
 
 ## Course materials
 
@@ -48,6 +50,8 @@ Allow an additional 40 minutes for Chapter 1, 65 minutes for Chapter 2 and 10–
 - [Production record](production-record.md)
 - [Chapter 1 design notes](docs/chapter-01.md)
 - [Chapter 2 design notes](docs/chapter-02.md)
+- [Chapter 3 design notes](docs/chapter-03.md)
+- [Chapter 4 design notes](docs/chapter-04.md)
 - [Instructor materials and answer guidance](instructor/)
 - [Independent reviews and verification records](review/)
 

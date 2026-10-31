@@ -131,4 +131,9 @@ Open decisions: intended audience segment; whether 30 hours means total study ti
 
 ## Python implementation amendment · 31 October 2026
 
-The original proposal describes a possible equivalent Python/notebook route. The currently delivered implementation instead supplies eight optional Python script activities for Chapters 1–2, adding an estimated 40 and 65 minutes respectively, plus 10–15 minutes for first setup, beyond the proposed 30-hour noncoding core. No equivalent-time replacement or notebook route has been validated. Later chapters remain proposed. See [Python practice](docs/python-practice.md).
+The original proposal describes a possible equivalent Python/notebook route. The currently delivered implementation instead supplies eight optional Python script activities for Chapters 1–2, adding an estimated 40 and 65 minutes respectively, plus 10–15 minutes for first setup, beyond the proposed 30-hour noncoding core. No equivalent-time replacement or notebook route has been validated. Chapters 3–4 now extend this optional script route to data cleaning and descriptive statistics; their per-activity extra times are shown in the workspace. Chapters 5–10 remain proposed. See [Python practice](docs/python-practice.md).
+
+
+## Current implementation status · Chapters 3–4 update
+
+Chapters 1–4 are implemented as formative self-learning web prototypes with text routes, local progress, worked/guided/transfer tasks and optional Python scripts. The original proposal’s notebook and facilitated-support plans remain proposals; no notebook service or facilitator response has been provisioned. Each chapter’s 180-minute noncoding estimate and additional Python times need a learner pilot. The proposal’s course-level assessment weights and capstone pass rules are not an awarded credential or implemented course-wide grading system. Chapters 5–10 remain planned.

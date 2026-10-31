@@ -1,0 +1,14 @@
+# Final verification · Chapters 3–4
+
+Status: corrected formative self-learning prototypes for authorized private publication and GitHub push. Chapters 5–10 remain proposed. This is not a full learner-piloted or commercially release-ready course.
+
+28 Node 24 tests pass (including 14 Chapter 3/4 tests); all five Python unittest methods pass on Python 3.8.2. The latter execute every case across all 14 Python activities, check incomplete starters, seeded misconceptions, ZIP contents and local CLI. Chapter 2/3/4 printable routes regenerated; Python learner pack regenerated. 97 local HTML asset/download links resolve; git diff whitespace check passes. Independent reviews are separate files here, with findings, corrections, hashes and scoped limitations.
+
+Actual ChatGPT in-app-browser verification on localhost:
+- Chapter 3: setup saved; unsupported keep-last conflict policy produces corrective feedback; quarantine succeeds; adjusted then raw runs retained; hand check 2% and reflection/self-review save the lab. Raw-last lab remains complete after reload. Skip link preserves the current lab. Quant methods independently reproduce 3 retained / 4 removed rows, adjusted 4.04% versus raw −47.98% endpoint change.
+- Chapter 4: setup and probability task wrong .5 generates targeted feedback; corrected .3333 and .75 plus reflection save and survive reload. Editing an answer invalidates completion. Seeds 42 and 43 generate histogram bins plus source-value replicate tables. Latest seed43 first replicate hand check −5/6 passes; writing reflection and checking criteria then saves lab without rechecking. Independent assessment earns8/8 only after correct conventions; feedback response saves. Skip link preserves the current lab. Desktop visual layout inspected.
+- Real browser Python: Pyodide314.0.7 ran Python3.14.2; Chapter3 DictReader/date-sort/interval-return implementation matches3/3 cases. Chapter4 unfinished quantile implementation matches0/4; corrected interpolation matches4/4 including unsorted input and upper endpoint. Chapter3/4 back-links and dynamic activity grouping inspected. No new execution-server or runtime dependency introduced.
+
+Full destructive browser reset, actual file-download dialogue, mobile-device reflow, complete screen-reader compatibility, learner timings and effectiveness were not tested in this update. Reset/export code and downloadable pack are covered by source/local checks; no blanket accessibility claim. Private learner-page hosting logs/CDN requests and local-only saved progress limits remain disclosed. The external runtime loads only when run. Code completion does not certify financial reasoning; prose is self-reviewed.
+
+Packaging check: original Sites checkout ignored all ZIP files. Added a narrow exception for dist/python/learner-pack.zip so the source commit and deployment archive both include the downloadable learner pack. Site identity and private audience are preserved.

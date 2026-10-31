@@ -554,5 +554,559 @@
         "hint": "Use each function argument rather than the default values."
       }
     ]
+  },
+  {
+    "id": "ch3-order",
+    "chapter": 3,
+    "kind": "Guided practice",
+    "minutes": 15,
+    "title": "Sort before taking a return",
+    "concept": "Chapter 3 · chronological observations",
+    "objective": "Sort ISO-date observations and calculate adjacent interval price returns.",
+    "prediction": "The input arrives as 8 January £52.02, 2 January £50, 7 January £51. Predict the first chronological interval return.",
+    "instructions": "Complete both TODO expressions. The supplied csv_returns wrapper reads CSV with csv.DictReader, converts price strings using float, and passes [ISO date, split-adjusted price] rows to your function. Inputs here have unique valid dates and positive prices; the next activity handles quality defects. Return a dictionary of the first and last interval percentages and cumulative percentage, not rounded strings. At least two observations are supplied. The first observation has no return. Gaps remain observed intervals, not daily returns.",
+    "syntax": "csv.DictReader returns dictionary fields as strings; float converts price strings to numbers. io.StringIO makes CSV text readable like a file. sorted(rows, key=...) returns a new list. lambda row: row[0] selects its ISO date as a sorting key. zip pairs the earlier rows with ordered[1:], the list starting at its second item. append adds a result to a list.",
+    "hints": [
+      "Fixed-width ISO dates sort in chronological order. Use key=lambda row: row[0].",
+      "For each earlier/later pair use (later[1] / earlier[1] - 1) * 100."
+    ],
+    "reflection": "Name the actual date intervals. Explain why file order and a daily label would be misleading, and why the first observation has no return.",
+    "starter": "import csv\nimport io\n\ndef ordered_returns(rows):\n    ordered = None  # TODO: sort a copy by ISO date.\n    returns = []\n    for earlier, later in zip(ordered, ordered[1:]):\n        result = None  # TODO: interval return in percentage units.\n        returns.append(result)\n    total = 1\n    for result in returns:\n        total *= 1 + result / 100\n    return dict(first=returns[0], last=returns[-1], cumulative=(total - 1) * 100)\n\ndef csv_returns(csv_text):\n    reader = csv.DictReader(io.StringIO(csv_text))\n    rows = [[row[\"date\"], float(row[\"adjusted\"])] for row in reader]\n    return ordered_returns(rows)\n\nif __name__ == \"__main__\":\n    csv_text = \"date,adjusted\\n2025-01-08,52.02\\n2025-01-02,50\\n2025-01-07,51\\n\"\n    print(\"Interval price returns (%):\", csv_returns(csv_text))\n",
+    "example": "# ISO strings, not ambiguous day/month strings.\nrows = [[\"2025-03-06\", 84], [\"2025-03-01\", 80]]\nordered = sorted(rows, key=lambda row: row[0])\nprint(\"From\", ordered[0][0], \"to\", ordered[1][0])\nprint(\"Interval return (%):\", (ordered[1][1] / ordered[0][1] - 1) * 100)  # 5\n",
+    "cases": [
+      {
+        "label": "Shuffled split-consistent file",
+        "function": "csv_returns",
+        "args": [
+          "date,adjusted\n2025-01-08,52.02\n2025-01-02,50\n2025-01-07,51\n"
+        ],
+        "expected": {
+          "first": 2,
+          "last": 2,
+          "cumulative": 4.04
+        },
+        "hint": "Sort dates, not prices or original row order."
+      },
+      {
+        "label": "A falling interval",
+        "function": "csv_returns",
+        "args": [
+          "date,adjusted\n2025-02-05,95\n2025-02-01,100\n"
+        ],
+        "expected": {
+          "first": -5,
+          "last": -5,
+          "cumulative": -5
+        },
+        "hint": "The older price is the denominator."
+      },
+      {
+        "label": "Already ordered with a gap",
+        "function": "csv_returns",
+        "args": [
+          "date,adjusted\n2025-03-01,80\n2025-03-04,84\n2025-03-09,84\n"
+        ],
+        "expected": {
+          "first": 5,
+          "last": 0,
+          "cumulative": 5
+        },
+        "hint": "Do not insert zero-return observations for absent dates."
+      }
+    ]
+  },
+  {
+    "id": "ch3-audit",
+    "chapter": 3,
+    "kind": "Guided practice",
+    "minutes": 20,
+    "title": "Count every cleaning decision",
+    "concept": "Chapter 3 · transparent quality audit",
+    "objective": "Implement a conservative missing/duplicate/conflict policy and report audit counts.",
+    "prediction": "Five rows contain one exact duplicate and two different prices on one date. How many rows will remain after exact deduplication and conflict quarantine?",
+    "instructions": "Rows contain [date, price] on one consistently adjusted basis. Valid ISO dates are supplied. Complete the counting and retention TODOs; the grouping logic is provided. Return a dictionary with retained, missing, conflicts and duplicates. Counts describe original removed rows, except duplicates counts redundant exact copies. If a date has multiple distinct valid prices, quarantine every row on that date. Unknown prices are excluded first. No filling occurs.",
+    "syntax": "A dictionary maps keys to values. set removes identical values. len counts items. continue skips to the next loop item. The supplied groups.setdefault(date, []).append(price) collects valid prices for each date. None means unknown here.",
+    "hints": [
+      "Each None price increments missing, then continue prevents adding it to groups.",
+      "If a date has conflicting distinct prices, all len(prices) rows count as conflicts. Otherwise retain one and count len(prices) - 1 redundant copies."
+    ],
+    "reflection": "Explain the unit of each audit count, the retained observation count and why quarantining conflict does not recover the true price.",
+    "starter": "def audit_counts(rows):\n    groups = {}\n    missing = 0\n    for date, price in rows:\n        if price is None:\n            missing += 1\n            continue\n        groups.setdefault(date, []).append(price)\n    retained = conflicts = duplicates = 0\n    for date, prices in groups.items():\n        if len(set(prices)) > 1:\n            conflicts += None  # TODO: number of original rows quarantined.\n        else:\n            retained += None  # TODO: how many observations survive this date?\n            duplicates += None  # TODO: redundant identical copies.\n    return dict(retained=retained, missing=missing,\n                conflicts=conflicts, duplicates=duplicates)\n\nif __name__ == \"__main__\":\n    rows = [[\"2025-01-02\", 50], [\"2025-01-03\", 51],\n            [\"2025-01-03\", 51.5], [\"2025-01-06\", None],\n            [\"2025-01-07\", 51], [\"2025-01-08\", 52.02],\n            [\"2025-01-08\", 52.02]]\n    print(audit_counts(rows))\n",
+    "example": "# Worked exact duplicate: both date and price agree.\nprices_for_one_date = [50, 50, 50]\ndistinct_values = set(prices_for_one_date)\nprint(\"Distinct values:\", len(distinct_values))  # 1\nprint(\"Retained:\", 1)\nprint(\"Redundant copies:\", len(prices_for_one_date) - 1)  # 2\nprint(\"A conflicting date needs source investigation, not averaging.\")\n",
+    "cases": [
+      {
+        "label": "Mixed audit",
+        "function": "audit_counts",
+        "args": [
+          [
+            [
+              "2025-01-02",
+              50
+            ],
+            [
+              "2025-01-03",
+              51
+            ],
+            [
+              "2025-01-03",
+              51.5
+            ],
+            [
+              "2025-01-06",
+              null
+            ],
+            [
+              "2025-01-07",
+              51
+            ],
+            [
+              "2025-01-08",
+              52.02
+            ],
+            [
+              "2025-01-08",
+              52.02
+            ]
+          ]
+        ],
+        "expected": {
+          "retained": 3,
+          "missing": 1,
+          "conflicts": 2,
+          "duplicates": 1
+        },
+        "hint": "Classify every original row exactly once as retained or removed."
+      },
+      {
+        "label": "Changed conflict case",
+        "function": "audit_counts",
+        "args": [
+          [
+            [
+              "2025-02-01",
+              80
+            ],
+            [
+              "2025-02-01",
+              80
+            ],
+            [
+              "2025-02-02",
+              81
+            ],
+            [
+              "2025-02-02",
+              82
+            ],
+            [
+              "2025-02-03",
+              84
+            ]
+          ]
+        ],
+        "expected": {
+          "retained": 2,
+          "missing": 0,
+          "conflicts": 2,
+          "duplicates": 1
+        },
+        "hint": "Conflicting values are both quarantined; one exact copy is retained."
+      },
+      {
+        "label": "Only missing observations",
+        "function": "audit_counts",
+        "args": [
+          [
+            [
+              "2025-03-01",
+              null
+            ],
+            [
+              "2025-03-02",
+              null
+            ]
+          ]
+        ],
+        "expected": {
+          "retained": 0,
+          "missing": 2,
+          "conflicts": 0,
+          "duplicates": 0
+        },
+        "hint": "Do not turn None into a zero price."
+      }
+    ]
+  },
+  {
+    "id": "ch3-split",
+    "chapter": 3,
+    "kind": "Transfer challenge",
+    "minutes": 15,
+    "title": "Keep the share basis consistent",
+    "concept": "Chapter 3 · split-adjusted price returns",
+    "objective": "Adjust an earlier raw price for a verified split, then report raw and adjusted interval returns.",
+    "prediction": "A raw £100 becomes £51 after a two-for-one split. Predict the raw price change and split-consistent price return.",
+    "instructions": "Use split_factor as new shares per old share. The split is independently verified; do not infer it from a price fall. The later price is already post-split. Complete earlier_adjusted and both returns. No dividends, other actions, fees or taxes; this is price return only. Return a dictionary; keep numerical precision.",
+    "syntax": "Divide the older raw price by the split factor to express both prices in new-share units. A dictionary literal uses braces and key: value pairs. Use each function argument so new cases work.",
+    "hints": [
+      "Earlier adjusted price = earlier_raw / split_factor.",
+      "Use later_raw / earlier_raw - 1 for raw, and later_raw / earlier_adjusted - 1 for split-consistent return; multiply each by 100."
+    ],
+    "reflection": "Explain the share-count arithmetic and why raw −49% does not prove a 49% wealth loss. State why the result is not dividend-inclusive total return.",
+    "starter": "def split_report(earlier_raw, later_raw, split_factor):\n    earlier_adjusted = None  # TODO: use the post-split share basis.\n    raw_return = None  # TODO: raw interval percentage change.\n    adjusted_return = None  # TODO: split-consistent interval percentage return.\n    return dict(earlier_adjusted=earlier_adjusted,\n                raw_return=raw_return, adjusted_return=adjusted_return)\n\nif __name__ == \"__main__\":\n    print(split_report(100, 51, 2))\n",
+    "example": "# A pure two-for-one split: one old share -> two new shares.\nold_price = 120\nnew_price = 60\nnew_shares_per_old = 2\nprint(\"Wealth before:\", old_price * 1)\nprint(\"Wealth after:\", new_price * new_shares_per_old)\nprint(\"Earlier price in new-share units:\", old_price / new_shares_per_old)\n",
+    "cases": [
+      {
+        "label": "Main split case",
+        "function": "split_report",
+        "args": [
+          100,
+          51,
+          2
+        ],
+        "expected": {
+          "earlier_adjusted": 50,
+          "raw_return": -49,
+          "adjusted_return": 2
+        },
+        "hint": "Divide the older price by the new-shares-per-old factor."
+      },
+      {
+        "label": "Pure split",
+        "function": "split_report",
+        "args": [
+          202,
+          101,
+          2
+        ],
+        "expected": {
+          "earlier_adjusted": 101,
+          "raw_return": -50,
+          "adjusted_return": 0
+        },
+        "hint": "A pure split does not change wealth."
+      },
+      {
+        "label": "New three-for-one split",
+        "function": "split_report",
+        "args": [
+          90,
+          31.5,
+          3
+        ],
+        "expected": {
+          "earlier_adjusted": 30,
+          "raw_return": -65,
+          "adjusted_return": 5
+        },
+        "hint": "Do not hard-code the factor two."
+      },
+      {
+        "label": "No split",
+        "function": "split_report",
+        "args": [
+          80,
+          84,
+          1
+        ],
+        "expected": {
+          "earlier_adjusted": 80,
+          "raw_return": 5,
+          "adjusted_return": 5
+        },
+        "hint": "A factor of one leaves the price basis unchanged."
+      }
+    ]
+  },
+  {
+    "id": "ch4-summary",
+    "chapter": 4,
+    "kind": "Guided practice",
+    "minutes": 15,
+    "title": "Summarise a tiny return sample",
+    "concept": "Chapter 4 · observed frequency, centre and sample spread",
+    "objective": "Calculate observed loss frequency, arithmetic mean, median and sample SD; explain their units and limits.",
+    "prediction": "For [-2, 0, 2]%, predict mean, median, loss frequency and sample standard deviation before running.",
+    "instructions": "Complete the four dictionary values. Use the standard-library statistics functions already imported. Inputs are percentage-unit returns, not decimals. A loss is strictly below zero; return its frequency on the 0–1 scale. Sample SD uses n−1 and is in percentage points. At least two finite observations are required. No external packages.",
+    "syntax": "A dictionary maps quoted keys to values. statistics.mean, median and stdev accept lists. sum(value < 0 for value in returns_pct) counts True conditions. len returns the number of observations. Do not use pstdev: it uses n, not n−1.",
+    "hints": [
+      "Use mean(returns_pct), median(returns_pct) and stdev(returns_pct) for the three summaries.",
+      "Count strictly negative observations and divide by len(returns_pct); zero belongs to the complement."
+    ],
+    "reflection": "Explain why standard deviation uses percentage points, why zero is not a loss, and why this tiny invented sample does not establish future probabilities.",
+    "starter": "import math\nfrom statistics import mean, median, stdev\n\ndef describe(returns_pct):\n    if len(returns_pct) < 2 or not all(math.isfinite(x) for x in returns_pct):\n        raise ValueError(\"Supply at least two finite observations.\")\n    return {\n        \"mean\": None,  # TODO_MEAN\n        \"median\": None,  # TODO_MEDIAN\n        \"sample_sd\": None,  # TODO_SD\n        \"loss_frequency\": None,  # TODO_LOSS\n    }\n\nif __name__ == \"__main__\":\n    print(describe([-3, -1, 0, 1, 2, 7]))\n",
+    "example": "from statistics import mean, median, stdev\nvalues = [-2, 0, 2]  # Hypothetical monthly returns in percentage units.\nprint(\"Mean (%):\", mean(values))  # 0\nprint(\"Median (%):\", median(values))  # 0\nprint(\"Sample SD (percentage points):\", stdev(values))  # 2\nprint(\"Observed loss frequency:\", sum(x < 0 for x in values) / len(values))\n",
+    "cases": [
+      {
+        "label": "Zero is not a loss",
+        "function": "describe",
+        "args": [
+          [
+            -2,
+            0,
+            2
+          ]
+        ],
+        "expected": {
+          "mean": 0,
+          "median": 0,
+          "sample_sd": 2,
+          "loss_frequency": 0.3333333333333333
+        },
+        "hint": "Use n−1 and count only values below zero."
+      },
+      {
+        "label": "Transfer sample",
+        "function": "describe",
+        "args": [
+          [
+            -4,
+            0,
+            4,
+            8
+          ]
+        ],
+        "expected": {
+          "mean": 2,
+          "median": 2,
+          "sample_sd": 5.163977794943222,
+          "loss_frequency": 0.25
+        },
+        "hint": "Use all observations and return numeric dictionary values."
+      },
+      {
+        "label": "Constant series",
+        "function": "describe",
+        "args": [
+          [
+            3,
+            3,
+            3
+          ]
+        ],
+        "expected": {
+          "mean": 3,
+          "median": 3,
+          "sample_sd": 0,
+          "loss_frequency": 0
+        },
+        "hint": "A constant sample has zero spread, not missing data."
+      }
+    ]
+  },
+  {
+    "id": "ch4-quantile",
+    "chapter": 4,
+    "kind": "Guided practice",
+    "minutes": 15,
+    "title": "Declare the quantile convention",
+    "concept": "Chapter 4 · sorted linear interpolation",
+    "objective": "Implement inclusive quantiles using h=(n−1)p and explain differences from other conventions.",
+    "prediction": "For [0, 10, 20, 40]%, predict the 25th and 75th percentiles under h=(n−1)p.",
+    "instructions": "Complete the interpolation expression. The starter sorts the data and finds the lower and upper neighbours. p is a fraction between zero and one, so .25 means the 25th percentile. For p=1 both neighbours are the final observation. Keep full precision; round only printed output.",
+    "syntax": "sorted creates a sorted copy. int(h) truncates a nonnegative position to its lower integer. Python list indices start at zero. The fraction h-lower is how far to move from the lower value toward the upper value.",
+    "hints": [
+      "Interpolate as lower_value + fraction × (upper_value − lower_value).",
+      "Use ordered[lower] + (h - lower) * (ordered[upper] - ordered[lower])."
+    ],
+    "reflection": "State the sorting rule, zero-based position and interpolation convention. Explain why a different software default can give a different small-sample quantile.",
+    "starter": "import math\n\ndef inclusive_quantile(values, p):\n    if not values or not all(math.isfinite(x) for x in values) or not 0 <= p <= 1:\n        raise ValueError(\"Use finite values and p between zero and one.\")\n    ordered = sorted(values)\n    h = (len(ordered) - 1) * p\n    lower = int(h)\n    upper = min(lower + 1, len(ordered) - 1)\n    return None  # TODO_INTERPOLATE\n\nif __name__ == \"__main__\":\n    print(\"25th percentile (%):\", inclusive_quantile([0, 10, 20, 40], .25))\n",
+    "example": "ordered = [0, 10, 20, 40]\nh = (len(ordered) - 1) * .75  # 2.25\nlower = int(h)  # 2: value 20\nfraction = h - lower  # .25\nresult = ordered[lower] + fraction * (ordered[lower + 1] - ordered[lower])\nprint(\"75th percentile (%):\", result)  # 25\n",
+    "cases": [
+      {
+        "label": "Interpolation",
+        "function": "inclusive_quantile",
+        "args": [
+          [
+            0,
+            10,
+            20,
+            40
+          ],
+          0.25
+        ],
+        "expected": 7.5,
+        "hint": "Interpolate .75 of the distance from 0 to 10."
+      },
+      {
+        "label": "Unsorted input",
+        "function": "inclusive_quantile",
+        "args": [
+          [
+            20,
+            0,
+            8,
+            4
+          ],
+          0.75
+        ],
+        "expected": 11,
+        "hint": "Sort before finding position 2.25."
+      },
+      {
+        "label": "Upper endpoint",
+        "function": "inclusive_quantile",
+        "args": [
+          [
+            3,
+            -2,
+            9
+          ],
+          1
+        ],
+        "expected": 9,
+        "hint": "The 100th percentile is the maximum."
+      },
+      {
+        "label": "Median transfer",
+        "function": "inclusive_quantile",
+        "args": [
+          [
+            -3,
+            -1,
+            0,
+            1,
+            2,
+            7
+          ],
+          0.5
+        ],
+        "expected": 0.5,
+        "hint": "Interpolate between zero-based indices 2 and 3."
+      }
+    ]
+  },
+  {
+    "id": "ch4-correlation",
+    "chapter": 4,
+    "kind": "Transfer challenge",
+    "minutes": 15,
+    "title": "Preserve the date pairs",
+    "concept": "Chapter 4 · Pearson correlation and undefined cases",
+    "objective": "Implement Pearson correlation for aligned monthly rows; detect zero variance and reject causal overclaims.",
+    "prediction": "What correlation do you expect when x=[-1,0,1] and y=[-2,0,2]? What if y is constant?",
+    "instructions": "Complete covariance numerator and denominator calculations. Each row must already hold same-date asset returns; the starter rejects duplicate dates. Verify alignment in the source data before creating rows. Undefined correlation is reported as {\"defined\": 0, \"r\": 0}; this explicit flag means the numeric placeholder is not a correlation estimate. Do not interpret it as zero association. Defined cases use {\"defined\": 1, \"r\": value}. No statistics.correlation dependency, so this works on Python 3.8.",
+    "syntax": "Each row is [date, x, y]. List comprehensions extract aligned values. zip pairs deviations without sorting. sum accumulates products; math.sqrt takes a square root. The defined flag is numeric to work with the shared exercise checker.",
+    "hints": [
+      "The numerator is sum((a - mx) * (b - my) for a, b in zip(x, y)).",
+      "The denominator is math.sqrt(xx * yy); when either squared-deviation sum is zero, use the explicit undefined flag supplied in the starter."
+    ],
+    "reflection": "Explain why row alignment matters, why zero variance makes r undefined, and why a nonzero sample association proves neither causation nor future stability.",
+    "starter": "import math\n\ndef paired_report(rows):\n    if len(rows) < 2 or len({r[0] for r in rows}) != len(rows):\n        raise ValueError(\"Supply at least two unique aligned date rows.\")\n    x = [r[1] for r in rows]\n    y = [r[2] for r in rows]\n    if not all(math.isfinite(v) for v in x + y):\n        raise ValueError(\"Returns must be finite.\")\n    mx, my = sum(x) / len(x), sum(y) / len(y)\n    xx = sum((v - mx) ** 2 for v in x)\n    yy = sum((v - my) ** 2 for v in y)\n    if xx == 0 or yy == 0:\n        return {\"defined\": 0, \"r\": 0}  # Undefined: do not interpret placeholder as an r.\n    numerator = None  # TODO_NUMERATOR\n    denominator = None  # TODO_DENOMINATOR\n    return {\"defined\": 1, \"r\": numerator / denominator}\n\nif __name__ == \"__main__\":\n    print(paired_report([[\"Jan\", -1, -2], [\"Feb\", 0, 0], [\"Mar\", 1, 2]]))\n",
+    "example": "import math\nx, y = [-1, 0, 1], [-2, 0, 2]  # Same three dates, not sorted independently.\ncross_products = 2 + 0 + 2\nprint(\"Correlation:\", cross_products / math.sqrt(2 * 8))  # 1\nprint(\"An association in these pairs is not a causal explanation or forecast.\")\n",
+    "cases": [
+      {
+        "label": "Positive aligned line",
+        "function": "paired_report",
+        "args": [
+          [
+            [
+              "Jan",
+              -1,
+              -2
+            ],
+            [
+              "Feb",
+              0,
+              0
+            ],
+            [
+              "Mar",
+              1,
+              2
+            ]
+          ]
+        ],
+        "expected": {
+          "defined": 1,
+          "r": 1
+        },
+        "hint": "Sum paired deviation products."
+      },
+      {
+        "label": "Negative association",
+        "function": "paired_report",
+        "args": [
+          [
+            [
+              "Jan",
+              -1,
+              2
+            ],
+            [
+              "Feb",
+              0,
+              0
+            ],
+            [
+              "Mar",
+              1,
+              -2
+            ]
+          ]
+        ],
+        "expected": {
+          "defined": 1,
+          "r": -1
+        },
+        "hint": "Keep original pairs and signs."
+      },
+      {
+        "label": "Undefined constant series",
+        "function": "paired_report",
+        "args": [
+          [
+            [
+              "Jan",
+              1,
+              3
+            ],
+            [
+              "Feb",
+              2,
+              3
+            ],
+            [
+              "Mar",
+              3,
+              3
+            ]
+          ]
+        ],
+        "expected": {
+          "defined": 0,
+          "r": 0
+        },
+        "hint": "The flag marks an undefined value; the placeholder is not a correlation."
+      },
+      {
+        "label": "Zero linear association",
+        "function": "paired_report",
+        "args": [
+          [
+            [
+              "Jan",
+              -1,
+              1
+            ],
+            [
+              "Feb",
+              0,
+              -2
+            ],
+            [
+              "Mar",
+              1,
+              1
+            ]
+          ]
+        ],
+        "expected": {
+          "defined": 1,
+          "r": 0
+        },
+        "hint": "Zero linear correlation can coexist with a nonlinear pattern."
+      }
+    ]
   }
 ]

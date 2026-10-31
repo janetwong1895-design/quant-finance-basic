@@ -1,0 +1,10 @@
+CHAPTER 3 SYNTHETIC DATA DICTIONARY v1.0, authored 31 October 2026
+Creator: Quant Finance Studio course examples. Original synthetic teaching material under repository MIT licence. Not actual market data; no investment inference.
+lantern-raw.csv: fictional LANTERN asset, GBP per share. Includes deliberate quality defects. Raw original must be preserved.
+transfer.csv: new fictional asset, same units and conventions, two-for-one split on 5 February 2025. No deliberate quality conflicts.
+date: ISO YYYY-MM-DD observation date, not a timestamp. No exchange/trading-calendar claim. Dates cannot establish expected sessions.
+raw: positive price in share units then in effect. Empty fields mean unknown, never zero.
+adjusted: price on post-split share basis. LANTERN split on 7 January 2025, two new shares per old share; earlier raw prices divided by two. Transfer split on 5 February, same factor. Later raw and adjusted prices match. No dividends, fees, taxes, other corporate actions or FX. Thus adjusted price returns are not a general total-return series.
+Audit policy used in course: chronological ISO sorting; retain one identical date+raw+adjusted copy; quarantine all conflicting date values pending authoritative evidence; exclude missing/invalid prices without filling. This is an explicit pedagogical policy, not universal advice.
+Record every removal and calculation interval. First retained observation has no return. Gaps remain observed multi-date intervals; no daily label, annualisation or forecast.
+CSV readers such as Python DictReader return strings; convert numeric fields deliberately and map empty strings to None before calculations.
