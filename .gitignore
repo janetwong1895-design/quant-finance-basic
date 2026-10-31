@@ -1,0 +1,10 @@
+node_modules/
+.DS_Store
+.openai/
+*.tar.gz
+*.zip
+.env
+.env.*
+!.env.example
+qf-chapter-*-progress.json
+qf-chapter-*-runs.csv
