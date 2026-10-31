@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Self-paced quantitative finance foundations: proposal and interactive Chapters 1\u20134.",
+  "description": "Ten-chapter self-learning quantitative finance foundations prototype with optional Python.",
   "engines": {
     "node": ">=24"
   },
@@ -12,6 +12,7 @@
     "build:guide": "node scripts/build-guides.mjs",
     "start": "python3 -m http.server 8765 --bind 127.0.0.1 --directory dist",
     "test:python": "python3 -m unittest discover -s tests -p \"test_python_*.py\"",
-    "build:python": "python3 scripts/build-python-practice.py"
+    "build:python": "python3 scripts/build-python-practice.py",
+    "build:navigation": "node scripts/build-course-navigation.mjs"
   }
 }

@@ -1,4 +1,4 @@
-# Optional Python consolidation: Chapters 1–4
+# Optional Python consolidation: Chapters 1–10
 
 You can practise real Python in the course's Python workspace or run the same scripts locally. The browser route needs no installation or account. On first execution it downloads the pinned Pyodide runtime from jsDelivr; that provider receives ordinary asset requests. Learner code is executed on your device, not sent to a course execution server. Use the supplied classroom values, not personal data or credentials. Browser code can use Python/JavaScript network features if you add them yourself; the supplied scripts make no network calls.
 
@@ -11,7 +11,7 @@ You can practise real Python in the course's Python workspace or run the same sc
 5. Change an input or assumption, predict again, and compare the output.
 6. Save a short reflection: what changed, what you checked, and what the model leaves out.
 
-All activities are formative. Numerical checks validate the supplied test cases, not all possible programs or the quality of a financial claim. Reference solutions are available separately after an explicit reveal. The learner ZIP includes starters and local check tools, not the complete reference solutions. Chapter 3 CSV activities embed their teaching CSV text in the script so they run without uploading or fetching files. The first Chapter 1 percentage activity is a completed worked example, not an independent coding assessment.
+All activities are formative. Numerical checks validate the supplied test cases, not all possible programs or the quality of a financial claim. Reference solutions are available separately after an explicit reveal. The learner ZIP includes starters and local check tools, not the complete reference solutions. Chapter 3 uses embedded teaching CSV text/rows so scripts run without uploading or fetching files. The first Chapter 1 percentage activity is a completed worked example, not an independent coding assessment.
 
 ## Browser route
 
@@ -51,22 +51,34 @@ Choose an activity ID from the workspace or the table below. Each `.py` file can
 
 | ID | Core concept | Type | Extra minutes |
 |---|---|---|---:|
-| ch1-change | Percent change, variables and function calls | Worked example | 10 |
-| ch1-allocation | Weighted returns, lists and a loop | Guided practice | 15 |
-| ch1-comparison | A fair net-of-fee comparison, pound versus percentage units | Transfer extension | 15 |
-| ch2-return | Price gain and distributions | Guided practice | 10 |
-| ch2-growth | Compounding, powers and CAGR | Guided practice | 15 |
-| ch2-discount | Dated cash flows and bond present value | Guided practice | 15 |
-| ch2-inflation | Exact real returns and purchasing power | Guided practice | 10 |
-| ch2-transfer | Reproduce the lab and change only inflation | Transfer challenge | 15 |
-| ch3-order | Parse CSV and order dates before returns | Guided practice | 15 |
-| ch3-audit | Audit duplicates and missing observations | Guided practice | 20 |
-| ch3-split | Use a consistent split-adjusted basis | Transfer challenge | 15 |
-| ch4-summary | Mean, median and sample spread | Guided practice | 15 |
-| ch4-quantile | Explicitly interpolated quantiles | Guided practice | 15 |
-| ch4-correlation | Paired Pearson correlation | Transfer challenge | 15 |
+| ch1-change | Chapter 1 · readiness and percentage changes | Worked example | 10 |
+| ch1-allocation | Chapter 1 · allocation lab | Guided practice | 15 |
+| ch1-comparison | Chapter 1 · fair benchmarks, optional cost extension | Transfer challenge | 15 |
+| ch2-return | Chapter 2 · measure a return | Guided practice | 10 |
+| ch2-growth | Chapter 2 · compound over time | Guided practice | 15 |
+| ch2-discount | Chapter 2 · present value and bonds | Guided practice | 15 |
+| ch2-inflation | Chapter 2 · purchasing power | Guided practice | 10 |
+| ch2-transfer | Chapter 2 · calculation card and reproducibility | Transfer challenge | 15 |
+| ch3-order | Chapter 3 · chronological observations | Guided practice | 15 |
+| ch3-audit | Chapter 3 · transparent quality audit | Guided practice | 20 |
+| ch3-split | Chapter 3 · split-adjusted price returns | Transfer challenge | 15 |
+| ch4-summary | Chapter 4 · observed frequency, centre and sample spread | Guided practice | 15 |
+| ch4-quantile | Chapter 4 · sorted linear interpolation | Guided practice | 15 |
+| ch4-correlation | Chapter 4 · Pearson correlation and undefined cases | Transfer challenge | 15 |
+| ch5-risk | Chapter 5 · sample spread and observed drawdown | Guided practice | 20 |
+| ch5-sharpe | Chapter 5 · monthly excess returns and Sharpe | Transfer challenge | 15 |
+| ch6-weights | Chapter 6 · weighted return, constant mix and buy-and-hold | Guided practice | 20 |
+| ch6-beta | Chapter 6 · sample beta and Pearson correlation | Transfer challenge | 15 |
+| ch7-payoffs | Chapter7 · terminal payoff versus undiscounted profit | Guided practice | 15 |
+| ch7-path | Chapter7 · compounding and fixed-generator simulation | Transfer challenge | 15 |
+| ch8-timing | Chapter8 · trailing3-close signal | Guided practice | 15 |
+| ch8-costs | Chapter8 · turnover fee before return | Transfer challenge | 15 |
+| ch9-audit | Chapter 9 · chronological audit | Guided practice | 15 |
+| ch9-trials | Chapter 9 · selection and trial retention | Transfer challenge | 20 |
+| ch10-evidence | Chapter 10 · hand check and calculation attachment | Guided practice | 15 |
+| ch10-ledger | Chapter 10 · rule, chronology, costs and same-date benchmark | Transfer challenge | 20 |
 
-Allow another 10–15 minutes once for first-time Python setup. These are optional additions: about 40 minutes in Chapter 1, 65 in Chapter 2, 50 in Chapter 3 and 45 in Chapter 4, beyond the existing three-hour core chapter estimates. The original 30-hour core remains the noncoding path. A future timed pilot can determine which exercises can replace equivalent core practice without increasing total workload. These estimates are not learner-validated.
+Allow another 10–15 minutes once for first-time Python setup. These are optional additions: about Chapter 1: 40 minutes, Chapter 2: 65 minutes, Chapter 3: 50 minutes, Chapter 4: 45 minutes, Chapter 5: 35 minutes, Chapter 6: 35 minutes, Chapter 7: 30 minutes, Chapter 8: 30 minutes, Chapter 9: 35 minutes, Chapter 10: 35 minutes, beyond the existing three-hour core chapter estimates. The original 30-hour core remains the noncoding path. A future timed pilot can determine which exercises can replace equivalent core practice without increasing total workload. These estimates are not learner-validated.
 
 ## Hypothetical data and conventions
 
@@ -93,4 +105,4 @@ Browser answers, code, checks and reflections use a separate Python-practice sto
 
 Original tasks and scripts. Runtime design follows [Pyodide worker guidance](https://pyodide.org/en/stable/usage/webworker.html); Python syntax follows the [official Python tutorial](https://docs.python.org/3/tutorial/introduction.html). No third-party course questions or datasets are copied. The runtime has its own upstream licence; it is loaded from its official documented CDN, not redistributed in the learner ZIP.
 
-Chapters 3–4 now add CSV inspection, cleaning and descriptive-statistics exercises. For Chapters 5–10, the curriculum should pair suitable tasks with Python: CSV inspection and missing data; descriptive statistics; risk metrics; portfolio weights; seeded simulation; timing-aware backtests; trial/cost audits; and a reproducible capstone. Chapters 5–10 and their scripts remain planned. Keep an interpretation route and a worked → guided → transfer sequence for each new lab.
+Chapters 3–4 now add CSV inspection, cleaning and descriptive-statistics exercises. Chapters 5–10 now extend the script route to risk, portfolios, scenario simulation, payoff arithmetic, timing/cost checks and reproducible capstone evidence. Every activity has a starter, worked example, changed-input checks and reference solution. Numerical checks do not validate a research conclusion. The proposed 30-hour core excludes these additional coding activities.

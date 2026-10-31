@@ -1,0 +1,7 @@
+terminal_gbp,forward_payoff_gbp,call_payoff_gbp,call_profit_gbp
+70,-30,0,-6
+90,-10,0,-6
+100,0,0,-6
+106,6,6,0
+120,20,20,14
+140,40,40,34

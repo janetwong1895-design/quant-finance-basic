@@ -1,6 +1,6 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Python practice: complete text and local route</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="practice.css"><style>body{max-width:880px;margin:auto;padding:35px 25px}h1{font-size:3rem}section{margin:35px 0}</style></head><body><a href="index.html">← Interactive Python workspace</a><h1>Consolidate the idea in Python.</h1><p>Optional additions for Chapters 1–4: predict, read, run, explain, modify, check and critique. No instructor response is required. This text route uses the same scripts and checks on local Python; it has no JavaScript dependency. The core chapters also remain available without Python.</p><h2>Setup and retention</h2><p>Download and extract the <a href="learner-pack.zip">learner pack</a>. It includes the chapter starters, check.py, checker.py and exercises.json. Install Python 3 from <a href="https://www.python.org/downloads/">python.org</a> if necessary. No pip packages or keys are needed. Scripts use Python 3.8+ syntax and are locally tested on 3.8.2; choose a currently supported Python release for new installations.</p><p>Open a terminal in the extracted folder. On macOS/Linux run the commands below; on Windows use py in place of python3 if appropriate.</p><pre class="code-block">python3 --version
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Python practice: complete text and local route</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="practice.css"><style>body{max-width:880px;margin:auto;padding:35px 25px}h1{font-size:3rem}section{margin:35px 0}</style></head><body><a href="index.html">← Interactive Python workspace</a><h1>Consolidate the idea in Python.</h1><p>Optional additions for Chapters 1–10: predict, read, run, explain, modify, check and critique. No instructor response is required. This text route uses the same scripts and checks on local Python; it has no JavaScript dependency. The core chapters also remain available without Python.</p><h2>Setup and retention</h2><p>Download and extract the <a href="learner-pack.zip">learner pack</a>. It includes the chapter starters, check.py, checker.py and exercises.json. Install Python 3 from <a href="https://www.python.org/downloads/">python.org</a> if necessary. No pip packages or keys are needed. Scripts use Python 3.8+ syntax and are locally tested on 3.8.2; choose a currently supported Python release for new installations.</p><p>Open a terminal in the extracted folder. On macOS/Linux run the commands below; on Windows use py in place of python3 if appropriate.</p><pre class="code-block">python3 --version
 python3 ch1-change.py
-python3 check.py ch1-change</pre><p>Then edit ch1-allocation.py, replace the TODO expression, save, run it and check it with python3 check.py ch1-allocation. Keep the check tools and exercises.json in the same folder. Keep notes on paper or in a local document. The text/local route does not synchronise with browser progress; retain your own script revisions, outputs and reflection.</p><h2>Syntax bridge and troubleshooting</h2><p>= stores a value, # begins a comment, * multiplies, / divides and ** raises to a power. ^ is not exponentiation. Four spaces indent function and loop bodies. return sends a value back; print shows it. A function uses named inputs so the calculation works on changed cases. Keep precision inside functions; round only displayed values.</p><p>NotImplementedError means a TODO remains. A TypeError involving None usually means a missing calculation. NameError points to an undefined or misspelled name. For SyntaxError or IndentationError, check spaces, parentheses, colons and quotes. Failed numerical checks give targeted method hints. Revise and try again; a printed hard-coded answer does not implement a reusable function.</p><h2>Time, criteria and assumptions</h2><p>Suggested extra time: 40 minutes in Chapter 1, 65 in Chapter 2, 50 in Chapter 3 and 45 in Chapter 4. Allow 10–15 minutes once for setup. These optional additions are beyond the 30-hour noncoding core. Timings are unvalidated. For each task, predict first, attempt the code, check every supplied numerical case, and write a correction/check and limitation. Confidence is optional and ungraded. These checks do not certify financial reasoning, independent coding proficiency or a credential.</p><p>All data and rates are hypothetical. Chapter 1 uses one annual holding period and cash/bond/share order. The first lab has zero costs; the optional cost extension charges a flat pound fee at year end consistently to both portfolios. Chapter 2 uses annual effective rates, year-end payments, no external deposits and no fees/taxes. Distributions are held in cash to period end. Bond principal appears once in the final payment. No live prices, forecast claims, broker connections or personal inputs are required.</p><section><h2>ch1-change: Turn a percentage into Python</h2><p><strong>Objective:</strong> Read variables, arithmetic and a function; explain a percentage relative to its starting value.</p><p><strong>Predict:</strong> Predict the percentage change from £200 to £210 before running. Why is the denominator 200?</p><p><strong>Task:</strong> This first script is complete. Run it, inspect the named inputs and printed result, then change ending_value to 190 and predict the result. Restore the original example before checking.</p><p><strong>Python syntax:</strong> = stores a value; # starts a comment; / divides; * multiplies. def names a reusable function. Four spaces indent its body. return sends a result back. print displays it. You call a function with values in parentheses.</p><h3>Worked example</h3><pre class="code-block"># Hypothetical amounts; no deposits, withdrawals, fees or tax.
+python3 check.py ch1-change</pre><p>Then edit ch1-allocation.py, replace the TODO expression, save, run it and check it with python3 check.py ch1-allocation. Keep the check tools and exercises.json in the same folder. Keep notes on paper or in a local document. The text/local route does not synchronise with browser progress; retain your own script revisions, outputs and reflection.</p><h2>Syntax bridge and troubleshooting</h2><p>= stores a value, # begins a comment, * multiplies, / divides and ** raises to a power. ^ is not exponentiation. Four spaces indent function and loop bodies. return sends a value back; print shows it. A function uses named inputs so the calculation works on changed cases. Keep precision inside functions; round only displayed values.</p><p>NotImplementedError means a TODO remains. A TypeError involving None usually means a missing calculation. NameError points to an undefined or misspelled name. For SyntaxError or IndentationError, check spaces, parentheses, colons and quotes. Failed numerical checks give targeted method hints. Revise and try again; a printed hard-coded answer does not implement a reusable function.</p><h2>Time, criteria and assumptions</h2><p>Suggested extra time: Additional Python time is shown for each activity and chapter in the workspace and learner-pack README. Allow 10–15 minutes once for setup. These optional additions are beyond the 30-hour noncoding core. Timings are unvalidated. For each task, predict first, attempt the code, check every supplied numerical case, and write a correction/check and limitation. Confidence is optional and ungraded. These checks do not certify financial reasoning, independent coding proficiency or a credential.</p><p>All data and rates are hypothetical. Chapter 1 uses one annual holding period and cash/bond/share order. The first lab has zero costs; the optional cost extension charges a flat pound fee at year end consistently to both portfolios. Chapter 2 uses annual effective rates, year-end payments, no external deposits and no fees/taxes. Distributions are held in cash to period end. Bond principal appears once in the final payment. No live prices, forecast claims, broker connections or personal inputs are required.</p><section><h2>ch1-change: Turn a percentage into Python</h2><p><strong>Objective:</strong> Read variables, arithmetic and a function; explain a percentage relative to its starting value.</p><p><strong>Predict:</strong> Predict the percentage change from £200 to £210 before running. Why is the denominator 200?</p><p><strong>Task:</strong> This first script is complete. Run it, inspect the named inputs and printed result, then change ending_value to 190 and predict the result. Restore the original example before checking.</p><p><strong>Python syntax:</strong> = stores a value; # starts a comment; / divides; * multiplies. def names a reusable function. Four spaces indent its body. return sends a result back. print displays it. You call a function with values in parentheses.</p><h3>Worked example</h3><pre class="code-block"># Hypothetical amounts; no deposits, withdrawals, fees or tax.
 def percentage_change(start, end):
     return (end - start) / start * 100
 
@@ -261,4 +261,234 @@ def paired_report(rows):
 
 if __name__ == &quot;__main__&quot;:
     print(paired_report([[&quot;Jan&quot;, -1, -2], [&quot;Feb&quot;, 0, 0], [&quot;Mar&quot;, 1, 2]]))
-</pre><p><a href="scripts/ch4-correlation.py" download>Download starter .py</a></p><h3>Hints</h3><ol><li>The numerator is sum((a - mx) * (b - my) for a, b in zip(x, y)).</li><li>The denominator is math.sqrt(xx * yy); when either squared-deviation sum is zero, use the explicit undefined flag supplied in the starter.</li></ol><p>Run <code>python3 check.py ch4-correlation</code>. It checks: Positive aligned line, Negative association, Undefined constant series, Zero linear association.</p><p><strong>Explain and revise:</strong> Explain why row alignment matters, why zero variance makes r undefined, and why a nonzero sample association proves neither causation nor future stability.</p><p>After trying and revising, <a href="reference/ch4-correlation.py">compare with the reference solution</a>. Reference viewing is a learning aid, not evidence of independent authorship.</p></section><section><h2>Browser alternative and privacy</h2><p>The interactive workspace runs Pyodide 314.0.7 in a device-local worker, loaded on demand from jsDelivr. The runtime provider receives ordinary asset requests; the supplied scripts do not upload code to a course execution server. Use classroom data. Added code can use network features if you write them yourself. The browser saves scripts, predictions, feedback, reflections and attempts locally; resets are separate from core chapter records. Exports have no import/sync. Keep downloaded files until you choose to delete them.</p><p>Browser loading has a one-minute limit; execution has five seconds, capped output and a Stop control. These are responsiveness limits, not a guaranteed memory sandbox. Downloaded scripts need a local Python installation. Learner pilot, full assistive-technology testing and commercial release validation remain pending.</p><p>Optional references: <a href="https://docs.python.org/3/tutorial/introduction.html">official Python syntax tutorial</a>; <a href="https://pyodide.org/en/stable/usage/webworker.html">Pyodide worker documentation</a>. Chapters 1–4 have optional Python activities; Chapters 5–10 remain planned.</p></section></body></html>
+</pre><p><a href="scripts/ch4-correlation.py" download>Download starter .py</a></p><h3>Hints</h3><ol><li>The numerator is sum((a - mx) * (b - my) for a, b in zip(x, y)).</li><li>The denominator is math.sqrt(xx * yy); when either squared-deviation sum is zero, use the explicit undefined flag supplied in the starter.</li></ol><p>Run <code>python3 check.py ch4-correlation</code>. It checks: Positive aligned line, Negative association, Undefined constant series, Zero linear association.</p><p><strong>Explain and revise:</strong> Explain why row alignment matters, why zero variance makes r undefined, and why a nonzero sample association proves neither causation nor future stability.</p><p>After trying and revising, <a href="reference/ch4-correlation.py">compare with the reference solution</a>. Reference viewing is a learning aid, not evidence of independent authorship.</p></section><section><h2>ch5-risk: Include the initial peak</h2><p><strong>Objective:</strong> Calculate sample monthly SD, conditional annualised SD and a positive maximum-drawdown magnitude.</p><p><strong>Predict:</strong> Compare [-20,25]% with [0,0]%. Both end where they started: will SD and maximum drawdown match?</p><p><strong>Task:</strong> Complete the sample-SD, annual scaling, wealth-update and loss-from-peak expressions. Returns use percentage units. Start wealth at100 and include it in the running peak. Maximum drawdown is a positive magnitude; individual drawdowns could be signed negative elsewhere. At least two finite returns above -100% are required. Annual SD uses sqrt(12), conditional on independent, identically distributed monthly returns. No fees or flows.</p><p><strong>Python syntax:</strong> stdev uses sample n-1. math.sqrt is square root. wealth *= factor updates a variable by multiplication. max compares the running peak and current wealth. Dictionaries return named numeric results.</p><h3>Worked example</h3><pre class="code-block">import math
+from statistics import stdev
+values = [-2, 0, 2]
+print(&quot;Monthly sample SD (percentage points):&quot;, stdev(values))
+print(&quot;Annualised estimate, IID-month assumption:&quot;, stdev(values) * math.sqrt(12))
+wealth = [100, 80, 100]  # [-20%, +25%], including initial wealth.
+print(&quot;Observed maximum drawdown (% magnitude):&quot;, 100 * (1 - min(wealth) / 100))
+print(&quot;This observed loss is not a future bound.&quot;)
+</pre><h3>Starter script</h3><pre class="code-block">import math
+from statistics import stdev
+
+def risk_summary(returns_pct):
+    if len(returns_pct) &lt; 2 or not all(math.isfinite(x) and x &gt; -100 for x in returns_pct):
+        raise ValueError(&quot;Use at least two finite monthly returns above -100%.&quot;)
+    monthly_sd = None  # TODO_SD
+    value, peak, largest_loss = 100.0, 100.0, 0.0
+    for monthly_return in returns_pct:
+        value *= None  # TODO_GROW
+        peak = max(peak, value)
+        loss = None  # TODO_LOSS
+        largest_loss = max(largest_loss, loss)
+    return {&quot;monthly_sd&quot;: monthly_sd,
+            &quot;annualised_sd&quot;: None,  # TODO_ANNUAL
+            &quot;maximum_drawdown&quot;: largest_loss, &quot;ending_wealth&quot;: value}
+
+if __name__ == &quot;__main__&quot;:
+    print(risk_summary([-20, 25]))
+</pre><p><a href="scripts/ch5-risk.py" download>Download starter .py</a></p><h3>Hints</h3><ol><li>Use stdev(returns_pct), then monthly_sd * math.sqrt(12).</li><li>Update wealth *= 1 + value/100; update peak before computing 100*(1-wealth/peak).</li></ol><p>Run <code>python3 check.py ch5-risk</code>. It checks: Initial peak and recovery, Same ending, different path, New transfer path.</p><p><strong>Explain and revise:</strong> Explain the initial peak, positive loss-magnitude convention, SD units and a limitation of square-root-of-time scaling or monthly observations.</p><p>After trying and revising, <a href="reference/ch5-risk.py">compare with the reference solution</a>. Reference viewing is a learning aid, not evidence of independent authorship.</p></section><section><h2>ch5-sharpe: Match the risk-free frequency</h2><p><strong>Objective:</strong> Convert an annual effective risk-free rate, calculate a declared annualised Sharpe and report zero-variance cases explicitly.</p><p><strong>Predict:</strong> For [-1,1,3]% monthly, predict whether moving annual effective risk-free from0% to12% changes sample excess SD or Sharpe.</p><p><strong>Task:</strong> Complete the effective monthly rate, excess list and ratio. The report flag defined=0 means Sharpe is undefined; its sharpe=0 placeholder is not an estimate. The starter handles constant excess returns explicitly. Annualisation by sqrt(12) assumes independent stationary monthly excess returns; no future-performance inference follows. Keep percentage units throughout.</p><p><strong>Python syntax:</strong> ** raises a power; 1/12 is a fraction. [value - monthly_rf for value in returns_pct] transforms every monthly return. stdev supplies n-1; mean supplies arithmetic mean. Return numeric flags for the public checker.</p><h3>Worked example</h3><pre class="code-block">from statistics import mean, stdev
+import math
+excess = [-1,1,3]  # Monthly percentage-point excess, risk-free0%.
+print(&quot;Mean excess:&quot;, mean(excess), &quot;Sample SD:&quot;, stdev(excess))
+print(&quot;Annualised Sharpe, independent-month assumption:&quot;, math.sqrt(12)*mean(excess)/stdev(excess))
+print(&quot;Zero excess variance means undefined, not a zero Sharpe.&quot;)
+</pre><h3>Starter script</h3><pre class="code-block">import math
+from statistics import mean, stdev
+
+def sharpe_report(returns_pct, annual_effective_pct):
+    if len(returns_pct) &lt; 2 or not all(math.isfinite(x) for x in returns_pct):
+        raise ValueError(&quot;Supply two or more finite monthly returns.&quot;)
+    if not math.isfinite(annual_effective_pct) or annual_effective_pct &lt;= -100:
+        raise ValueError(&quot;Annual effective rate must exceed -100%.&quot;)
+    monthly_rf = None  # TODO_RF
+    excess = None  # TODO_EXCESS
+    if all(x == excess[0] for x in excess):
+        return {&quot;defined&quot;: 0, &quot;sharpe&quot;: 0, &quot;monthly_rf&quot;: monthly_rf}
+    ratio = None  # TODO_RATIO
+    return {&quot;defined&quot;: 1, &quot;sharpe&quot;: ratio, &quot;monthly_rf&quot;: monthly_rf}
+
+if __name__ == &quot;__main__&quot;:
+    print(sharpe_report([-1,1,3], 0))
+</pre><p><a href="scripts/ch5-sharpe.py" download>Download starter .py</a></p><h3>Hints</h3><ol><li>monthly_rf = 100 * ((1 + annual_effective_pct / 100) ** (1/12) - 1).</li><li>Compute excess at monthly frequency, then sqrt(12) * mean(excess) / stdev(excess).</li></ol><p>Run <code>python3 check.py ch5-sharpe</code>. It checks: Declared sample ratio, Effective annual conversion, Non-binary constant.</p><p><strong>Explain and revise:</strong> State the frequency conversion and sample denominator, explain why a constant risk-free shift leaves SD unchanged, and qualify annual scaling.</p><p>After trying and revising, <a href="reference/ch5-sharpe.py">compare with the reference solution</a>. Reference viewing is a learning aid, not evidence of independent authorship.</p></section><section><h2>ch6-weights: Compare a policy with drift</h2><p><strong>Objective:</strong> Implement two cost-free policies on aligned monthly return pairs and distinguish ending wealth from target weights.</p><p><strong>Predict:</strong> A has [+20,-20]% and B [0,0]%; start50/50. Predict constant-mix and buy-and-hold ending wealth from100.</p><p><strong>Task:</strong> Complete the weighted return, constant-mix update and separate sleeve updates. Input rows already pair same-date A/B total returns; verify alignment before constructing them. w_a is a starting/target fraction0–1; B gets1-w_a. Constant mix resets before each following month; buy-and-hold keeps units unchanged. No costs, taxes, flows or borrowing. A better result in one path is not a recommendation.</p><p><strong>Python syntax:</strong> for a_return, b_return in rows unpacks each paired observation. A sleeve is the currency value invested in one asset. *= compounds a sleeve. Return a dictionary of numeric values.</p><h3>Worked example</h3><pre class="code-block">w_a = .6
+first_return = w_a*10 + (1-w_a)*(-5)
+print(&quot;Weighted return (%):&quot;, first_return)  # 4
+print(&quot;Ending wealth:&quot;, 100*(1+first_return/100))  # 104
+print(&quot;Drifted A weight:&quot;, 60*1.1/(60*1.1+40*.95))
+print(&quot;Resetting target weights before the next month is a different policy.&quot;)
+</pre><h3>Starter script</h3><pre class="code-block">import math
+
+def policy_report(rows, w_a):
+    if not rows or not 0 &lt;= w_a &lt;= 1 or not all(math.isfinite(v) and v &gt; -100 for row in rows for v in row):
+        raise ValueError(&quot;Use aligned finite return pairs above -100%, and A weight0-1.&quot;)
+    mix, a_value, b_value = 100.0, 100*w_a, 100*(1-w_a)
+    first_return = None
+    for a_return, b_return in rows:
+        weighted = None  # TODO_WEIGHTED
+        if first_return is None:
+            first_return = weighted
+        mix *= None  # TODO_MIX
+        a_value *= None  # TODO_A
+        b_value *= None  # TODO_B
+    return {&quot;first_return&quot;: first_return, &quot;constant_mix&quot;: mix,
+            &quot;buy_hold&quot;: a_value+b_value, &quot;ending_a_weight&quot;: a_value/(a_value+b_value)}
+
+if __name__ == &quot;__main__&quot;:
+    print(policy_report([[20,0],[-20,0]], .5))
+</pre><p><a href="scripts/ch6-weights.py" download>Download starter .py</a></p><h3>Hints</h3><ol><li>weighted = w_a * a_return + (1 - w_a) * b_return.</li><li>Grow mix by1+weighted/100; grow each initial sleeve by its own monthly return.</li></ol><p>Run <code>python3 check.py ch6-weights</code>. It checks: Reversal path, Trending counterexample, New allocation.</p><p><strong>Explain and revise:</strong> Explain why the buy-and-hold A weight drifts, when constant-mix resets and why omitted costs or another path can reverse the comparison.</p><p>After trying and revising, <a href="reference/ch6-weights.py">compare with the reference solution</a>. Reference viewing is a learning aid, not evidence of independent authorship.</p></section><section><h2>ch6-beta: Keep sensitivity paired</h2><p><strong>Objective:</strong> Calculate beta against benchmark variance, report undefined cases and distinguish slope from correlation.</p><p><strong>Predict:</strong> For benchmark[-1,0,1]% and portfolio[-2,0,2]%, predict beta and correlation. Which changes if portfolio scale doubles?</p><p><strong>Task:</strong> Rows are [date, portfolio, benchmark] using aligned monthly simple total returns, without subtracting a risk-free series. Complete cross-product, beta and correlation expressions. Sample n-1 cancels in the ratio. Defined flags distinguish numeric zero from an undefined placeholder. A constant benchmark makes beta and correlation undefined; a constant portfolio with varying benchmark has beta0 and undefined correlation. This is a fitted sample slope with intercept, not a future promise.</p><p><strong>Python syntax:</strong> List comprehensions select each aligned column. zip pairs deviations. math.sqrt makes the correlation denominator. defined flags are numeric for the public formative checker; a placeholder value with flag0 is not an estimate.</p><h3>Worked example</h3><pre class="code-block">import math
+cross, portfolio_ss, benchmark_ss = 4, 8, 2
+print(&quot;Sample beta:&quot;, cross/benchmark_ss)  # 2
+print(&quot;Sample Pearson correlation:&quot;, cross/math.sqrt(portfolio_ss*benchmark_ss))  # 1
+print(&quot;The n-1 covariance/variance factors cancel; beta is a sample slope, not a guaranteed next return.&quot;)
+</pre><h3>Starter script</h3><pre class="code-block">import math
+
+def sensitivity_report(rows):
+    if len(rows) &lt; 2 or len({r[0] for r in rows}) != len(rows):
+        raise ValueError(&quot;Use two or more unique same-date rows.&quot;)
+    portfolio, market = [r[1] for r in rows], [r[2] for r in rows]
+    if not all(math.isfinite(x) for x in portfolio + market):
+        raise ValueError(&quot;Use finite same-frequency returns.&quot;)
+    mp, mm = sum(portfolio)/len(rows), sum(market)/len(rows)
+    pp = 0 if all(x == portfolio[0] for x in portfolio) else sum((x-mp)**2 for x in portfolio)
+    bb = 0 if all(x == market[0] for x in market) else sum((x-mm)**2 for x in market)
+    if bb == 0:
+        return {&quot;beta_defined&quot;:0,&quot;beta&quot;:0,&quot;correlation_defined&quot;:0,&quot;correlation&quot;:0}
+    cross = None  # TODO_CROSS
+    beta = None  # TODO_BETA
+    if pp == 0:
+        return {&quot;beta_defined&quot;:1,&quot;beta&quot;:beta,&quot;correlation_defined&quot;:0,&quot;correlation&quot;:0}
+    correlation = None  # TODO_CORRELATION
+    return {&quot;beta_defined&quot;:1,&quot;beta&quot;:beta,&quot;correlation_defined&quot;:1,&quot;correlation&quot;:correlation}
+
+if __name__ == &quot;__main__&quot;:
+    print(sensitivity_report([[&quot;Jan&quot;,-2,-1],[&quot;Feb&quot;,0,0],[&quot;Mar&quot;,2,1]]))
+</pre><p><a href="scripts/ch6-beta.py" download>Download starter .py</a></p><h3>Hints</h3><ol><li>cross=sum((p-mp)*(m-mm) for p,m in zip(portfolio,market)).</li><li>Beta uses cross/market_squared_sum; correlation uses cross/sqrt(portfolio_squared_sum*market_squared_sum).</li></ol><p>Run <code>python3 check.py ch6-beta</code>. It checks: Scale versus association, Negative slope transfer, Constant benchmark, Constant portfolio.</p><p><strong>Explain and revise:</strong> Distinguish beta scale from correlation, preserve date pairs and explain the two different zero-variance cases and predictive limits.</p><p>After trying and revising, <a href="reference/ch6-beta.py">compare with the reference solution</a>. Reference viewing is a learning aid, not evidence of independent authorship.</p></section><section><h2>ch7-payoffs: Keep premium out of payoff</h2><p><strong>Objective:</strong> Calculate long-forward payoff, call payoff and call profit per unit.</p><p><strong>Predict:</strong> K=100,premium6,terminal104: predict forward payoff,call payoff and call profit.</p><p><strong>Task:</strong> Complete the three values. Prices,premium and output are pounds per unit. No financing,discounting,fees,taxes,early exercise or default. Premium is supplied,not priced. A long forward has no initial premium in this example.</p><p><strong>Python syntax:</strong> max(a,0) floors a negative payoff at zero. Dictionary keys label different quantities. Subtract premium once for profit.</p><h3>Worked example</h3><pre class="code-block">terminal,strike,premium=104,100,6
+payoff=max(terminal-strike,0)
+print(&quot;Forward payoff:&quot;,terminal-strike)
+print(&quot;Call payoff:&quot;,payoff)
+print(&quot;Undiscounted call profit:&quot;,payoff-premium)
+</pre><h3>Starter script</h3><pre class="code-block">import math
+def derivative_report(terminal,strike,premium):
+    if not all(math.isfinite(x) and x &gt;= 0 for x in [terminal,strike,premium]):
+        raise ValueError(&quot;Use nonnegative finite amounts.&quot;)
+    payoff = None # TODO_CALL
+    return {&quot;forward&quot;:None, # TODO_FORWARD
+            &quot;call&quot;:payoff,&quot;profit&quot;:None} # TODO_PROFIT
+if __name__ == &quot;__main__&quot;:
+    print(derivative_report(104,100,6))
+</pre><p><a href="scripts/ch7-payoffs.py" download>Download starter .py</a></p><h3>Hints</h3><ol><li>Forward payoff is terminal-strike,without a zero floor.</li><li>Call payoff is max(terminal-strike,0);profit subtracts premium from that payoff.</li></ol><p>Run <code>python3 check.py ch7-payoffs</code>. It checks: Above strike but loss, Below strike, Break-even.</p><p><strong>Explain and revise:</strong> Explain why a call can be in the money yet make a loss,and why negative long-forward payoffs are possible.</p><p>After trying and revising, <a href="reference/ch7-payoffs.py">compare with the reference solution</a>. Reference viewing is a learning aid, not evidence of independent authorship.</p></section><section><h2>ch7-path: Reproduce a conditional price path</h2><p><strong>Objective:</strong> Compound supplied discrete returns;repeat a declared seeded generator.</p><p><strong>Predict:</strong> For100 and [+10,0,-10]%,predict terminal price. Does a wider spread raise every terminal outcome?</p><p><strong>Task:</strong> Complete the multiplication. The supplied fixed LCG produces the same up/zero/down indices as the browser;do not use random.Random and expect identical paths. The function returns one terminal price from three draws. Seed1–999999,spread5/10/20. Three independent,equally likely bounded returns are a teaching assumption,not a market forecast.</p><p><strong>Python syntax:</strong> Python integers do not overflow;use modulo2**32 explicitly. z//(2**32//3) is not exactly the specified mapping;use int((z/2**32)*3)-1. Multiplication updates the current wealth.</p><h3>Worked example</h3><pre class="code-block">price=100
+for return_pct in [10,0,-10]:
+    price *= 1+return_pct/100
+print(&quot;Conditional terminal price:&quot;,price) #99
+print(&quot;This invented path is not a forecast.&quot;)
+</pre><h3>Starter script</h3><pre class="code-block">def terminal_price(seed,spread):
+    if not isinstance(seed,int) or not 1 &lt;= seed &lt;= 999999 or spread not in (5,10,20):
+        raise ValueError(&quot;Use the declared seed and spread bounds.&quot;)
+    z,price=seed,100.0
+    for _ in range(3):
+        z=(1664525*z+1013904223) % 2**32
+        direction=int((z/2**32)*3)-1
+        price = None # TODO_GROW
+    return price
+if __name__ == &quot;__main__&quot;:
+    print(terminal_price(42,10))
+</pre><p><a href="scripts/ch7-path.py" download>Download starter .py</a></p><h3>Hints</h3><ol><li>The period return is direction*spread in percentage units.</li><li>Multiply price by1+direction*spread/100 each period.</li></ol><p>Run <code>python3 check.py ch7-path</code>. It checks: Browser seed42, Spread-only sensitivity, Different seed.</p><p><strong>Explain and revise:</strong> Explain seed reproducibility,compound growth,and two model risks that more paths cannot fix.</p><p>After trying and revising, <a href="reference/ch7-path.py">compare with the reference solution</a>. Reference viewing is a learning aid, not evidence of independent authorship.</p></section><section><h2>ch8-timing: Separate signal from execution</h2><p><strong>Objective:</strong> Compute a frozen trailing-close target using only information through t.</p><p><strong>Predict:</strong> Closes100,101,102 imply which target? If a later close changes,should this target change?</p><p><strong>Task:</strong> Complete the strict comparison using only closes[t-2:t+1]. Return1 if the signal close is strictly above the mean,otherwise0. This is a target decided after close t,not an execution at that close. Execution would be next open. Do not use future closes.</p><p><strong>Python syntax:</strong> slicing excludes the upper bound; t+1 includes close t. int(True) is1 and int(False) is0. Equality belongs to cash.</p><h3>Worked example</h3><pre class="code-block">closes=[100,101,102]
+average=sum(closes)/3
+print(&quot;Signal target:&quot;,int(closes[-1]&gt;average))
+print(&quot;Execute at the next open,not this already-observed close.&quot;)
+</pre><h3>Starter script</h3><pre class="code-block">import math
+def target(closes,t):
+    if not isinstance(t,int) or t &lt; 2 or t &gt;= len(closes):
+        raise ValueError(&quot;Need3known closes ending at t.&quot;)
+    observed=closes[t-2:t+1]
+    if not all(math.isfinite(x) and x &gt; 0 for x in observed):
+        raise ValueError(&quot;Use finite positive observed prices.&quot;)
+    average=sum(observed)/3
+    return None # TODO_SIGNAL
+if __name__ == &quot;__main__&quot;:
+    print(target([100,101,102,1],2))
+</pre><p><a href="scripts/ch8-timing.py" download>Download starter .py</a></p><h3>Hints</h3><ol><li>Compare closes[t] with the mean of the selected3 values.</li><li>Return int(closes[t] &gt; average).</li></ol><p>Run <code>python3 check.py ch8-timing</code>. It checks: Known closes, Future perturbation, Tie means cash, Falling path.</p><p><strong>Explain and revise:</strong> Draw signal close→next open execution→following open mark. Explain why modifying future closes must not alter this target.</p><p>After trying and revising, <a href="reference/ch8-timing.py">compare with the reference solution</a>. Reference viewing is a learning aid, not evidence of independent authorship.</p></section><section><h2>ch8-costs: Account for the final exit</h2><p><strong>Objective:</strong> Reproduce fixed positions net of every fee including liquidation.</p><p><strong>Predict:</strong> Flat opens,initial1000,target1,cost10bps:predict final wealth after entry and final exit.</p><p><strong>Task:</strong> positions[i] is a supplied0/1target held from opens[i] to opens[i+1]. The signal timing that created positions must be audited separately. Complete turnover,fee-before-return growth,and final-exit fee. Costs are bps per traded notional,cash return0%,no leverage/shorting,taxes or additional slippage. Keep the supplied positions fixed;this is not a search for profitable rules.</p><p><strong>Python syntax:</strong> abs computes absolute turnover. bps/10000 converts to decimal. A loop enumerates each holding interval. The last target is sold at the final eligible open.</p><h3>Worked example</h3><pre class="code-block">wealth=1000*(1-.001)*(1+.10)
+print(&quot;After entry and interval:&quot;,wealth)
+wealth*=1-.001
+print(&quot;After final exit:&quot;,wealth) #1097.8011
+</pre><h3>Starter script</h3><pre class="code-block">import math
+def net_wealth(opens,positions,cost_bps,initial=1000):
+    if len(opens) != len(positions)+1 or not positions or any(w not in (0,1) for w in positions):
+        raise ValueError(&quot;One0/1weight per open-to-open interval.&quot;)
+    if not all(math.isfinite(x) and x &gt; 0 for x in opens) or not 0 &lt;= cost_bps &lt;= 100:
+        raise ValueError(&quot;Positive finite opens,costs0-100bps.&quot;)
+    c=cost_bps/10000
+    wealth,previous=initial,0
+    for i,weight in enumerate(positions):
+        turnover=None # TODO_TURNOVER
+        interval_return=opens[i+1]/opens[i]-1
+        wealth=None # TODO_INTERVAL
+        previous=weight
+    return None # TODO_EXIT
+if __name__ == &quot;__main__&quot;:
+    print(net_wealth([100,100],[1],10))
+</pre><p><a href="scripts/ch8-costs.py" download>Download starter .py</a></p><h3>Hints</h3><ol><li>Turnover=abs(weight-previous).</li><li>wealth*(1-c*turnover)*(1+weight*return);after the loop multiply by1-c*previous.</li></ol><p>Run <code>python3 check.py ch8-costs</code>. It checks: Flat but costs lose, Growth then liquidation, Cash then entry, Exit before next interval.</p><p><strong>Explain and revise:</strong> Show a one-interval hand-check,explain the final exit and why higher fees cannot improve this fixed path.</p><p>After trying and revising, <a href="reference/ch8-costs.py">compare with the reference solution</a>. Reference viewing is a learning aid, not evidence of independent authorship.</p></section><section><h2>ch9-audit: Check information and execution dates</h2><p><strong>Objective:</strong> Count invalid timing rows without using future information.</p><p><strong>Predict:</strong> If a signal is available on day 3 but execution is day 2, can that trade use the signal? Predict the audit count.</p><p><strong>Task:</strong> Rows are [available_day, execution_day]. Day numbers are ordered integers in one synthetic calendar. The close-based signal must execute on a STRICTLY LATER day. Count executions at or before information availability. This is a mechanical timing screen, not proof that all leakage is absent.</p><p><strong>Python syntax:</strong> sum(condition for row in rows) counts True values. A &lt;= comparison includes equality. Dictionary outputs are numeric so the shared checker can compare them.</p><h3>Worked example</h3><pre class="code-block">rows = [[1, 2], [3, 2], [4, 4]]
+for available, execution in rows:
+    print(available, execution, &quot;invalid&quot; if execution &lt;= available else &quot;later execution&quot;)
+</pre><h3>Starter script</h3><pre class="code-block">def timing_audit(rows):
+    if any(len(row) != 2 or not all(isinstance(v, int) for v in row) for row in rows):
+        raise ValueError(&quot;Use [available_day, execution_day] integer pairs.&quot;)
+    invalid = None  # TODO_INVALID
+    return {&quot;total&quot;: len(rows), &quot;invalid&quot;: invalid, &quot;valid&quot;: len(rows) - invalid}
+
+if __name__ == &quot;__main__&quot;:
+    print(timing_audit([[1, 2], [3, 2], [4, 4]]))
+</pre><p><a href="scripts/ch9-audit.py" download>Download starter .py</a></p><h3>Hints</h3><ol><li>A close-based signal available on day t cannot execute at an earlier day or that same day open.</li><li>Count execution &lt;= available. Return total, invalid and valid counts.</li></ol><p>Run <code>python3 check.py ch9-audit</code>. It checks: Earlier and same-day errors, Changed dates, No rows.</p><p><strong>Explain and revise:</strong> Explain the same-day open violation and name one leakage source that this tiny date screen cannot detect.</p><p>After trying and revising, <a href="reference/ch9-audit.py">compare with the reference solution</a>. Reference viewing is a learning aid, not evidence of independent authorship.</p></section><section><h2>ch9-trials: Keep the losing trials</h2><p><strong>Objective:</strong> Summarise every supplied trial without filtering by sign.</p><p><strong>Predict:</strong> For net trial returns [-4, 0, 6, -2]%, how many losing trials and what mean do you expect?</p><p><strong>Task:</strong> Inputs are percentage-unit net returns from ALL supplied trials. Complete loss count and arithmetic mean. This descriptive mean is not expected future strategy return and does not correct multiple testing. Zero is neither a win nor a loss. Retain all four values in your log.</p><p><strong>Python syntax:</strong> sum(values)/len(values) is the arithmetic mean. sum(x &lt; 0 for x in values) counts losses. Do not replace the input with positive returns.</p><h3>Worked example</h3><pre class="code-block">values = [-4, 0, 6, -2]
+print(&quot;All trial count:&quot;, len(values))
+print(&quot;Complete-log sum (%):&quot;, sum(values))
+print(&quot;Reporting only&quot;, max(values), &quot;would hide losses and selection.&quot;)
+</pre><h3>Starter script</h3><pre class="code-block">import math
+
+def trial_summary(values):
+    if not values or not all(math.isfinite(x) for x in values):
+        raise ValueError(&quot;Use a nonempty complete list of finite trial returns in %.&quot;)
+    losses = None  # TODO_LOSSES
+    average = None  # TODO_MEAN
+    return {&quot;trials&quot;: len(values), &quot;losses&quot;: losses, &quot;mean_pct&quot;: average, &quot;best_pct&quot;: max(values)}
+
+if __name__ == &quot;__main__&quot;:
+    print(trial_summary([-4, 0, 6, -2]))
+</pre><p><a href="scripts/ch9-trials.py" download>Download starter .py</a></p><h3>Hints</h3><ol><li>Keep negatives and zero in the denominator.</li><li>Count values strictly below zero; mean all values, not just the winning trial.</li></ol><p>Run <code>python3 check.py ch9-trials</code>. It checks: Complete log, All unfavourable, Zero and changed cases.</p><p><strong>Explain and revise:</strong> Why would reporting only the maximum create a misleading impression? Explain why averaging all tried strategies still does not establish deployability.</p><p>After trying and revising, <a href="reference/ch9-trials.py">compare with the reference solution</a>. Reference viewing is a learning aid, not evidence of independent authorship.</p></section><section><h2>ch10-evidence: Trace a net holding-period calculation</h2><p><strong>Objective:</strong> Reproduce the first evaluation holding period with entry cost before return.</p><p><strong>Predict:</strong> With £1000, entry101, exit97 and10bps entry cost, should end wealth be above or below £1000? Predict the approximate value.</p><p><strong>Task:</strong> Complete end_wealth for a fully invested long position entered from cash. Cost is charged against starting wealth at entry, before the open-to-open price ratio. This is one period, not the full strategy. A separate final exit, if applicable, would incur another cost; this function intentionally returns wealth before that exit.</p><p><strong>Python syntax:</strong> 10 basis points /10000 = .001. Multiply start by (1-cost_bps/10000), then by exit_open/entry_open. Do not subtract10 percent or use the close price.</p><h3>Worked example</h3><pre class="code-block">start, entry, exit_price, bps = 1000, 100, 105, 10
+after_entry_cost = start * (1 - bps / 10000)
+print(&quot;After entry:&quot;, after_entry_cost)
+print(&quot;End before separate final exit:&quot;, after_entry_cost * exit_price / entry)
+</pre><h3>Starter script</h3><pre class="code-block">import math
+
+def holding_end(start, entry_open, exit_open, cost_bps):
+    if not all(math.isfinite(x) for x in [start, entry_open, exit_open, cost_bps]) or min(start, entry_open, exit_open) &lt;= 0 or not 0 &lt;= cost_bps &lt;= 100:
+        raise ValueError(&quot;Use positive finite wealth/prices and cost 0–100bps.&quot;)
+    return None  # TODO_END
+
+if __name__ == &quot;__main__&quot;:
+    print(holding_end(1000, 101, 97, 10))
+</pre><p><a href="scripts/ch10-evidence.py" download>Download starter .py</a></p><h3>Hints</h3><ol><li>Market factor = exit_open / entry_open.</li><li>The full expression is start * (1 - cost_bps / 10000) * exit_open / entry_open.</li></ol><p>Run <code>python3 check.py ch10-evidence</code>. It checks: Capstone first row, Changed cost, Changed independent case.</p><p><strong>Explain and revise:</strong> State the information/execution timeline and explain why the result excludes a separate terminal-exit cost.</p><p>After trying and revising, <a href="reference/ch10-evidence.py">compare with the reference solution</a>. Reference viewing is a learning aid, not evidence of independent authorship.</p></section><section><h2>ch10-ledger: Reproduce the full evaluation ledger</h2><p><strong>Objective:</strong> Complete the fixed rule ledger and reproduce both predefined cost cases.</p><p><strong>Predict:</strong> Will the higher 30bps cost improve or reduce the fixed-position final wealth? Predict before running both cases.</p><p><strong>Task:</strong> The starter supplies all original synthetic opens/closes, chronological signal/entry/exit indices, switches and terminal liquidation. Complete the signal and cost-adjusted wealth expressions. It reports numeric summaries, while your core export retains complete rows. A signal at index t uses closes through t, executes open t+1 and earns open t+1→t+2. Do not shift returns backward.</p><p><strong>Python syntax:</strong> Slice closes[t-2:t+1] contains three known closes. int(condition) converts a rule to0or1. abs(position-previous) is traded fraction. Final liquidation charges the final held position; benchmark pays entry and exit costs. No external packages or filesystem access.</p><h3>Worked example</h3><pre class="code-block">closes = [101, 102, 107]
+print(&quot;Known mean:&quot;, sum(closes) / 3)
+print(&quot;Position for next open:&quot;, int(closes[-1] &gt; sum(closes) / 3))
+print(&quot;Do not earn returns before execution; retain all cost cases and losing results.&quot;)
+</pre><h3>Starter script</h3><pre class="code-block">def evaluate_block(cost_bps):
+    if not 0 &lt;= cost_bps &lt;= 100:
+        raise ValueError(&quot;Use cost0–100bps.&quot;)
+    opens = [100,103,105,101,97,94,96,99,102,98,95,97,94,92,96,99]
+    closes = [price + [1,-1,2,-2][i % 4] for i, price in enumerate(opens)]
+    c = cost_bps / 10000
+    wealth, previous, turnover_sum = 1000.0, 0, 0
+    for t in range(2, len(opens) - 2):
+        position = None  # TODO_SIGNAL
+        turnover = abs(position - previous)
+        wealth = None  # TODO_WEALTH
+        turnover_sum += turnover
+        previous = position
+    wealth *= 1 - previous * c  # final liquidation, if invested
+    benchmark = 1000 * (1-c) * opens[-1] / opens[3] * (1-c)
+    return {&quot;final&quot;: wealth, &quot;benchmark&quot;: benchmark, &quot;return_pct&quot;: (wealth/1000-1)*100, &quot;traded_fraction&quot;: turnover_sum + previous}
+
+if __name__ == &quot;__main__&quot;:
+    print(&quot;10bps:&quot;, evaluate_block(10))
+    print(&quot;30bps:&quot;, evaluate_block(30))
+</pre><p><a href="scripts/ch10-ledger.py" download>Download starter .py</a></p><h3>Hints</h3><ol><li>position=int(closes[t] &gt; sum(closes[t-2:t+1])/3).</li><li>wealth *= (1-turnover*c) * (1+position*(opens[t+2]/opens[t+1]-1)).</li></ol><p>Run <code>python3 check.py ch10-ledger</code>. It checks: Base ledger, Cost sensitivity, Zero-cost diagnostic.</p><p><strong>Explain and revise:</strong> Explain the first eligible entry and last exit, why all predefined costs must be retained, and why matching a synthetic ledger cannot prove real profitability.</p><p>After trying and revising, <a href="reference/ch10-ledger.py">compare with the reference solution</a>. Reference viewing is a learning aid, not evidence of independent authorship.</p></section><section><h2>Browser alternative and privacy</h2><p>The interactive workspace runs Pyodide 314.0.7 in a device-local worker, loaded on demand from jsDelivr. The runtime provider receives ordinary asset requests; the supplied scripts do not upload code to a course execution server. Use classroom data. Added code can use network features if you write them yourself. The browser saves scripts, predictions, feedback, reflections and attempts locally; resets are separate from core chapter records. Exports have no import/sync. Keep downloaded files until you choose to delete them.</p><p>Browser loading has a one-minute limit; execution has five seconds, capped output and a Stop control. These are responsiveness limits, not a guaranteed memory sandbox. Downloaded scripts need a local Python installation. Learner pilot, full assistive-technology testing and commercial release validation remain pending.</p><p>Optional references: <a href="https://docs.python.org/3/tutorial/introduction.html">official Python syntax tutorial</a>; <a href="https://pyodide.org/en/stable/usage/webworker.html">Pyodide worker documentation</a>. All ten prototype chapters have optional Python activities, with additional time shown per activity.</p></section></body></html>

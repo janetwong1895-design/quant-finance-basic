@@ -1,6 +1,6 @@
 # Quantitative Finance Foundations
 
-A proposed 30-hour beginner course, with the first four chapters implemented as self-paced, browser-based learning experiences.
+A proposed 30-hour beginner course, with the ten chapters implemented as self-paced, browser-based learning experiences.
 
 | Chapter | Content | Status |
 | --- | --- | --- |
@@ -8,9 +8,16 @@ A proposed 30-hour beginner course, with the first four chapters implemented as 
 | [2 · Make the numbers comparable](dist/chapter-02/index.html) | Total returns, compounding/CAGR, present value, bond cash flows and purchasing power | Interactive prototype |
 | [3 · Trust the table](dist/chapter-03/index.html) | CSV inspection, dates, duplicates, missing prices, split adjustments and a cleaning audit | Interactive prototype |
 | [4 · Describe the evidence](dist/chapter-04/index.html) | Probability, mean/median, sample spread, quantiles, correlation and resampling | Interactive prototype |
-| 5–10 | Risk, portfolios, simulation, backtesting, research reliability and capstone | Course proposal |
+| [5 · Risk and performance](dist/chapter-05/index.html) | Volatility, drawdown and a defined Sharpe ratio | Interactive prototype |
+| [6 · Portfolio diversification](dist/chapter-06/index.html) | Weights, concentration, rebalancing, correlation and beta | Interactive prototype |
+| [7 · Simulation and payoffs](dist/chapter-07/index.html) | Seeded scenarios, forwards and calls after premium | Interactive prototype |
+| [8 · A transparent backtest](dist/chapter-08/index.html) | Signal timing, execution, costs and matching benchmark | Interactive prototype |
+| [9 · Research reliability](dist/chapter-09/index.html) | Bias audit, complete trial logs and a frozen plan | Interactive prototype |
+| [10 · Capstone and communication](dist/chapter-10/index.html) | Reproduce evidence, draft and revise a research memo | Interactive prototype |
 
-Each implemented chapter has worked examples, guided practice, independent self-checks, targeted feedback, revisions, local progress and a text/paper alternative. Suggested chapter time is three hours, including activities and assessment. Learner timings and educational effectiveness have not yet been validated.
+Start with the [complete course map](dist/course/index.html). All ten chapters are formative prototypes: completion does not certify research quality or award a credential.
+
+Each chapter has worked examples, guided practice, independent self-checks, targeted feedback, revisions, local progress and a text/paper alternative. Suggested chapter time is three hours, including activities and assessment. Learner timings and educational effectiveness have not yet been validated.
 
 ## Run locally
 
@@ -20,7 +27,7 @@ Use Python 3 to serve the static learner site:
 python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 ```
 
-Open [Chapter 1](http://127.0.0.1:8765/), [Chapter 2](http://127.0.0.1:8765/chapter-02/), [Chapter 3](http://127.0.0.1:8765/chapter-03/) or [Chapter 4](http://127.0.0.1:8765/chapter-04/). JavaScript modules require HTTP(S); double-clicking `index.html` is not a supported way to launch the interactive route. Learners visiting a hosted copy need no installation.
+Open [Chapter 1](http://127.0.0.1:8765/), [Chapter 2](http://127.0.0.1:8765/chapter-02/), [Chapter 3](http://127.0.0.1:8765/chapter-03/) or the [ten-chapter course map](http://127.0.0.1:8765/course/). JavaScript modules require HTTP(S); double-clicking `index.html` is not a supported way to launch the interactive route. Learners visiting a hosted copy need no installation.
 
 The core chapters have no runtime npm dependencies, external fonts, remote calculation APIs or required market-data accounts. The optional Python workspace downloads pinned Pyodide from jsDelivr on first execution; the downloadable scripts run locally without third-party Python packages. Text/paper alternatives are available at `dist/chapter-guide.html` and each later chapter’s `guide.html`.
 
@@ -32,16 +39,17 @@ Developer checks require Node.js 24 or later. No `npm install` is needed.
 npm test
 npm run build:guide
 npm run build:python
+node scripts/build-course-navigation.mjs
 npm run test:python
 ```
 
-The tests cover the implemented chapters, including financial arithmetic, input validation, critical assessment criteria, saved-state recovery and completion invalidation. The Chapter 2–4 text routes are generated from the same lesson and assessment definitions as their interactive routes.
+The tests cover the implemented chapters, including financial arithmetic, input validation, critical assessment criteria, saved-state recovery and completion invalidation. The Chapter 2–10 text routes are generated from the same lesson and assessment definitions as their interactive routes.
 
 ## Optional Python consolidation
 
 Open [Python practice](dist/python/index.html) from the chapter links. Chapter-linked activities offer prediction, a real Python editor, changed-input checks, hints, references and self-reviewed reflection. A [complete text/setup guide](dist/python/guide.html) and [downloadable learner pack](dist/python/learner-pack.zip) support local Python. See [the design and future chapter mapping](docs/python-practice.md).
 
-Allow an additional 40 minutes for Chapter 1, 65 minutes for Chapter 2 and 10–15 minutes for first setup, beyond the proposed 30-hour core. These estimates are unvalidated. Python progress is separate from core completion. Chapters 3–4 add an estimated 50 and 45 minutes of data and statistics scripts; Chapters 5–10 remain proposed.
+Allow an additional 40 minutes for Chapter 1, 65 minutes for Chapter 2 and 10–15 minutes for first setup, beyond the proposed 30-hour core. These estimates are unvalidated. Python progress is separate from core completion. Chapters 3–4 add an estimated 50 and 45 minutes of data and statistics scripts; Chapters 5–10 add risk, portfolios, simulation, backtesting, reliability and capstone scripts; their additional study time is shown per activity.
 
 ## Course materials
 
@@ -52,6 +60,8 @@ Allow an additional 40 minutes for Chapter 1, 65 minutes for Chapter 2 and 10–
 - [Chapter 2 design notes](docs/chapter-02.md)
 - [Chapter 3 design notes](docs/chapter-03.md)
 - [Chapter 4 design notes](docs/chapter-04.md)
+- [Remaining chapter design notes](docs/)
+- [Full prototype manifest and outcome map](docs/prototype-manifest.md)
 - [Instructor materials and answer guidance](instructor/)
 - [Independent reviews and verification records](review/)
 
@@ -66,6 +76,10 @@ Answers and progress stay in the learner's browser using separate chapter storag
 The package has undergone automated checks, browser walkthroughs and independent agent reviews. Real-learner pilots, full screen-reader verification, validated completion timings and commercial-release checks remain outstanding. Review records describe the precise scope and remaining limits. Agent review does not establish accessibility conformance or learning effectiveness.
 
 The original prototype's hosting configuration, deployment archives and machine-specific authentication settings are intentionally absent. To host this repository, serve `dist/` from any static web server and configure the destination separately. Source review hashes refer to the inspected development snapshots; machine-local documentation paths have been normalised for this repository.
+
+## Prototype validation
+
+The complete prototype has 65 JavaScript tests and five Python test methods covering the 26-activity pack. Independent review and observed browser workflows are recorded in [the release evidence](review/chapters-05-10/verification.md). Human learner timing, full assistive-technology compatibility and educational effectiveness remain unvalidated.
 
 ## License
 

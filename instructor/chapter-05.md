@@ -1,0 +1,15 @@
+# Chapter 5 instructor and reviewer notes
+
+Status: owner-review prototype. Learner-facing material is self-contained and does not depend on instructor replies. Outcomes CH5-01–04 map one-to-one to the four concept lessons, checked tasks and independent transfer. Core180minutes; optional standard-library Python35minutes extra. These proposed timings are not pilot evidence.
+
+Sample monthly standard deviation uses n−1 and percentage-point units. Annualised SD and Sharpe use√12 with an explicit independent, identically distributed/stationary monthly-return assumption; this is not a realised loss bound. Drawdown includes initial wealth and reports maximum loss as a positive magnitude. Annual effective risk-free inputs convert via100 ×[(1+R/100)^(1/12)−1] before monthly subtraction. Sharpe uses mean monthly excess/sample SD monthly excess; constant series are explicitly undefined, including floating-point .3 regressions. Portfolio and benchmark growth compound over the same six months and basis.
+
+Acceptable evidence: both numeric tasks per lesson checked correctly, explanation against the stated rubric; two distinct lab inputs with prediction before run, latest hand check, comparison and limitation; independent7/8 with all critical items and specific correction/verification response; final method/check/limit card. Review prose for a substantive reason, correct convention, reproducible result and material limitation; minimum length is not a proficiency score. Preserve unsuccessful attempts and unfavourable numeric results.
+
+Answer keys are learner-accessible in the complete text guide, intentionally formative. Python reference solutions are generated separately under`instructor/python/`; learner starters/pack are built by the root Python builder. Do not label completion an exam credential. No investment allocation is recommended.
+
+Assessment feedback: on incorrect units show fraction-versus-percentage conversion; on wrong denominator trace deviations and n−1; on timing/policy mistakes trace holdings before/after a month; on overclaims ask what the six original invented observations and omitted frictions cannot establish. Ask the learner to revise and reattempt without copying. Detailed numerical answers and per-item feedback are sourced directly from the executable model and guide builder.
+
+Accessibility target is keyboard-operable semantic forms, explicit labels, focused status feedback, text guide and exact table equivalents to charts. Full screen-reader/human testing remains pending. Browser/storage and artifact review evidence belongs to the root release ledger. Source and data rights: original hypothetical material under repository licence; external primary pages are linked, not copied.
+
+Before release run chapter tests, regenerate guide/data, inspect plot/table parity and attempt logs, exercise edit/reload invalidation, validate links and Python references, and resolve independent review findings. Actual model/token costs are unknown, not zero; no external paid model dispatch introduced here.

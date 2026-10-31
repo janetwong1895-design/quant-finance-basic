@@ -31,3 +31,8 @@ The original proposal describes a possible equivalent Python/notebook route. The
 ## Current implementation status · Chapters 3–4 update
 
 Chapters 1–4 are implemented as formative self-learning web prototypes with text routes, local progress, worked/guided/transfer tasks and optional Python scripts. The original proposal’s notebook and facilitated-support plans remain proposals; no notebook service or facilitator response has been provisioned. Each chapter’s 180-minute noncoding estimate and additional Python times need a learner pilot. The proposal’s course-level assessment weights and capstone pass rules are not an awarded credential or implemented course-wide grading system. Chapters 5–10 remain planned.
+
+
+## Full prototype implementation amendment
+
+At the user’s request, all ten chapters now have self-learning web prototypes with worked examples, guided practice, formative independent transfer, feedback/revision and text routes. Suitable concepts have optional browser/local Python scripts with extra time separately disclosed. The intended noncoding core remains ten estimated 180-minute chapters (30hours); timings and educational effectiveness remain unvalidated. No notebook service, facilitator response promise, secure examination, independently verified preregistration or accredited credential is provisioned. Earlier “planned” descriptions record proposal history; see docs/prototype-manifest.md for the current assets and scope. The capstone uses a public synthetic dataset and a pedagogical local plan gate, which cannot establish genuine unseen-data validation. Full learner pilots, assistive-technology verification and commercial readiness remain pending.
