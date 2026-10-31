@@ -1,0 +1,32 @@
+# Independent curriculum, assessment and product-claim review
+
+Date: 31 October 2026. Reviewer: `python_learning_review`, independent of implementation author. Candidate based on commit `011d361b79829d37cba9702787a072e8f014fb46` plus working-tree Python additions. Inspected actual `scripts/build-python-practice.py`, generated `dist/python/{exercises.json,guide.html,index.html,app.js,check.py,checker.py}`, `dist/python-links.mjs`, `docs/python-practice.md`, course brief and proposal. This is artifact review, not a target-learner pilot or browser/assistive-technology audit.
+
+Snapshot SHA-256: builder `15a44229ee042086bb38dfee340222f03455059bfd980d5ba433b0ac6a6c138a`; app `3b4f818b7ed5068d832c7eb572049cc93a19e15bb50a81fc93d2e5c24148a414`; practice guide `ab9914f197eeefbc7702e99586faccc4191ee7ad8dc3400faf6c84f14c79f417`.
+
+## Finding PY-CUR-01 — major, open at first review
+
+Role: curriculum/product scope. Evidence: `course-brief.md:11–12` describes guided Python plus an equivalent no-code route inside 30 total hours. `course-proposal.md:30,79` describes prepared Python notebooks and two equivalent routes. The delivered route is standalone scripts, with `docs/python-practice.md:63` explicitly adding 40 + 65 optional minutes beyond the 30-hour core, plus setup. These are different delivery and workload contracts. Readers of the repository proposal could reasonably expect an implemented Python route fitting the original total.
+
+Correction: add a dated implementation amendment to brief/proposal (and README) stating that the original proposal's within-budget notebook route is superseded for the first two delivered chapters by optional standard-library scripts/browser Python; all coding time is additional until a timed pilot supports replacing core practice. Retain the useful historical proposal but distinguish planned Chapters 3–10 from delivered Chapters 1–2. Owner: root implementation author. Acceptance: the current implementation description is consistent across brief, proposal, README and learner guide, with no unqualified 30-hour Python completion promise. Retest pending.
+
+## Observations and evidence
+
+- Appropriate progression for concept consolidation: a fully supplied percentage-change example, one-expression guided allocation loop, and fee-comparison extension; Chapter 2 moves from reusable return formulas to compounding, dated payments, deflation and a three-output report. New syntax is described beside each task. This supports small script edits; it does not demonstrate independent programming proficiency.
+- The financial task has priority over syntax. Existing chapter concepts and hypothetical conventions are reused. The fee comparison is explicitly marked as an extension beyond the zero-cost core; cash distribution treatment, percentage versus pound units, principal inclusion and different deflation/discounting rates are disclosed.
+- Numerical checks use changed inputs and negative-return cases. The browser requires a prediction and matched current-code checks before consolidation, plus a self-reviewed reflection. It truthfully states that minimum prose lengths do not assess reasoning. Code edits invalidate completion; no return-based marks or programming credential are promised.
+- The first worked example already passes the numerical tests; the page and guide explicitly say this is not independent coding evidence. Public references and checks are appropriate for formative self-study, with their limits stated. The learner ZIP does not include full reference solutions, while references remain deliberately accessible separately.
+- The complete static guide and downloadable standard-library scripts provide a JavaScript-free alternative to the worker. Local setup has Windows and macOS/Linux commands and targeted error guidance. New beginners may need more than the 10–15-minute setup suggestion; the estimates are explicitly unvalidated and this remains a pilot question, not a release claim.
+- Optional practice is currently present for Chapters 1 and 2 only; future chapter mapping is clearly planned. Chapter links do not require coding to complete the existing financial-learning route.
+
+## Checks actually run
+
+`python3 -m unittest discover -s tests -p 'test_python_*.py'`: five tests passed. This covers reference cases, incomplete starters, misconceptions, arithmetic invariance and extracted-ZIP checks. As an independent sample learner attempt, replaced the allocation starter's `None` with `(weight / 100) * asset_return`: all four cases matched. As a diagnostic test, implemented real return by subtraction while preserving exact buying-power deflation: both real-return checks failed with targeted hints and both buying-power checks passed. No browser execution, screen-reader testing, target-learner timing or retention effectiveness was tested by this reviewer.
+
+Curriculum/assessment score: 2/3 (usable, learner pilot pending). Product truth: 1/3 while PY-CUR-01 remains open; otherwise the activity-level promises are appropriately scoped. No blocker found. Recommendation: resolve the major documentation mismatch, then recheck affected claims before publishing this candidate update. Commercial release readiness is not established.
+
+## Revision recheck · 31 October 2026
+
+PY-CUR-01 resolved. Re-read the new dated Python implementation amendments in `course-brief.md` and `course-proposal.md`, README's optional Python section and both printable-guide integrations. They explicitly distinguish the originally proposed notebook/equivalent-time route from eight currently delivered script activities, disclose 40 + 65 extra minutes and first setup, state no validated equivalent-time replacement, and retain planned status for later chapters. README describes the actual browser/runtime/local-pack split. Core guides label coding additional and progress separate. The amendment's phrase “proposal below” is a minor directional wording issue when the amendment appears at the document end; it does not obscure the explicit current contract.
+
+No unresolved blocker or major in this review scope. Product truth revised to 2/3. The curriculum/assessment and product-claim portions are usable for a scoped prototype, conditional on root's separate browser verification and the quantitative/accessibility review. Target-learner timing, actual learning benefit and commercial release remain unverified. This recheck does not certify the worker runtime.

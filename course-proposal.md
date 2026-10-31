@@ -127,3 +127,8 @@ Proceed to detailed authoring after the scope is accepted: build M01–M03 first
 This deliverable is a **curriculum proposal**. Learner lessons, runnable labs, answer keys and validated assessments have not been produced. Independent quantitative, accessibility and teaching reviews, followed by recorded revisions and fresh-run checks, are required before a pilot-ready package is claimed. Publication would additionally invoke the studio's review-and-release workflow. No learner outcomes, accreditation, commercial demand, data rights or release readiness are asserted.
 
 Open decisions: intended audience segment; whether 30 hours means total study time or contact time; preferred delivery format; expected Python depth; facilitator availability; production budget; and any commercial destination. None prevents this proposal from being reviewed.
+
+
+## Python implementation amendment · 31 October 2026
+
+The original proposal describes a possible equivalent Python/notebook route. The currently delivered implementation instead supplies eight optional Python script activities for Chapters 1–2, adding an estimated 40 and 65 minutes respectively, plus 10–15 minutes for first setup, beyond the proposed 30-hour noncoding core. No equivalent-time replacement or notebook route has been validated. Later chapters remain proposed. See [Python practice](docs/python-practice.md).

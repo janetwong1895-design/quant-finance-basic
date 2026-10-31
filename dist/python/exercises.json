@@ -1,0 +1,558 @@
+[
+  {
+    "id": "ch1-change",
+    "chapter": 1,
+    "kind": "Worked example",
+    "minutes": 10,
+    "title": "Turn a percentage into Python",
+    "concept": "Chapter 1 · readiness and percentage changes",
+    "objective": "Read variables, arithmetic and a function; explain a percentage relative to its starting value.",
+    "prediction": "Predict the percentage change from £200 to £210 before running. Why is the denominator 200?",
+    "instructions": "This first script is complete. Run it, inspect the named inputs and printed result, then change ending_value to 190 and predict the result. Restore the original example before checking.",
+    "syntax": "= stores a value; # starts a comment; / divides; * multiplies. def names a reusable function. Four spaces indent its body. return sends a result back. print displays it. You call a function with values in parentheses.",
+    "hints": [
+      "The change is ending value minus starting value.",
+      "Divide by the starting value, then multiply by 100. A lower ending value gives a negative change."
+    ],
+    "reflection": "Explain the denominator and the effect of changing 210 to 190. Passing these checks only confirms the supplied function, not that you have written independent code.",
+    "starter": "# Hypothetical amounts; no deposits, withdrawals, fees or tax.\ndef percentage_change(start, end):\n    return (end - start) / start * 100\n\nif __name__ == \"__main__\":\n    starting_value = 200\n    ending_value = 210  # Try 190, predict, then run again.\n    result = percentage_change(starting_value, ending_value)\n    print(\"Percentage change:\", result, \"%\")\n",
+    "example": "# Hypothetical amounts; no deposits, withdrawals, fees or tax.\ndef percentage_change(start, end):\n    return (end - start) / start * 100\n\nif __name__ == \"__main__\":\n    starting_value = 200\n    ending_value = 210  # Try 190, predict, then run again.\n    result = percentage_change(starting_value, ending_value)\n    print(\"Percentage change:\", result, \"%\")\n",
+    "cases": [
+      {
+        "label": "The supplied example",
+        "function": "percentage_change",
+        "args": [
+          200,
+          210
+        ],
+        "expected": 5,
+        "hint": "Use change divided by starting value."
+      },
+      {
+        "label": "A falling value",
+        "function": "percentage_change",
+        "args": [
+          200,
+          190
+        ],
+        "expected": -5,
+        "hint": "Keep the negative sign."
+      },
+      {
+        "label": "A new base",
+        "function": "percentage_change",
+        "args": [
+          80,
+          100
+        ],
+        "expected": 25,
+        "hint": "Use 80, not 100, as the denominator."
+      }
+    ]
+  },
+  {
+    "id": "ch1-allocation",
+    "chapter": 1,
+    "kind": "Guided practice",
+    "minutes": 15,
+    "title": "Build a weighted portfolio return",
+    "concept": "Chapter 1 · allocation lab",
+    "objective": "Implement a weighted return and compare the fixed 20/40/40 baseline with another allocation.",
+    "prediction": "Which returns do you expect for the 20/40/40 baseline and a 50/40/10 allocation in the stress scenario?",
+    "instructions": "Replace the single TODO expression inside the loop. weights contains cash, bond and share percentages; returns_pct contains their one-year returns in the same order. Complete the expression, run, then check on several allocations.",
+    "syntax": "A list groups values in square brackets. zip pairs items in order. for repeats the indented calculation for each pair. total += contribution adds to a running total. None is a placeholder here, not zero.",
+    "hints": [
+      "A 20% weight is 20 / 100, or 0.20.",
+      "Each contribution is weight / 100 multiplied by that asset's return in percentage units."
+    ],
+    "reflection": "Compare both allocations in steady and stress conditions using the earlier browser table. Explain a trade-off and one limitation of the invented data.",
+    "starter": "import math\n\ndef portfolio_return(weights, returns_pct):\n    if len(weights) != 3 or len(returns_pct) != 3:\n        raise ValueError(\"Supply three matching assets.\")\n    if any(w < 0 or w > 100 for w in weights):\n        raise ValueError(\"Each weight must be between 0 and 100.\")\n    if not math.isclose(sum(weights), 100):\n        raise ValueError(\"Weights must add to 100%.\")\n    total = 0\n    for weight, asset_return in zip(weights, returns_pct):\n        contribution = None  # TODO: replace None with the weighted return.\n        total += contribution\n    return total\n\nif __name__ == \"__main__\":\n    stress = [1, -5, -20]  # Cash, bonds, shares: synthetic annual returns (%).\n    print(\"Baseline stress return (%):\", portfolio_return([20, 40, 40], stress))\n    print(\"Alternative stress return (%):\", portfolio_return([50, 40, 10], stress))\n",
+    "example": "# Worked calculation: the fixed baseline in the steady scenario.\nweights = [20, 40, 40]\nreturns_pct = [2, 3, 8]\ntotal = 0\nfor weight, asset_return in zip(weights, returns_pct):\n    total += weight / 100 * asset_return\nprint(\"Baseline steady return (%):\", total)  # 4.8\n",
+    "cases": [
+      {
+        "label": "Steady baseline",
+        "function": "portfolio_return",
+        "args": [
+          [
+            20,
+            40,
+            40
+          ],
+          [
+            2,
+            3,
+            8
+          ]
+        ],
+        "expected": 4.8,
+        "hint": "Use decimal weights but percentage-unit asset returns."
+      },
+      {
+        "label": "Stress baseline",
+        "function": "portfolio_return",
+        "args": [
+          [
+            20,
+            40,
+            40
+          ],
+          [
+            1,
+            -5,
+            -20
+          ]
+        ],
+        "expected": -9.8,
+        "hint": "Keep negative asset returns."
+      },
+      {
+        "label": "Alternative allocation",
+        "function": "portfolio_return",
+        "args": [
+          [
+            50,
+            40,
+            10
+          ],
+          [
+            1,
+            -5,
+            -20
+          ]
+        ],
+        "expected": -3.5,
+        "hint": "Use the function's inputs, not fixed weights."
+      },
+      {
+        "label": "All cash transfer",
+        "function": "portfolio_return",
+        "args": [
+          [
+            100,
+            0,
+            0
+          ],
+          [
+            1,
+            -5,
+            -20
+          ]
+        ],
+        "expected": 1,
+        "hint": "The two zero-weight holdings contribute zero."
+      }
+    ]
+  },
+  {
+    "id": "ch1-comparison",
+    "chapter": 1,
+    "kind": "Transfer challenge",
+    "minutes": 15,
+    "title": "Repair an omitted-cost comparison",
+    "concept": "Chapter 1 · fair benchmarks, optional cost extension",
+    "objective": "Calculate ending wealth after a flat fee and use the same convention for a comparison.",
+    "prediction": "The browser's first lab assumes zero costs. What happens to a £1,000 balance earning 4.8% when a £5 fee is deducted at year end?",
+    "instructions": "Write the ending_value function using its three inputs. This extension introduces a flat pound fee charged at the end of the year, after growth. Compare both portfolios using that same convention. It is not a full trading-cost or tax model.",
+    "syntax": "Use parentheses to group 1 + return_pct / 100. Subtract a pound fee from a pound balance. Do not subtract a pound amount directly from a percentage.",
+    "hints": [
+      "First calculate the ending value before the fee.",
+      "Multiply start by (1 + return_pct / 100), then subtract fee_gbp."
+    ],
+    "reflection": "Explain why £5 is 0.5 percentage points of a £1,000 starting balance. State when the fee was charged and why both comparisons need the same timing.",
+    "starter": "def ending_value(start, return_pct, fee_gbp):\n    # TODO: replace the next line with a calculation and return its result.\n    raise NotImplementedError(\"Calculate growth, then deduct the end-year pound fee.\")\n\nif __name__ == \"__main__\":\n    print(\"Baseline after fee (£):\", ending_value(1000, 4.8, 5))\n    print(\"Alternative after fee (£):\", ending_value(1000, 3.0, 5))\n",
+    "example": "starting_pounds = 500\nreturn_pct = 2\nend_year_fee_pounds = 3\ngross_end = starting_pounds * (1 + return_pct / 100)\nprint(\"Net ending pounds:\", gross_end - end_year_fee_pounds)  # 507\n",
+    "cases": [
+      {
+        "label": "Baseline with fee",
+        "function": "ending_value",
+        "args": [
+          1000,
+          4.8,
+          5
+        ],
+        "expected": 1043,
+        "hint": "The fee is £5, not 5%."
+      },
+      {
+        "label": "Alternative with same fee",
+        "function": "ending_value",
+        "args": [
+          1000,
+          3,
+          5
+        ],
+        "expected": 1025,
+        "hint": "Apply the same fee timing."
+      },
+      {
+        "label": "Stress loss plus fee",
+        "function": "ending_value",
+        "args": [
+          1000,
+          -9.8,
+          5
+        ],
+        "expected": 897,
+        "hint": "A fee increases a loss."
+      },
+      {
+        "label": "New starting amount",
+        "function": "ending_value",
+        "args": [
+          500,
+          2,
+          3
+        ],
+        "expected": 507,
+        "hint": "Use all function arguments, not the example constants."
+      }
+    ]
+  },
+  {
+    "id": "ch2-return",
+    "chapter": 2,
+    "kind": "Guided practice",
+    "minutes": 10,
+    "title": "Include the distribution once",
+    "concept": "Chapter 2 · measure a return",
+    "objective": "Implement a total-return function and distinguish price gain from a cash distribution.",
+    "prediction": "What total return comes from buying at £80, ending at £76 and receiving £2 in cash?",
+    "instructions": "Replace the TODO line. The distribution is held as cash to the end, with no reinvestment return; there are no external deposits, fees or taxes. Return a percentage number such as 7, not a decimal 0.07.",
+    "syntax": "Function arguments make the same formula reusable on new data. Keep full precision inside the function; rounding is only for printed presentation.",
+    "hints": [
+      "Net gain equals end minus start plus the distribution.",
+      "Divide that net gain by start and multiply by 100."
+    ],
+    "reflection": "Explain why the loss case remains negative. What would change if a supplied total-return series had already included distributions?",
+    "starter": "def total_return(start, end, distribution):\n    # TODO: return the total return in percentage units.\n    raise NotImplementedError(\"Include both the price change and the cash distribution.\")\n\nif __name__ == \"__main__\":\n    print(\"Total return (%):\", total_return(80, 76, 2))\n",
+    "example": "start, end, distribution = 50, 52, 1\ngain = end - start + distribution\nprint(\"Total return (%):\", gain / start * 100)  # 6\n",
+    "cases": [
+      {
+        "label": "Price plus distribution",
+        "function": "total_return",
+        "args": [
+          100,
+          104,
+          3
+        ],
+        "expected": 7,
+        "hint": "Add the cash receipt once."
+      },
+      {
+        "label": "Loss partly offset",
+        "function": "total_return",
+        "args": [
+          80,
+          76,
+          2
+        ],
+        "expected": -2.5,
+        "hint": "Use the starting £80 denominator."
+      },
+      {
+        "label": "New independent values",
+        "function": "total_return",
+        "args": [
+          200,
+          210,
+          6
+        ],
+        "expected": 8,
+        "hint": "Do not hard-code the worked example."
+      }
+    ]
+  },
+  {
+    "id": "ch2-growth",
+    "chapter": 2,
+    "kind": "Guided practice",
+    "minutes": 15,
+    "title": "Compound and annualise",
+    "concept": "Chapter 2 · compound over time",
+    "objective": "Implement future value and CAGR, and diagnose adding successive returns.",
+    "prediction": "Predict £500 growing at 8% for two years. Then predict the CAGR connecting £1,000 to £1,331 over three years.",
+    "instructions": "Complete both functions. Rates use percentage units and years are whole positive annual periods. No external deposits or withdrawals. Change the worked script's return list from [20, -20] to [25, -20] and explain the difference.",
+    "syntax": "Python uses ** for powers, not ^. For a square root use ** (1 / 2). Convert a percentage to a decimal with / 100, and a decimal return to a percentage with * 100.",
+    "hints": [
+      "Future value multiplies principal by the annual growth factor raised to years.",
+      "CAGR is ((end / start) ** (1 / years) - 1) * 100."
+    ],
+    "reflection": "Explain why multiplying yearly growth factors differs from adding returns. What information about the investment path does CAGR leave out?",
+    "starter": "def future_value(principal, rate_pct, years):\n    raise NotImplementedError(\"TODO: compound the annual growth factor.\")\n\ndef cagr(start, end, years):\n    raise NotImplementedError(\"TODO: find the equivalent annual percentage rate.\")\n\nif __name__ == \"__main__\":\n    print(\"Future value (£):\", future_value(500, 8, 2))\n    print(\"CAGR (%):\", cagr(1000, 1331, 3))\n",
+    "example": "balance = 100\nreturns_pct = [20, -20]\nfor rate in returns_pct:\n    balance *= 1 + rate / 100\nprint(\"Ending balance (£):\", balance)  # 96\nprint(\"Cumulative return (%):\", (balance / 100 - 1) * 100)  # -4\n",
+    "cases": [
+      {
+        "label": "Two-year compounding",
+        "function": "future_value",
+        "args": [
+          500,
+          8,
+          2
+        ],
+        "expected": 583.2,
+        "hint": "Use ** for powers; do not multiply rate by years."
+      },
+      {
+        "label": "Three-year transfer",
+        "function": "future_value",
+        "args": [
+          800,
+          4,
+          3
+        ],
+        "expected": 899.8912,
+        "hint": "Keep full precision until printing."
+      },
+      {
+        "label": "Annualising growth",
+        "function": "cagr",
+        "args": [
+          1000,
+          1331,
+          3
+        ],
+        "expected": 10,
+        "hint": "Take the cube root of the ending-to-starting ratio."
+      },
+      {
+        "label": "Annualising a loss",
+        "function": "cagr",
+        "args": [
+          100,
+          81,
+          2
+        ],
+        "expected": -10,
+        "hint": "A loss can have a negative CAGR."
+      }
+    ]
+  },
+  {
+    "id": "ch2-discount",
+    "chapter": 2,
+    "kind": "Guided practice",
+    "minutes": 15,
+    "title": "Discount each dated payment",
+    "concept": "Chapter 2 · present value and bonds",
+    "objective": "Translate a dated cash-flow schedule into a reproducible present-value calculation.",
+    "prediction": "What is the time-0 value of a £20 payment in year 1 plus £1,020 in year 2, discounted at 5%?",
+    "instructions": "payments is a list of (year, pounds) pairs. Complete one expression inside the loop. The final bond payment already includes principal. Use one supplied annual effective discount rate, with no default, fees or tax.",
+    "syntax": "for year, amount in payments unpacks each pair into names. Each payment has its own power. Add the discounted values, not the undated cash amounts.",
+    "hints": [
+      "Convert rate_pct to a decimal before forming the denominator.",
+      "The term is amount / (1 + rate_pct / 100) ** year."
+    ],
+    "reflection": "Explain why one exponent cannot discount the entire bond schedule correctly. Why must you avoid adding principal twice?",
+    "starter": "def present_value(payments, rate_pct):\n    total = 0\n    for year, amount in payments:\n        discounted = None  # TODO: discount this payment using its year.\n        total += discounted\n    return total\n\nif __name__ == \"__main__\":\n    bond = [(1, 20), (2, 1020)]\n    print(\"Present value (£):\", round(present_value(bond, 5), 2))\n",
+    "example": "future_payment = 1210\ndiscount_rate = 10 / 100\nyears = 2\nprint(\"Present value (£):\", future_payment / (1 + discount_rate) ** years)  # 1000\n",
+    "cases": [
+      {
+        "label": "Two bond payments",
+        "function": "present_value",
+        "args": [
+          [
+            [
+              1,
+              20
+            ],
+            [
+              2,
+              1020
+            ]
+          ],
+          5
+        ],
+        "expected": 944.2176870748299,
+        "hint": "Discount each dated payment before summing."
+      },
+      {
+        "label": "A single payment",
+        "function": "present_value",
+        "args": [
+          [
+            [
+              3,
+              926.1
+            ]
+          ],
+          5
+        ],
+        "expected": 800,
+        "hint": "Use the supplied payment year."
+      },
+      {
+        "label": "Different coupon and rate",
+        "function": "present_value",
+        "args": [
+          [
+            [
+              1,
+              30
+            ],
+            [
+              2,
+              1030
+            ]
+          ],
+          4
+        ],
+        "expected": 981.1390532544378,
+        "hint": "The final amount already includes principal."
+      },
+      {
+        "label": "Zero-rate comparison",
+        "function": "present_value",
+        "args": [
+          [
+            [
+              1,
+              50
+            ],
+            [
+              2,
+              1050
+            ]
+          ],
+          0
+        ],
+        "expected": 1100,
+        "hint": "At zero discount rate, sum the cash payments."
+      }
+    ]
+  },
+  {
+    "id": "ch2-inflation",
+    "chapter": 2,
+    "kind": "Guided practice",
+    "minutes": 10,
+    "title": "Calculate exact real returns",
+    "concept": "Chapter 2 · purchasing power",
+    "objective": "Use ratios for real returns and compound inflation to deflate a nominal balance.",
+    "prediction": "Can a 3% nominal gain produce a loss of buying power when inflation is 5%? Predict the sign before running.",
+    "instructions": "Complete both TODO lines. Both rates cover the same period. buying_power deflates an already computed nominal balance over whole years. It is not investment-rate discounting.",
+    "syntax": "Group both growth factors with parentheses. Return a real percentage from real_return and a pound amount from buying_power. Names carry units, which helps prevent mixing them.",
+    "hints": [
+      "Real return is a ratio of one plus nominal return to one plus inflation, minus one.",
+      "Deflate the nominal balance by (1 + inflation_pct / 100) ** years."
+    ],
+    "reflection": "Distinguish nominal pounds, starting-year buying power and the PV of a future payment. Explain why subtracting rates is only an approximation.",
+    "starter": "def real_return(nominal_pct, inflation_pct):\n    raise NotImplementedError(\"TODO: return the exact real percentage.\")\n\ndef buying_power(nominal_balance, inflation_pct, years):\n    raise NotImplementedError(\"TODO: return starting-year purchasing power in pounds.\")\n\nif __name__ == \"__main__\":\n    print(\"Real return (%):\", real_return(3, 5))\n    print(\"Buying power (£):\", round(buying_power(1030, 5, 1), 2))\n",
+    "example": "nominal_pct, inflation_pct = 6, 4\nreal_pct = ((1 + nominal_pct / 100) / (1 + inflation_pct / 100) - 1) * 100\nprint(\"Exact real return (%):\", round(real_pct, 2))  # 1.92, not exactly 2\n",
+    "cases": [
+      {
+        "label": "Exact ratio",
+        "function": "real_return",
+        "args": [
+          6,
+          4
+        ],
+        "expected": 1.9230769230769162,
+        "hint": "Subtraction is only an approximation."
+      },
+      {
+        "label": "Negative real return",
+        "function": "real_return",
+        "args": [
+          3,
+          5
+        ],
+        "expected": -1.904761904761909,
+        "hint": "Keep the negative sign."
+      },
+      {
+        "label": "One-year buying power",
+        "function": "buying_power",
+        "args": [
+          1030,
+          5,
+          1
+        ],
+        "expected": 980.952380952381,
+        "hint": "The result is pounds, not a percentage."
+      },
+      {
+        "label": "Multi-year transfer",
+        "function": "buying_power",
+        "args": [
+          1210,
+          10,
+          2
+        ],
+        "expected": 1000,
+        "hint": "Compound the inflation factor over both years."
+      }
+    ]
+  },
+  {
+    "id": "ch2-transfer",
+    "chapter": 2,
+    "kind": "Transfer challenge",
+    "minutes": 15,
+    "title": "Reproduce and critique the growth lab",
+    "concept": "Chapter 2 · calculation card and reproducibility",
+    "objective": "Build a small report that keeps nominal growth, real value and discounting distinct.",
+    "prediction": "If only inflation rises from 3% to 6%, which outputs change? Predict nominal end, buying power and the PV of the separate payment.",
+    "instructions": "Complete three formulas in summarise. Return a dictionary with the specified keys. Use the inputs, not constants from the example. The separate future payment is discounted at growth_pct as an illustrative opportunity rate; it is not the portfolio balance.",
+    "syntax": "A dictionary pairs text keys with values: {\"nominal\": nominal}. It gives units and meanings a stable label. Keep calculations unrounded; round only when printing the report.",
+    "hints": [
+      "Compute nominal = principal * (1 + growth_pct / 100) ** years.",
+      "Deflate nominal using inflation; discount the separate payment using growth_pct. These are different operations."
+    ],
+    "reflection": "Report a hand check and an inflation-only comparison. State one model limitation and one specific revision to your initial prediction. Explain why tests are evidence of code behaviour, not proof of an investment claim.",
+    "starter": "def summarise(principal, growth_pct, inflation_pct, years, future_payment):\n    nominal = None  # TODO: compound the principal.\n    real = None  # TODO: express nominal balance in starting-year pounds.\n    payment_pv = None  # TODO: discount the separate future payment.\n    return {\"nominal\": nominal, \"real\": real, \"payment_pv\": payment_pv}\n\nif __name__ == \"__main__\":\n    for inflation in [3, 6]:\n        result = summarise(1000, 5, inflation, 10, 2000)\n        print(\"Inflation scenario (%):\", inflation)\n        for label, amount in result.items():\n            print(label, \"(pounds):\", round(amount, 2))\n",
+    "example": "# Dictionary syntax before building your report.\nreport = {\"nominal\": 1100, \"real\": 1000}\nfor label, amount in report.items():\n    print(label, \"(pounds):\", amount)\n",
+    "cases": [
+      {
+        "label": "Default lab",
+        "function": "summarise",
+        "args": [
+          1000,
+          5,
+          3,
+          10,
+          2000
+        ],
+        "expected": {
+          "nominal": 1628.894626777442,
+          "real": 1212.0505797930664,
+          "payment_pv": 1227.8265070815182
+        },
+        "hint": "Use different rates for deflating and discounting."
+      },
+      {
+        "label": "Change only inflation",
+        "function": "summarise",
+        "args": [
+          1000,
+          5,
+          6,
+          10,
+          2000
+        ],
+        "expected": {
+          "nominal": 1628.894626777442,
+          "real": 909.566251737624,
+          "payment_pv": 1227.8265070815182
+        },
+        "hint": "Only the real balance should change."
+      },
+      {
+        "label": "New principal, rate and horizon",
+        "function": "summarise",
+        "args": [
+          500,
+          10,
+          0,
+          2,
+          1210
+        ],
+        "expected": {
+          "nominal": 605,
+          "real": 605,
+          "payment_pv": 1000
+        },
+        "hint": "Use each function argument rather than the default values."
+      }
+    ]
+  }
+]

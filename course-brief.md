@@ -21,3 +21,8 @@ Version: 0.1 · Date: 31 October 2026
 - Budget: no explicit budget supplied; no additional paid model benchmark or separate API dispatch authorised or initiated.
 - Release state: proposal for review; no pilot or publication readiness claim.
 - Unresolved decisions: audience priority, contact versus total hours, format, Python depth, staffing, budget and destination.
+
+
+## Python implementation amendment · 31 October 2026
+
+The original proposal describes a possible equivalent Python/notebook route. The currently delivered implementation instead supplies eight optional Python script activities for Chapters 1–2, adding an estimated 40 and 65 minutes respectively, plus 10–15 minutes for first setup, beyond the proposed 30-hour noncoding core. No equivalent-time replacement or notebook route has been validated. Later chapters remain proposed. See [Python practice](docs/python-practice.md).

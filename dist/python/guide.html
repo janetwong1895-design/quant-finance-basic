@@ -1,0 +1,125 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Python practice: complete text and local route</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="practice.css"><style>body{max-width:880px;margin:auto;padding:35px 25px}h1{font-size:3rem}section{margin:35px 0}</style></head><body><a href="index.html">← Interactive Python workspace</a><h1>Consolidate the idea in Python.</h1><p>Optional additions for Chapters 1 and 2: predict, read, run, explain, modify, check and critique. No instructor response is required. This text route uses the same scripts and checks on local Python; it has no JavaScript dependency. The core chapters also remain available without Python.</p><h2>Setup and retention</h2><p>Download and extract the <a href="learner-pack.zip">learner pack</a>. It includes eight starters, check.py, checker.py and exercises.json. Install Python 3 from <a href="https://www.python.org/downloads/">python.org</a> if necessary. No pip packages or keys are needed. Scripts use Python 3.8+ syntax and are locally tested on 3.8.2; choose a currently supported Python release for new installations.</p><p>Open a terminal in the extracted folder. On macOS/Linux run the commands below; on Windows use py in place of python3 if appropriate.</p><pre class="code-block">python3 --version
+python3 ch1-change.py
+python3 check.py ch1-change</pre><p>Then edit ch1-allocation.py, replace the TODO expression, save, run it and check it with python3 check.py ch1-allocation. Keep the check tools and exercises.json in the same folder. Keep notes on paper or in a local document. The text/local route does not synchronise with browser progress; retain your own script revisions, outputs and reflection.</p><h2>Syntax bridge and troubleshooting</h2><p>= stores a value, # begins a comment, * multiplies, / divides and ** raises to a power. ^ is not exponentiation. Four spaces indent function and loop bodies. return sends a value back; print shows it. A function uses named inputs so the calculation works on changed cases. Keep precision inside functions; round only displayed values.</p><p>NotImplementedError means a TODO remains. A TypeError involving None usually means a missing calculation. NameError points to an undefined or misspelled name. For SyntaxError or IndentationError, check spaces, parentheses, colons and quotes. Failed numerical checks give targeted method hints. Revise and try again; a printed hard-coded answer does not implement a reusable function.</p><h2>Time, criteria and assumptions</h2><p>Suggested extra time: 40 minutes in Chapter 1 and 65 in Chapter 2, plus 10–15 minutes once for setup. These optional additions are beyond the 30-hour noncoding core. Timings are unvalidated. For each task, predict first, attempt the code, check every supplied numerical case, and write a correction/check and limitation. Confidence is optional and ungraded. These checks do not certify financial reasoning, independent coding proficiency or a credential.</p><p>All data and rates are hypothetical. Chapter 1 uses one annual holding period and cash/bond/share order. The first lab has zero costs; the optional cost extension charges a flat pound fee at year end consistently to both portfolios. Chapter 2 uses annual effective rates, year-end payments, no external deposits and no fees/taxes. Distributions are held in cash to period end. Bond principal appears once in the final payment. No live prices, forecast claims, broker connections or personal inputs are required.</p><section><h2>ch1-change: Turn a percentage into Python</h2><p><strong>Objective:</strong> Read variables, arithmetic and a function; explain a percentage relative to its starting value.</p><p><strong>Predict:</strong> Predict the percentage change from £200 to £210 before running. Why is the denominator 200?</p><p><strong>Task:</strong> This first script is complete. Run it, inspect the named inputs and printed result, then change ending_value to 190 and predict the result. Restore the original example before checking.</p><p><strong>Python syntax:</strong> = stores a value; # starts a comment; / divides; * multiplies. def names a reusable function. Four spaces indent its body. return sends a result back. print displays it. You call a function with values in parentheses.</p><h3>Worked example</h3><pre class="code-block"># Hypothetical amounts; no deposits, withdrawals, fees or tax.
+def percentage_change(start, end):
+    return (end - start) / start * 100
+
+if __name__ == &quot;__main__&quot;:
+    starting_value = 200
+    ending_value = 210  # Try 190, predict, then run again.
+    result = percentage_change(starting_value, ending_value)
+    print(&quot;Percentage change:&quot;, result, &quot;%&quot;)
+</pre><h3>Starter script</h3><pre class="code-block"># Hypothetical amounts; no deposits, withdrawals, fees or tax.
+def percentage_change(start, end):
+    return (end - start) / start * 100
+
+if __name__ == &quot;__main__&quot;:
+    starting_value = 200
+    ending_value = 210  # Try 190, predict, then run again.
+    result = percentage_change(starting_value, ending_value)
+    print(&quot;Percentage change:&quot;, result, &quot;%&quot;)
+</pre><p><a href="scripts/ch1-change.py" download>Download starter .py</a></p><h3>Hints</h3><ol><li>The change is ending value minus starting value.</li><li>Divide by the starting value, then multiply by 100. A lower ending value gives a negative change.</li></ol><p>Run <code>python3 check.py ch1-change</code>. It checks: The supplied example, A falling value, A new base.</p><p><strong>Explain and revise:</strong> Explain the denominator and the effect of changing 210 to 190. Passing these checks only confirms the supplied function, not that you have written independent code.</p><p>After trying and revising, <a href="reference/ch1-change.py">compare with the reference solution</a>. Reference viewing is a learning aid, not evidence of independent authorship.</p></section><section><h2>ch1-allocation: Build a weighted portfolio return</h2><p><strong>Objective:</strong> Implement a weighted return and compare the fixed 20/40/40 baseline with another allocation.</p><p><strong>Predict:</strong> Which returns do you expect for the 20/40/40 baseline and a 50/40/10 allocation in the stress scenario?</p><p><strong>Task:</strong> Replace the single TODO expression inside the loop. weights contains cash, bond and share percentages; returns_pct contains their one-year returns in the same order. Complete the expression, run, then check on several allocations.</p><p><strong>Python syntax:</strong> A list groups values in square brackets. zip pairs items in order. for repeats the indented calculation for each pair. total += contribution adds to a running total. None is a placeholder here, not zero.</p><h3>Worked example</h3><pre class="code-block"># Worked calculation: the fixed baseline in the steady scenario.
+weights = [20, 40, 40]
+returns_pct = [2, 3, 8]
+total = 0
+for weight, asset_return in zip(weights, returns_pct):
+    total += weight / 100 * asset_return
+print(&quot;Baseline steady return (%):&quot;, total)  # 4.8
+</pre><h3>Starter script</h3><pre class="code-block">import math
+
+def portfolio_return(weights, returns_pct):
+    if len(weights) != 3 or len(returns_pct) != 3:
+        raise ValueError(&quot;Supply three matching assets.&quot;)
+    if any(w &lt; 0 or w &gt; 100 for w in weights):
+        raise ValueError(&quot;Each weight must be between 0 and 100.&quot;)
+    if not math.isclose(sum(weights), 100):
+        raise ValueError(&quot;Weights must add to 100%.&quot;)
+    total = 0
+    for weight, asset_return in zip(weights, returns_pct):
+        contribution = None  # TODO: replace None with the weighted return.
+        total += contribution
+    return total
+
+if __name__ == &quot;__main__&quot;:
+    stress = [1, -5, -20]  # Cash, bonds, shares: synthetic annual returns (%).
+    print(&quot;Baseline stress return (%):&quot;, portfolio_return([20, 40, 40], stress))
+    print(&quot;Alternative stress return (%):&quot;, portfolio_return([50, 40, 10], stress))
+</pre><p><a href="scripts/ch1-allocation.py" download>Download starter .py</a></p><h3>Hints</h3><ol><li>A 20% weight is 20 / 100, or 0.20.</li><li>Each contribution is weight / 100 multiplied by that asset&#x27;s return in percentage units.</li></ol><p>Run <code>python3 check.py ch1-allocation</code>. It checks: Steady baseline, Stress baseline, Alternative allocation, All cash transfer.</p><p><strong>Explain and revise:</strong> Compare both allocations in steady and stress conditions using the earlier browser table. Explain a trade-off and one limitation of the invented data.</p><p>After trying and revising, <a href="reference/ch1-allocation.py">compare with the reference solution</a>. Reference viewing is a learning aid, not evidence of independent authorship.</p></section><section><h2>ch1-comparison: Repair an omitted-cost comparison</h2><p><strong>Objective:</strong> Calculate ending wealth after a flat fee and use the same convention for a comparison.</p><p><strong>Predict:</strong> The browser&#x27;s first lab assumes zero costs. What happens to a £1,000 balance earning 4.8% when a £5 fee is deducted at year end?</p><p><strong>Task:</strong> Write the ending_value function using its three inputs. This extension introduces a flat pound fee charged at the end of the year, after growth. Compare both portfolios using that same convention. It is not a full trading-cost or tax model.</p><p><strong>Python syntax:</strong> Use parentheses to group 1 + return_pct / 100. Subtract a pound fee from a pound balance. Do not subtract a pound amount directly from a percentage.</p><h3>Worked example</h3><pre class="code-block">starting_pounds = 500
+return_pct = 2
+end_year_fee_pounds = 3
+gross_end = starting_pounds * (1 + return_pct / 100)
+print(&quot;Net ending pounds:&quot;, gross_end - end_year_fee_pounds)  # 507
+</pre><h3>Starter script</h3><pre class="code-block">def ending_value(start, return_pct, fee_gbp):
+    # TODO: replace the next line with a calculation and return its result.
+    raise NotImplementedError(&quot;Calculate growth, then deduct the end-year pound fee.&quot;)
+
+if __name__ == &quot;__main__&quot;:
+    print(&quot;Baseline after fee (£):&quot;, ending_value(1000, 4.8, 5))
+    print(&quot;Alternative after fee (£):&quot;, ending_value(1000, 3.0, 5))
+</pre><p><a href="scripts/ch1-comparison.py" download>Download starter .py</a></p><h3>Hints</h3><ol><li>First calculate the ending value before the fee.</li><li>Multiply start by (1 + return_pct / 100), then subtract fee_gbp.</li></ol><p>Run <code>python3 check.py ch1-comparison</code>. It checks: Baseline with fee, Alternative with same fee, Stress loss plus fee, New starting amount.</p><p><strong>Explain and revise:</strong> Explain why £5 is 0.5 percentage points of a £1,000 starting balance. State when the fee was charged and why both comparisons need the same timing.</p><p>After trying and revising, <a href="reference/ch1-comparison.py">compare with the reference solution</a>. Reference viewing is a learning aid, not evidence of independent authorship.</p></section><section><h2>ch2-return: Include the distribution once</h2><p><strong>Objective:</strong> Implement a total-return function and distinguish price gain from a cash distribution.</p><p><strong>Predict:</strong> What total return comes from buying at £80, ending at £76 and receiving £2 in cash?</p><p><strong>Task:</strong> Replace the TODO line. The distribution is held as cash to the end, with no reinvestment return; there are no external deposits, fees or taxes. Return a percentage number such as 7, not a decimal 0.07.</p><p><strong>Python syntax:</strong> Function arguments make the same formula reusable on new data. Keep full precision inside the function; rounding is only for printed presentation.</p><h3>Worked example</h3><pre class="code-block">start, end, distribution = 50, 52, 1
+gain = end - start + distribution
+print(&quot;Total return (%):&quot;, gain / start * 100)  # 6
+</pre><h3>Starter script</h3><pre class="code-block">def total_return(start, end, distribution):
+    # TODO: return the total return in percentage units.
+    raise NotImplementedError(&quot;Include both the price change and the cash distribution.&quot;)
+
+if __name__ == &quot;__main__&quot;:
+    print(&quot;Total return (%):&quot;, total_return(80, 76, 2))
+</pre><p><a href="scripts/ch2-return.py" download>Download starter .py</a></p><h3>Hints</h3><ol><li>Net gain equals end minus start plus the distribution.</li><li>Divide that net gain by start and multiply by 100.</li></ol><p>Run <code>python3 check.py ch2-return</code>. It checks: Price plus distribution, Loss partly offset, New independent values.</p><p><strong>Explain and revise:</strong> Explain why the loss case remains negative. What would change if a supplied total-return series had already included distributions?</p><p>After trying and revising, <a href="reference/ch2-return.py">compare with the reference solution</a>. Reference viewing is a learning aid, not evidence of independent authorship.</p></section><section><h2>ch2-growth: Compound and annualise</h2><p><strong>Objective:</strong> Implement future value and CAGR, and diagnose adding successive returns.</p><p><strong>Predict:</strong> Predict £500 growing at 8% for two years. Then predict the CAGR connecting £1,000 to £1,331 over three years.</p><p><strong>Task:</strong> Complete both functions. Rates use percentage units and years are whole positive annual periods. No external deposits or withdrawals. Change the worked script&#x27;s return list from [20, -20] to [25, -20] and explain the difference.</p><p><strong>Python syntax:</strong> Python uses ** for powers, not ^. For a square root use ** (1 / 2). Convert a percentage to a decimal with / 100, and a decimal return to a percentage with * 100.</p><h3>Worked example</h3><pre class="code-block">balance = 100
+returns_pct = [20, -20]
+for rate in returns_pct:
+    balance *= 1 + rate / 100
+print(&quot;Ending balance (£):&quot;, balance)  # 96
+print(&quot;Cumulative return (%):&quot;, (balance / 100 - 1) * 100)  # -4
+</pre><h3>Starter script</h3><pre class="code-block">def future_value(principal, rate_pct, years):
+    raise NotImplementedError(&quot;TODO: compound the annual growth factor.&quot;)
+
+def cagr(start, end, years):
+    raise NotImplementedError(&quot;TODO: find the equivalent annual percentage rate.&quot;)
+
+if __name__ == &quot;__main__&quot;:
+    print(&quot;Future value (£):&quot;, future_value(500, 8, 2))
+    print(&quot;CAGR (%):&quot;, cagr(1000, 1331, 3))
+</pre><p><a href="scripts/ch2-growth.py" download>Download starter .py</a></p><h3>Hints</h3><ol><li>Future value multiplies principal by the annual growth factor raised to years.</li><li>CAGR is ((end / start) ** (1 / years) - 1) * 100.</li></ol><p>Run <code>python3 check.py ch2-growth</code>. It checks: Two-year compounding, Three-year transfer, Annualising growth, Annualising a loss.</p><p><strong>Explain and revise:</strong> Explain why multiplying yearly growth factors differs from adding returns. What information about the investment path does CAGR leave out?</p><p>After trying and revising, <a href="reference/ch2-growth.py">compare with the reference solution</a>. Reference viewing is a learning aid, not evidence of independent authorship.</p></section><section><h2>ch2-discount: Discount each dated payment</h2><p><strong>Objective:</strong> Translate a dated cash-flow schedule into a reproducible present-value calculation.</p><p><strong>Predict:</strong> What is the time-0 value of a £20 payment in year 1 plus £1,020 in year 2, discounted at 5%?</p><p><strong>Task:</strong> payments is a list of (year, pounds) pairs. Complete one expression inside the loop. The final bond payment already includes principal. Use one supplied annual effective discount rate, with no default, fees or tax.</p><p><strong>Python syntax:</strong> for year, amount in payments unpacks each pair into names. Each payment has its own power. Add the discounted values, not the undated cash amounts.</p><h3>Worked example</h3><pre class="code-block">future_payment = 1210
+discount_rate = 10 / 100
+years = 2
+print(&quot;Present value (£):&quot;, future_payment / (1 + discount_rate) ** years)  # 1000
+</pre><h3>Starter script</h3><pre class="code-block">def present_value(payments, rate_pct):
+    total = 0
+    for year, amount in payments:
+        discounted = None  # TODO: discount this payment using its year.
+        total += discounted
+    return total
+
+if __name__ == &quot;__main__&quot;:
+    bond = [(1, 20), (2, 1020)]
+    print(&quot;Present value (£):&quot;, round(present_value(bond, 5), 2))
+</pre><p><a href="scripts/ch2-discount.py" download>Download starter .py</a></p><h3>Hints</h3><ol><li>Convert rate_pct to a decimal before forming the denominator.</li><li>The term is amount / (1 + rate_pct / 100) ** year.</li></ol><p>Run <code>python3 check.py ch2-discount</code>. It checks: Two bond payments, A single payment, Different coupon and rate, Zero-rate comparison.</p><p><strong>Explain and revise:</strong> Explain why one exponent cannot discount the entire bond schedule correctly. Why must you avoid adding principal twice?</p><p>After trying and revising, <a href="reference/ch2-discount.py">compare with the reference solution</a>. Reference viewing is a learning aid, not evidence of independent authorship.</p></section><section><h2>ch2-inflation: Calculate exact real returns</h2><p><strong>Objective:</strong> Use ratios for real returns and compound inflation to deflate a nominal balance.</p><p><strong>Predict:</strong> Can a 3% nominal gain produce a loss of buying power when inflation is 5%? Predict the sign before running.</p><p><strong>Task:</strong> Complete both TODO lines. Both rates cover the same period. buying_power deflates an already computed nominal balance over whole years. It is not investment-rate discounting.</p><p><strong>Python syntax:</strong> Group both growth factors with parentheses. Return a real percentage from real_return and a pound amount from buying_power. Names carry units, which helps prevent mixing them.</p><h3>Worked example</h3><pre class="code-block">nominal_pct, inflation_pct = 6, 4
+real_pct = ((1 + nominal_pct / 100) / (1 + inflation_pct / 100) - 1) * 100
+print(&quot;Exact real return (%):&quot;, round(real_pct, 2))  # 1.92, not exactly 2
+</pre><h3>Starter script</h3><pre class="code-block">def real_return(nominal_pct, inflation_pct):
+    raise NotImplementedError(&quot;TODO: return the exact real percentage.&quot;)
+
+def buying_power(nominal_balance, inflation_pct, years):
+    raise NotImplementedError(&quot;TODO: return starting-year purchasing power in pounds.&quot;)
+
+if __name__ == &quot;__main__&quot;:
+    print(&quot;Real return (%):&quot;, real_return(3, 5))
+    print(&quot;Buying power (£):&quot;, round(buying_power(1030, 5, 1), 2))
+</pre><p><a href="scripts/ch2-inflation.py" download>Download starter .py</a></p><h3>Hints</h3><ol><li>Real return is a ratio of one plus nominal return to one plus inflation, minus one.</li><li>Deflate the nominal balance by (1 + inflation_pct / 100) ** years.</li></ol><p>Run <code>python3 check.py ch2-inflation</code>. It checks: Exact ratio, Negative real return, One-year buying power, Multi-year transfer.</p><p><strong>Explain and revise:</strong> Distinguish nominal pounds, starting-year buying power and the PV of a future payment. Explain why subtracting rates is only an approximation.</p><p>After trying and revising, <a href="reference/ch2-inflation.py">compare with the reference solution</a>. Reference viewing is a learning aid, not evidence of independent authorship.</p></section><section><h2>ch2-transfer: Reproduce and critique the growth lab</h2><p><strong>Objective:</strong> Build a small report that keeps nominal growth, real value and discounting distinct.</p><p><strong>Predict:</strong> If only inflation rises from 3% to 6%, which outputs change? Predict nominal end, buying power and the PV of the separate payment.</p><p><strong>Task:</strong> Complete three formulas in summarise. Return a dictionary with the specified keys. Use the inputs, not constants from the example. The separate future payment is discounted at growth_pct as an illustrative opportunity rate; it is not the portfolio balance.</p><p><strong>Python syntax:</strong> A dictionary pairs text keys with values: {&quot;nominal&quot;: nominal}. It gives units and meanings a stable label. Keep calculations unrounded; round only when printing the report.</p><h3>Worked example</h3><pre class="code-block"># Dictionary syntax before building your report.
+report = {&quot;nominal&quot;: 1100, &quot;real&quot;: 1000}
+for label, amount in report.items():
+    print(label, &quot;(pounds):&quot;, amount)
+</pre><h3>Starter script</h3><pre class="code-block">def summarise(principal, growth_pct, inflation_pct, years, future_payment):
+    nominal = None  # TODO: compound the principal.
+    real = None  # TODO: express nominal balance in starting-year pounds.
+    payment_pv = None  # TODO: discount the separate future payment.
+    return {&quot;nominal&quot;: nominal, &quot;real&quot;: real, &quot;payment_pv&quot;: payment_pv}
+
+if __name__ == &quot;__main__&quot;:
+    for inflation in [3, 6]:
+        result = summarise(1000, 5, inflation, 10, 2000)
+        print(&quot;Inflation scenario (%):&quot;, inflation)
+        for label, amount in result.items():
+            print(label, &quot;(pounds):&quot;, round(amount, 2))
+</pre><p><a href="scripts/ch2-transfer.py" download>Download starter .py</a></p><h3>Hints</h3><ol><li>Compute nominal = principal * (1 + growth_pct / 100) ** years.</li><li>Deflate nominal using inflation; discount the separate payment using growth_pct. These are different operations.</li></ol><p>Run <code>python3 check.py ch2-transfer</code>. It checks: Default lab, Change only inflation, New principal, rate and horizon.</p><p><strong>Explain and revise:</strong> Report a hand check and an inflation-only comparison. State one model limitation and one specific revision to your initial prediction. Explain why tests are evidence of code behaviour, not proof of an investment claim.</p><p>After trying and revising, <a href="reference/ch2-transfer.py">compare with the reference solution</a>. Reference viewing is a learning aid, not evidence of independent authorship.</p></section><section><h2>Browser alternative and privacy</h2><p>The interactive workspace runs Pyodide 314.0.7 in a device-local worker, loaded on demand from jsDelivr. The runtime provider receives ordinary asset requests; the supplied scripts do not upload code to a course execution server. Use classroom data. Added code can use network features if you write them yourself. The browser saves scripts, predictions, feedback, reflections and attempts locally; resets are separate from core chapter records. Exports have no import/sync. Keep downloaded files until you choose to delete them.</p><p>Browser loading has a one-minute limit; execution has five seconds, capped output and a Stop control. These are responsiveness limits, not a guaranteed memory sandbox. Downloaded scripts need a local Python installation. Learner pilot, full assistive-technology testing and commercial release validation remain pending.</p><p>Optional references: <a href="https://docs.python.org/3/tutorial/introduction.html">official Python syntax tutorial</a>; <a href="https://pyodide.org/en/stable/usage/webworker.html">Pyodide worker documentation</a>. Chapters 3–10 Python activities are planned, not included here.</p></section></body></html>
