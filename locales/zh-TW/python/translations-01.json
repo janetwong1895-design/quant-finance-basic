@@ -1,0 +1,196 @@
+{
+  "ch1-change": {
+    "title": "把百分比寫成 Python",
+    "concept": "第 1 章｜起點與百分比變動",
+    "objective": "讀懂變數、算術與函式，解釋百分比為何要相對於起始值。",
+    "prediction": "先預測 £200 變成 £210 的百分比變動。分母為什麼是 200？",
+    "instructions": "第一支程式已完整寫好。先執行，檢查具名輸入與印出結果，再把 ending_value 改成 190，先預測再執行。檢查前請還原原始範例。",
+    "syntax": "= 儲存數值；# 開始註解；/ 是除法，* 是乘法。def 定義可重複使用的函式；函式內以四個空白縮排。return 傳回結果，print 顯示內容。呼叫函式時把輸入值放進括號。",
+    "hints": [
+      "變動＝期末值−期初值。",
+      "除以起始值，再乘 100。期末較低時，變動應為負數。"
+    ],
+    "reflection": "解釋分母，以及把 210 改成 190 的影響。通過測試只確認提供的函式，不代表你已獨立寫出程式。",
+    "kind": "完整範例",
+    "cases": [
+      {
+        "label": "提供的範例",
+        "function": "percentage_change",
+        "args": [
+          200,
+          210
+        ],
+        "expected": 5,
+        "hint": "用變動除以起始值。"
+      },
+      {
+        "label": "價值下跌",
+        "function": "percentage_change",
+        "args": [
+          200,
+          190
+        ],
+        "expected": -5,
+        "hint": "保留負號。"
+      },
+      {
+        "label": "新的起始值",
+        "function": "percentage_change",
+        "args": [
+          80,
+          100
+        ],
+        "expected": 25,
+        "hint": "分母用 80，而非 100。"
+      }
+    ]
+  },
+  "ch1-allocation": {
+    "title": "建立加權組合報酬率",
+    "concept": "第 1 章｜資產配置實驗",
+    "objective": "完成加權報酬率，將固定 20／40／40 基準與另一配置比較。",
+    "prediction": "壓力情境中，20／40／40 與 50／40／10 的報酬率各會是多少？",
+    "instructions": "替換迴圈中的一個 TODO 運算式。weights 依序放現金、債券、股票權重（百分比）；returns_pct 以相同順序放一年報酬率。完成後執行，再以不同配置檢查。",
+    "syntax": "串列用中括號集合數值。zip 按順序配對；for 對每一對執行縮排內的計算。total += contribution 會累加貢獻值。此處 None 是尚未完成的佔位，不等於零。",
+    "hints": [
+      "20% 的權重是 20／100，也就是 0.20。",
+      "各資產貢獻＝權重／100×該資產以百分比為單位的報酬率。"
+    ],
+    "reflection": "利用前面的表格比較兩種配置的平穩與壓力結果，解釋一項取捨與虛構資料的一項限制。",
+    "kind": "引導練習",
+    "cases": [
+      {
+        "label": "平穩基準",
+        "function": "portfolio_return",
+        "args": [
+          [
+            20,
+            40,
+            40
+          ],
+          [
+            2,
+            3,
+            8
+          ]
+        ],
+        "expected": 4.8,
+        "hint": "權重用小數，資產報酬保留百分比單位。"
+      },
+      {
+        "label": "壓力基準",
+        "function": "portfolio_return",
+        "args": [
+          [
+            20,
+            40,
+            40
+          ],
+          [
+            1,
+            -5,
+            -20
+          ]
+        ],
+        "expected": -9.8,
+        "hint": "保留資產報酬的負號。"
+      },
+      {
+        "label": "另一配置",
+        "function": "portfolio_return",
+        "args": [
+          [
+            50,
+            40,
+            10
+          ],
+          [
+            1,
+            -5,
+            -20
+          ]
+        ],
+        "expected": -3.5,
+        "hint": "使用函式輸入，不能寫死權重。"
+      },
+      {
+        "label": "全現金遷移題",
+        "function": "portfolio_return",
+        "args": [
+          [
+            100,
+            0,
+            0
+          ],
+          [
+            1,
+            -5,
+            -20
+          ]
+        ],
+        "expected": 1,
+        "hint": "兩項零權重持有部位的貢獻為零。"
+      }
+    ]
+  },
+  "ch1-comparison": {
+    "title": "補回遺漏成本，公平比較",
+    "concept": "第 1 章｜公平基準與選做成本延伸",
+    "objective": "計算扣除固定費用後的期末金額，並採相同規則比較。",
+    "prediction": "瀏覽器初始實驗假設零成本。£1,000 賺 4.8%，若年底扣 £5，期末還有多少？",
+    "instructions": "用三個輸入完成 ending_value。這項延伸在成長之後、年底扣一次固定英鎊費用。兩組合要採相同時點；這不是完整交易成本或稅務模型。",
+    "syntax": "用括號組合 1 + return_pct / 100。英鎊費用要從英鎊餘額扣除，不能把金額直接減在百分比上。",
+    "hints": [
+      "先算未扣費的期末金額。",
+      "start 乘上 (1 + return_pct / 100)，再扣 fee_gbp。"
+    ],
+    "reflection": "解釋為什麼 £5 相當於起始 £1,000 的 0.5 個百分點。指出扣費時點，以及為何比較必須一致。",
+    "kind": "遷移挑戰",
+    "cases": [
+      {
+        "label": "含費用的基準",
+        "function": "ending_value",
+        "args": [
+          1000,
+          4.8,
+          5
+        ],
+        "expected": 1043,
+        "hint": "費用是 £5，不是 5%。"
+      },
+      {
+        "label": "相同費用的另一配置",
+        "function": "ending_value",
+        "args": [
+          1000,
+          3,
+          5
+        ],
+        "expected": 1025,
+        "hint": "採用相同扣費時點。"
+      },
+      {
+        "label": "壓力虧損再扣費",
+        "function": "ending_value",
+        "args": [
+          1000,
+          -9.8,
+          5
+        ],
+        "expected": 897,
+        "hint": "費用會擴大虧損。"
+      },
+      {
+        "label": "新的起始金額",
+        "function": "ending_value",
+        "args": [
+          500,
+          2,
+          3
+        ],
+        "expected": 507,
+        "hint": "使用全部函式參數，不要寫死範例常數。"
+      }
+    ]
+  }
+}

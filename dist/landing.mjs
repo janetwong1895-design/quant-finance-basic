@@ -1,0 +1,1 @@
+document.querySelectorAll('[data-demo-answer]').forEach(button=>button.addEventListener('click',()=>{const result=document.querySelector('[data-demo-result]');result.textContent=result.dataset.answer;document.querySelectorAll('[data-demo-answer]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));}));

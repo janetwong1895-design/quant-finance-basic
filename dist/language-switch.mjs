@@ -1,0 +1,1 @@
+function updateLanguageLinks(){document.querySelectorAll('[data-language-switch]').forEach(a=>{const u=new URL(a.href);u.search=location.search;u.hash=location.hash;a.href=u.href;});}updateLanguageLinks();window.addEventListener('hashchange',updateLanguageLinks);document.querySelectorAll('[data-language-switch]').forEach(a=>a.addEventListener('click',updateLanguageLinks));

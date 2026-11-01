@@ -1,0 +1,2146 @@
+[
+  {
+    "id": "ch1-change",
+    "chapter": 1,
+    "kind": "完整範例",
+    "minutes": 10,
+    "title": "把百分比寫成 Python",
+    "concept": "第 1 章｜起點與百分比變動",
+    "objective": "讀懂變數、算術與函式，解釋百分比為何要相對於起始值。",
+    "prediction": "先預測 £200 變成 £210 的百分比變動。分母為什麼是 200？",
+    "instructions": "第一支程式已完整寫好。先執行，檢查具名輸入與印出結果，再把 ending_value 改成 190，先預測再執行。檢查前請還原原始範例。",
+    "syntax": "= 儲存數值；# 開始註解；/ 是除法，* 是乘法。def 定義可重複使用的函式；函式內以四個空白縮排。return 傳回結果，print 顯示內容。呼叫函式時把輸入值放進括號。",
+    "hints": [
+      "變動＝期末值−期初值。",
+      "除以起始值，再乘 100。期末較低時，變動應為負數。"
+    ],
+    "reflection": "解釋分母，以及把 210 改成 190 的影響。通過測試只確認提供的函式，不代表你已獨立寫出程式。",
+    "starter": "# Hypothetical amounts; no deposits, withdrawals, fees or tax.\ndef percentage_change(start, end):\n    return (end - start) / start * 100\n\nif __name__ == \"__main__\":\n    starting_value = 200\n    ending_value = 210  # Try 190, predict, then run again.\n    result = percentage_change(starting_value, ending_value)\n    print(\"Percentage change:\", result, \"%\")\n",
+    "example": "# Hypothetical amounts; no deposits, withdrawals, fees or tax.\ndef percentage_change(start, end):\n    return (end - start) / start * 100\n\nif __name__ == \"__main__\":\n    starting_value = 200\n    ending_value = 210  # Try 190, predict, then run again.\n    result = percentage_change(starting_value, ending_value)\n    print(\"Percentage change:\", result, \"%\")\n",
+    "cases": [
+      {
+        "label": "提供的範例",
+        "function": "percentage_change",
+        "args": [
+          200,
+          210
+        ],
+        "expected": 5,
+        "hint": "用變動除以起始值。"
+      },
+      {
+        "label": "價值下跌",
+        "function": "percentage_change",
+        "args": [
+          200,
+          190
+        ],
+        "expected": -5,
+        "hint": "保留負號。"
+      },
+      {
+        "label": "新的起始值",
+        "function": "percentage_change",
+        "args": [
+          80,
+          100
+        ],
+        "expected": 25,
+        "hint": "分母用 80，而非 100。"
+      }
+    ]
+  },
+  {
+    "id": "ch1-allocation",
+    "chapter": 1,
+    "kind": "引導練習",
+    "minutes": 15,
+    "title": "建立加權組合報酬率",
+    "concept": "第 1 章｜資產配置實驗",
+    "objective": "完成加權報酬率，將固定 20／40／40 基準與另一配置比較。",
+    "prediction": "壓力情境中，20／40／40 與 50／40／10 的報酬率各會是多少？",
+    "instructions": "替換迴圈中的一個 TODO 運算式。weights 依序放現金、債券、股票權重（百分比）；returns_pct 以相同順序放一年報酬率。完成後執行，再以不同配置檢查。",
+    "syntax": "串列用中括號集合數值。zip 按順序配對；for 對每一對執行縮排內的計算。total += contribution 會累加貢獻值。此處 None 是尚未完成的佔位，不等於零。",
+    "hints": [
+      "20% 的權重是 20／100，也就是 0.20。",
+      "各資產貢獻＝權重／100×該資產以百分比為單位的報酬率。"
+    ],
+    "reflection": "利用前面的表格比較兩種配置的平穩與壓力結果，解釋一項取捨與虛構資料的一項限制。",
+    "starter": "import math\n\ndef portfolio_return(weights, returns_pct):\n    if len(weights) != 3 or len(returns_pct) != 3:\n        raise ValueError(\"Supply three matching assets.\")\n    if any(w < 0 or w > 100 for w in weights):\n        raise ValueError(\"Each weight must be between 0 and 100.\")\n    if not math.isclose(sum(weights), 100):\n        raise ValueError(\"Weights must add to 100%.\")\n    total = 0\n    for weight, asset_return in zip(weights, returns_pct):\n        contribution = None  # TODO: replace None with the weighted return.\n        total += contribution\n    return total\n\nif __name__ == \"__main__\":\n    stress = [1, -5, -20]  # Cash, bonds, shares: synthetic annual returns (%).\n    print(\"Baseline stress return (%):\", portfolio_return([20, 40, 40], stress))\n    print(\"Alternative stress return (%):\", portfolio_return([50, 40, 10], stress))\n",
+    "example": "# Worked calculation: the fixed baseline in the steady scenario.\nweights = [20, 40, 40]\nreturns_pct = [2, 3, 8]\ntotal = 0\nfor weight, asset_return in zip(weights, returns_pct):\n    total += weight / 100 * asset_return\nprint(\"Baseline steady return (%):\", total)  # 4.8\n",
+    "cases": [
+      {
+        "label": "平穩基準",
+        "function": "portfolio_return",
+        "args": [
+          [
+            20,
+            40,
+            40
+          ],
+          [
+            2,
+            3,
+            8
+          ]
+        ],
+        "expected": 4.8,
+        "hint": "權重用小數，資產報酬保留百分比單位。"
+      },
+      {
+        "label": "壓力基準",
+        "function": "portfolio_return",
+        "args": [
+          [
+            20,
+            40,
+            40
+          ],
+          [
+            1,
+            -5,
+            -20
+          ]
+        ],
+        "expected": -9.8,
+        "hint": "保留資產報酬的負號。"
+      },
+      {
+        "label": "另一配置",
+        "function": "portfolio_return",
+        "args": [
+          [
+            50,
+            40,
+            10
+          ],
+          [
+            1,
+            -5,
+            -20
+          ]
+        ],
+        "expected": -3.5,
+        "hint": "使用函式輸入，不能寫死權重。"
+      },
+      {
+        "label": "全現金遷移題",
+        "function": "portfolio_return",
+        "args": [
+          [
+            100,
+            0,
+            0
+          ],
+          [
+            1,
+            -5,
+            -20
+          ]
+        ],
+        "expected": 1,
+        "hint": "兩項零權重持有部位的貢獻為零。"
+      }
+    ]
+  },
+  {
+    "id": "ch1-comparison",
+    "chapter": 1,
+    "kind": "遷移挑戰",
+    "minutes": 15,
+    "title": "補回遺漏成本，公平比較",
+    "concept": "第 1 章｜公平基準與選做成本延伸",
+    "objective": "計算扣除固定費用後的期末金額，並採相同規則比較。",
+    "prediction": "瀏覽器初始實驗假設零成本。£1,000 賺 4.8%，若年底扣 £5，期末還有多少？",
+    "instructions": "用三個輸入完成 ending_value。這項延伸在成長之後、年底扣一次固定英鎊費用。兩組合要採相同時點；這不是完整交易成本或稅務模型。",
+    "syntax": "用括號組合 1 + return_pct / 100。英鎊費用要從英鎊餘額扣除，不能把金額直接減在百分比上。",
+    "hints": [
+      "先算未扣費的期末金額。",
+      "start 乘上 (1 + return_pct / 100)，再扣 fee_gbp。"
+    ],
+    "reflection": "解釋為什麼 £5 相當於起始 £1,000 的 0.5 個百分點。指出扣費時點，以及為何比較必須一致。",
+    "starter": "def ending_value(start, return_pct, fee_gbp):\n    # TODO: replace the next line with a calculation and return its result.\n    raise NotImplementedError(\"Calculate growth, then deduct the end-year pound fee.\")\n\nif __name__ == \"__main__\":\n    print(\"Baseline after fee (£):\", ending_value(1000, 4.8, 5))\n    print(\"Alternative after fee (£):\", ending_value(1000, 3.0, 5))\n",
+    "example": "starting_pounds = 500\nreturn_pct = 2\nend_year_fee_pounds = 3\ngross_end = starting_pounds * (1 + return_pct / 100)\nprint(\"Net ending pounds:\", gross_end - end_year_fee_pounds)  # 507\n",
+    "cases": [
+      {
+        "label": "含費用的基準",
+        "function": "ending_value",
+        "args": [
+          1000,
+          4.8,
+          5
+        ],
+        "expected": 1043,
+        "hint": "費用是 £5，不是 5%。"
+      },
+      {
+        "label": "相同費用的另一配置",
+        "function": "ending_value",
+        "args": [
+          1000,
+          3,
+          5
+        ],
+        "expected": 1025,
+        "hint": "採用相同扣費時點。"
+      },
+      {
+        "label": "壓力虧損再扣費",
+        "function": "ending_value",
+        "args": [
+          1000,
+          -9.8,
+          5
+        ],
+        "expected": 897,
+        "hint": "費用會擴大虧損。"
+      },
+      {
+        "label": "新的起始金額",
+        "function": "ending_value",
+        "args": [
+          500,
+          2,
+          3
+        ],
+        "expected": 507,
+        "hint": "使用全部函式參數，不要寫死範例常數。"
+      }
+    ]
+  },
+  {
+    "id": "ch2-return",
+    "chapter": 2,
+    "kind": "引導練習",
+    "minutes": 10,
+    "title": "現金分配只算一次",
+    "concept": "第 2 章 · 衡量報酬率",
+    "objective": "實作總報酬率函式，區分價差與現金分配。",
+    "prediction": "以 £80 買入，期末 £76，另收到 £2，總報酬率是多少？",
+    "instructions": "取代 TODO 行。現金分配持有至期末，不賺再投資報酬；無外部存入、費用或稅負。回傳百分比數值，例如 7，而非小數 0.07。",
+    "syntax": "函式參數讓相同公式能用於新資料。函式內保留完整精度，只在列印時四捨五入。",
+    "hints": [
+      "淨獲利 = 期末 − 期初 + 現金分配。",
+      "淨獲利除以期初，再乘以 100。"
+    ],
+    "reflection": "說明虧損案例為何仍為負值。若提供的總報酬序列已含現金分配，應如何處理？",
+    "starter": "def total_return(start, end, distribution):\n    # TODO: return the total return in percentage units.\n    raise NotImplementedError(\"Include both the price change and the cash distribution.\")\n\nif __name__ == \"__main__\":\n    print(\"Total return (%):\", total_return(80, 76, 2))\n",
+    "example": "start, end, distribution = 50, 52, 1\ngain = end - start + distribution\nprint(\"Total return (%):\", gain / start * 100)  # 6\n",
+    "cases": [
+      {
+        "label": "價格加現金分配",
+        "function": "total_return",
+        "args": [
+          100,
+          104,
+          3
+        ],
+        "expected": 7,
+        "hint": "現金收入只能加一次。"
+      },
+      {
+        "label": "部分抵銷損失",
+        "function": "total_return",
+        "args": [
+          80,
+          76,
+          2
+        ],
+        "expected": -2.5,
+        "hint": "分母使用期初 £80。"
+      },
+      {
+        "label": "新的獨立數值",
+        "function": "total_return",
+        "args": [
+          200,
+          210,
+          6
+        ],
+        "expected": 8,
+        "hint": "不要把範例答案寫死。"
+      }
+    ]
+  },
+  {
+    "id": "ch2-growth",
+    "chapter": 2,
+    "kind": "引導練習",
+    "minutes": 15,
+    "title": "複利與年化",
+    "concept": "第 2 章 · 逐期複合成長",
+    "objective": "實作未來價值與 CAGR，診斷直接相加各期報酬率的錯誤。",
+    "prediction": "預測 £500 以 8% 成長兩年的結果，再預測 £1,000 三年成為 £1,331 的 CAGR。",
+    "instructions": "完成兩個函式。利率採百分比數值，年數為正整數；無外部存入或提領。把範例報酬清單由 [20, -20] 改為 [25, -20]，說明差異。",
+    "syntax": "Python 次方用 **，不是 ^。平方根可寫 ** (1 / 2)。百分比除以 100 變小數，小數報酬乘以 100 變百分比。",
+    "hints": [
+      "未來價值 = 本金乘以年成長因子的年數次方。",
+      "CAGR = ((end / start) ** (1 / years) - 1) * 100。"
+    ],
+    "reflection": "解釋逐年成長因子相乘為何不同於報酬率相加，並指出 CAGR 忽略的路徑資訊。",
+    "starter": "def future_value(principal, rate_pct, years):\n    raise NotImplementedError(\"TODO: compound the annual growth factor.\")\n\ndef cagr(start, end, years):\n    raise NotImplementedError(\"TODO: find the equivalent annual percentage rate.\")\n\nif __name__ == \"__main__\":\n    print(\"Future value (£):\", future_value(500, 8, 2))\n    print(\"CAGR (%):\", cagr(1000, 1331, 3))\n",
+    "example": "balance = 100\nreturns_pct = [20, -20]\nfor rate in returns_pct:\n    balance *= 1 + rate / 100\nprint(\"Ending balance (£):\", balance)  # 96\nprint(\"Cumulative return (%):\", (balance / 100 - 1) * 100)  # -4\n",
+    "cases": [
+      {
+        "label": "兩年複利",
+        "function": "future_value",
+        "args": [
+          500,
+          8,
+          2
+        ],
+        "expected": 583.2,
+        "hint": "次方用 **，不是把利率乘年數。"
+      },
+      {
+        "label": "三年應用",
+        "function": "future_value",
+        "args": [
+          800,
+          4,
+          3
+        ],
+        "expected": 899.8912,
+        "hint": "保留完整精度到列印時。"
+      },
+      {
+        "label": "成長年化",
+        "function": "cagr",
+        "args": [
+          1000,
+          1331,
+          3
+        ],
+        "expected": 10,
+        "hint": "期末／期初比值取立方根。"
+      },
+      {
+        "label": "虧損年化",
+        "function": "cagr",
+        "args": [
+          100,
+          81,
+          2
+        ],
+        "expected": -10,
+        "hint": "CAGR 可以為負。"
+      }
+    ]
+  },
+  {
+    "id": "ch2-discount",
+    "chapter": 2,
+    "kind": "引導練習",
+    "minutes": 15,
+    "title": "逐筆依日期折現",
+    "concept": "第 2 章 · 現值與債券",
+    "objective": "將有日期的現金流時程轉成可重現的現值計算。",
+    "prediction": "第 1 年 £20、第 2 年 £1,020，採 5% 折現，時間 0 現值是多少？",
+    "instructions": "payments 是 (year, pounds) 配對清單。完成迴圈中的一個運算式。債券最後一筆已含本金。使用提供的單一有效年折現率，無違約、費用或稅負。",
+    "syntax": "for year, amount in payments 將每對值拆成兩個名稱。每筆付款有自己的次方；加總折現值，不是沒有日期的現金總額。",
+    "hints": [
+      "先把 rate_pct 轉成小數，再形成分母。",
+      "每項為 amount / (1 + rate_pct / 100) ** year。"
+    ],
+    "reflection": "說明為何一個次方無法正確折現全部債券時程，以及本金為何不能重複加總。",
+    "starter": "def present_value(payments, rate_pct):\n    total = 0\n    for year, amount in payments:\n        discounted = None  # TODO: discount this payment using its year.\n        total += discounted\n    return total\n\nif __name__ == \"__main__\":\n    bond = [(1, 20), (2, 1020)]\n    print(\"Present value (£):\", round(present_value(bond, 5), 2))\n",
+    "example": "future_payment = 1210\ndiscount_rate = 10 / 100\nyears = 2\nprint(\"Present value (£):\", future_payment / (1 + discount_rate) ** years)  # 1000\n",
+    "cases": [
+      {
+        "label": "兩筆債券款項",
+        "function": "present_value",
+        "args": [
+          [
+            [
+              1,
+              20
+            ],
+            [
+              2,
+              1020
+            ]
+          ],
+          5
+        ],
+        "expected": 944.2176870748299,
+        "hint": "逐筆依日期折現再相加。"
+      },
+      {
+        "label": "單筆款項",
+        "function": "present_value",
+        "args": [
+          [
+            [
+              3,
+              926.1
+            ]
+          ],
+          5
+        ],
+        "expected": 800,
+        "hint": "使用指定付款年數。"
+      },
+      {
+        "label": "不同票息與利率",
+        "function": "present_value",
+        "args": [
+          [
+            [
+              1,
+              30
+            ],
+            [
+              2,
+              1030
+            ]
+          ],
+          4
+        ],
+        "expected": 981.1390532544378,
+        "hint": "最後一筆已含本金。"
+      },
+      {
+        "label": "零利率比較",
+        "function": "present_value",
+        "args": [
+          [
+            [
+              1,
+              50
+            ],
+            [
+              2,
+              1050
+            ]
+          ],
+          0
+        ],
+        "expected": 1100,
+        "hint": "折現率零時，直接加總款項。"
+      }
+    ]
+  },
+  {
+    "id": "ch2-inflation",
+    "chapter": 2,
+    "kind": "引導練習",
+    "minutes": 10,
+    "title": "計算精確實質報酬率",
+    "concept": "第 2 章 · 購買力",
+    "objective": "用比值求實質報酬率，並用複合通膨調整名目餘額。",
+    "prediction": "名目成長 3%、通膨 5% 時，購買力會虧損嗎？執行前先預測正負號。",
+    "instructions": "完成兩個 TODO。兩利率涵蓋相同期間。buying_power 將已算出的名目餘額按整年通膨還原，不是以投資利率折現。",
+    "syntax": "用括號包住兩個成長因子。real_return 回傳實質百分比，buying_power 回傳英鎊金額。名稱與單位有助避免混用。",
+    "hints": [
+      "實質報酬率 =（1 + 名目報酬率）÷（1 + 通膨率）− 1。",
+      "名目餘額除以 (1 + inflation_pct / 100) ** years。"
+    ],
+    "reflection": "區分名目英鎊、期初年度購買力與未來款項現值，並說明利率相減為何只是近似。",
+    "starter": "def real_return(nominal_pct, inflation_pct):\n    raise NotImplementedError(\"TODO: return the exact real percentage.\")\n\ndef buying_power(nominal_balance, inflation_pct, years):\n    raise NotImplementedError(\"TODO: return starting-year purchasing power in pounds.\")\n\nif __name__ == \"__main__\":\n    print(\"Real return (%):\", real_return(3, 5))\n    print(\"Buying power (£):\", round(buying_power(1030, 5, 1), 2))\n",
+    "example": "nominal_pct, inflation_pct = 6, 4\nreal_pct = ((1 + nominal_pct / 100) / (1 + inflation_pct / 100) - 1) * 100\nprint(\"Exact real return (%):\", round(real_pct, 2))  # 1.92, not exactly 2\n",
+    "cases": [
+      {
+        "label": "精確比值",
+        "function": "real_return",
+        "args": [
+          6,
+          4
+        ],
+        "expected": 1.9230769230769162,
+        "hint": "相減只是近似。"
+      },
+      {
+        "label": "負實質報酬率",
+        "function": "real_return",
+        "args": [
+          3,
+          5
+        ],
+        "expected": -1.904761904761909,
+        "hint": "保留負號。"
+      },
+      {
+        "label": "一年購買力",
+        "function": "buying_power",
+        "args": [
+          1030,
+          5,
+          1
+        ],
+        "expected": 980.952380952381,
+        "hint": "結果是英鎊，不是百分比。"
+      },
+      {
+        "label": "多年應用",
+        "function": "buying_power",
+        "args": [
+          1210,
+          10,
+          2
+        ],
+        "expected": 1000,
+        "hint": "兩年都要複合通膨因子。"
+      }
+    ]
+  },
+  {
+    "id": "ch2-transfer",
+    "chapter": 2,
+    "kind": "遷移挑戰",
+    "minutes": 15,
+    "title": "重現並檢視成長實驗",
+    "concept": "第 2 章 · 計算卡與可重現性",
+    "objective": "建立小報告，分清楚名目成長、實質價值與折現。",
+    "prediction": "若只把通膨由 3% 提高到 6%，哪些輸出改變？預測名目期末、購買力與獨立款項現值。",
+    "instructions": "完成 summarise 的三個公式，回傳指定鍵名的字典。使用輸入而非範例常數。獨立未來款項以 growth_pct 作為示例機會成本率折現，並不是投資組合餘額。",
+    "syntax": "字典用文字鍵對應數值，例如 {\"nominal\": nominal}，固定其單位與意義。計算不先四捨五入，只在列印報告時處理。",
+    "hints": [
+      "nominal = principal * (1 + growth_pct / 100) ** years。",
+      "用通膨還原 nominal；用 growth_pct 折現獨立款項，兩者不同。"
+    ],
+    "reflection": "提出手算與只改通膨的比較。說明模型限制及對原先預測的具體修正，並解釋測試只能呈現程式行為，不能證明投資主張。",
+    "starter": "def summarise(principal, growth_pct, inflation_pct, years, future_payment):\n    nominal = None  # TODO: compound the principal.\n    real = None  # TODO: express nominal balance in starting-year pounds.\n    payment_pv = None  # TODO: discount the separate future payment.\n    return {\"nominal\": nominal, \"real\": real, \"payment_pv\": payment_pv}\n\nif __name__ == \"__main__\":\n    for inflation in [3, 6]:\n        result = summarise(1000, 5, inflation, 10, 2000)\n        print(\"Inflation scenario (%):\", inflation)\n        for label, amount in result.items():\n            print(label, \"(pounds):\", round(amount, 2))\n",
+    "example": "# Dictionary syntax before building your report.\nreport = {\"nominal\": 1100, \"real\": 1000}\nfor label, amount in report.items():\n    print(label, \"(pounds):\", amount)\n",
+    "cases": [
+      {
+        "label": "預設實驗",
+        "function": "summarise",
+        "args": [
+          1000,
+          5,
+          3,
+          10,
+          2000
+        ],
+        "expected": {
+          "nominal": 1628.894626777442,
+          "real": 1212.0505797930664,
+          "payment_pv": 1227.8265070815182
+        },
+        "hint": "通膨還原與折現使用不同利率。"
+      },
+      {
+        "label": "只改通膨",
+        "function": "summarise",
+        "args": [
+          1000,
+          5,
+          6,
+          10,
+          2000
+        ],
+        "expected": {
+          "nominal": 1628.894626777442,
+          "real": 909.566251737624,
+          "payment_pv": 1227.8265070815182
+        },
+        "hint": "只有實質餘額應改變。"
+      },
+      {
+        "label": "新本金、利率與期間",
+        "function": "summarise",
+        "args": [
+          500,
+          10,
+          0,
+          2,
+          1210
+        ],
+        "expected": {
+          "nominal": 605,
+          "real": 605,
+          "payment_pv": 1000
+        },
+        "hint": "使用各參數，不是預設值。"
+      }
+    ]
+  },
+  {
+    "id": "ch3-order",
+    "chapter": 3,
+    "kind": "引導練習",
+    "minutes": 15,
+    "title": "先排序，再算報酬率",
+    "concept": "第 3 章 · 時間順序觀察",
+    "objective": "排序 ISO 日期觀察並計算相鄰區間價格報酬率。",
+    "prediction": "輸入依序為 1 月 8 日 £52.02、1 月 2 日 £50、1 月 7 日 £51，預測時間順序的第一段報酬率。",
+    "instructions": "完成兩個 TODO。csv_returns 包裝函式用 csv.DictReader 讀取 CSV，以 float 轉換價格字串，再傳入 [ISO 日期, 分割調整價格] 資料列。本題日期有效且不重複、價格為正；下一題處理品質缺陷。回傳第一與最後區間百分比及累積百分比的字典，不要回傳四捨五入字串。至少兩筆觀察；首筆無報酬率，缺口仍是觀察區間，不是日報酬率。",
+    "syntax": "csv.DictReader 讀得的欄位是字串，float 轉為數值。io.StringIO 讓文字像檔案可讀。sorted(rows, key=...) 產生排序副本；lambda row: row[0] 選 ISO 日期鍵。zip 將較早列與從第二筆開始的 ordered[1:] 配對；append 加入結果。",
+    "hints": [
+      "固定寬度 ISO 日期可按時間排序：key=lambda row: row[0]。",
+      "每對 earlier/later 使用 (later[1] / earlier[1] - 1) * 100。"
+    ],
+    "reflection": "指出實際日期區間，解釋檔案順序或日報酬標籤為何誤導，以及首筆為何無法算報酬率。",
+    "starter": "import csv\nimport io\n\ndef ordered_returns(rows):\n    ordered = None  # TODO: sort a copy by ISO date.\n    returns = []\n    for earlier, later in zip(ordered, ordered[1:]):\n        result = None  # TODO: interval return in percentage units.\n        returns.append(result)\n    total = 1\n    for result in returns:\n        total *= 1 + result / 100\n    return dict(first=returns[0], last=returns[-1], cumulative=(total - 1) * 100)\n\ndef csv_returns(csv_text):\n    reader = csv.DictReader(io.StringIO(csv_text))\n    rows = [[row[\"date\"], float(row[\"adjusted\"])] for row in reader]\n    return ordered_returns(rows)\n\nif __name__ == \"__main__\":\n    csv_text = \"date,adjusted\\n2025-01-08,52.02\\n2025-01-02,50\\n2025-01-07,51\\n\"\n    print(\"Interval price returns (%):\", csv_returns(csv_text))\n",
+    "example": "# ISO strings, not ambiguous day/month strings.\nrows = [[\"2025-03-06\", 84], [\"2025-03-01\", 80]]\nordered = sorted(rows, key=lambda row: row[0])\nprint(\"From\", ordered[0][0], \"to\", ordered[1][0])\nprint(\"Interval return (%):\", (ordered[1][1] / ordered[0][1] - 1) * 100)  # 5\n",
+    "cases": [
+      {
+        "label": "亂序但分割一致的檔案",
+        "function": "csv_returns",
+        "args": [
+          "date,adjusted\n2025-01-08,52.02\n2025-01-02,50\n2025-01-07,51\n"
+        ],
+        "expected": {
+          "first": 2,
+          "last": 2,
+          "cumulative": 4.04
+        },
+        "hint": "按日期排序，不按價格或原始列次序。"
+      },
+      {
+        "label": "下跌區間",
+        "function": "csv_returns",
+        "args": [
+          "date,adjusted\n2025-02-05,95\n2025-02-01,100\n"
+        ],
+        "expected": {
+          "first": -5,
+          "last": -5,
+          "cumulative": -5
+        },
+        "hint": "較早價格是分母。"
+      },
+      {
+        "label": "已排序但有缺口",
+        "function": "csv_returns",
+        "args": [
+          "date,adjusted\n2025-03-01,80\n2025-03-04,84\n2025-03-09,84\n"
+        ],
+        "expected": {
+          "first": 5,
+          "last": 0,
+          "cumulative": 5
+        },
+        "hint": "不要為不存在的日期插入零報酬。"
+      }
+    ]
+  },
+  {
+    "id": "ch3-audit",
+    "chapter": 3,
+    "kind": "引導練習",
+    "minutes": 20,
+    "title": "記錄每項清理決策",
+    "concept": "第 3 章 · 透明品質稽核",
+    "objective": "實作保守的缺漏、重複與衝突政策，並回報稽核筆數。",
+    "prediction": "五列中有一筆完全重複，另有同日兩個不同價格。去除完全重複並隔離衝突後，保留幾列？",
+    "instructions": "每列為一致調整基礎的 [date, price]，日期皆為有效 ISO 格式。完成計數與保留 TODO，分組邏輯已提供。回傳含 retained、missing、conflicts、duplicates 的字典。除 duplicates 計算多餘副本外，計數單位是被移除的原始列。某日期有多個不同有效價格時，隔離該日全部列；未知價格先排除，不填補。",
+    "syntax": "字典對應鍵與值；set 去除相同值；len 計數；continue 跳至下一個迴圈項目。groups.setdefault(date, []).append(price) 蒐集各日有效價格。此處 None 代表未知。",
+    "hints": [
+      "每個 None 讓 missing 加一，再用 continue 避免加入 groups。",
+      "若不同價格衝突，全部 len(prices) 列都算 conflicts；否則保留一列，len(prices) - 1 算多餘副本。"
+    ],
+    "reflection": "說明每個稽核計數的單位、保留筆數，以及隔離衝突為何不能找回真實價格。",
+    "starter": "def audit_counts(rows):\n    groups = {}\n    missing = 0\n    for date, price in rows:\n        if price is None:\n            missing += 1\n            continue\n        groups.setdefault(date, []).append(price)\n    retained = conflicts = duplicates = 0\n    for date, prices in groups.items():\n        if len(set(prices)) > 1:\n            conflicts += None  # TODO: number of original rows quarantined.\n        else:\n            retained += None  # TODO: how many observations survive this date?\n            duplicates += None  # TODO: redundant identical copies.\n    return dict(retained=retained, missing=missing,\n                conflicts=conflicts, duplicates=duplicates)\n\nif __name__ == \"__main__\":\n    rows = [[\"2025-01-02\", 50], [\"2025-01-03\", 51],\n            [\"2025-01-03\", 51.5], [\"2025-01-06\", None],\n            [\"2025-01-07\", 51], [\"2025-01-08\", 52.02],\n            [\"2025-01-08\", 52.02]]\n    print(audit_counts(rows))\n",
+    "example": "# Worked exact duplicate: both date and price agree.\nprices_for_one_date = [50, 50, 50]\ndistinct_values = set(prices_for_one_date)\nprint(\"Distinct values:\", len(distinct_values))  # 1\nprint(\"Retained:\", 1)\nprint(\"Redundant copies:\", len(prices_for_one_date) - 1)  # 2\nprint(\"A conflicting date needs source investigation, not averaging.\")\n",
+    "cases": [
+      {
+        "label": "混合稽核",
+        "function": "audit_counts",
+        "args": [
+          [
+            [
+              "2025-01-02",
+              50
+            ],
+            [
+              "2025-01-03",
+              51
+            ],
+            [
+              "2025-01-03",
+              51.5
+            ],
+            [
+              "2025-01-06",
+              null
+            ],
+            [
+              "2025-01-07",
+              51
+            ],
+            [
+              "2025-01-08",
+              52.02
+            ],
+            [
+              "2025-01-08",
+              52.02
+            ]
+          ]
+        ],
+        "expected": {
+          "retained": 3,
+          "missing": 1,
+          "conflicts": 2,
+          "duplicates": 1
+        },
+        "hint": "每個原始列恰好歸為保留或移除一次。"
+      },
+      {
+        "label": "不同衝突案例",
+        "function": "audit_counts",
+        "args": [
+          [
+            [
+              "2025-02-01",
+              80
+            ],
+            [
+              "2025-02-01",
+              80
+            ],
+            [
+              "2025-02-02",
+              81
+            ],
+            [
+              "2025-02-02",
+              82
+            ],
+            [
+              "2025-02-03",
+              84
+            ]
+          ]
+        ],
+        "expected": {
+          "retained": 2,
+          "missing": 0,
+          "conflicts": 2,
+          "duplicates": 1
+        },
+        "hint": "兩筆衝突皆隔離；完全重複保留一份。"
+      },
+      {
+        "label": "全部缺漏",
+        "function": "audit_counts",
+        "args": [
+          [
+            [
+              "2025-03-01",
+              null
+            ],
+            [
+              "2025-03-02",
+              null
+            ]
+          ]
+        ],
+        "expected": {
+          "retained": 0,
+          "missing": 2,
+          "conflicts": 0,
+          "duplicates": 0
+        },
+        "hint": "不可把 None 變成零價格。"
+      }
+    ]
+  },
+  {
+    "id": "ch3-split",
+    "chapter": 3,
+    "kind": "遷移挑戰",
+    "minutes": 15,
+    "title": "維持一致股數基礎",
+    "concept": "第 3 章 · 分割調整價格報酬率",
+    "objective": "依已核實分割調整較早原始價格，再回報原始與調整區間報酬率。",
+    "prediction": "原始 £100 在一拆二後變成 £51，預測原始價格變動與一致分割基礎的報酬率。",
+    "instructions": "split_factor 是每股舊股換得的新股數。分割已獨立核實，不可從價格下跌推測。較晚價格已是分割後基礎。完成 earlier_adjusted 與兩個報酬率。無股利、其他行動、費用或稅負；僅計算價格報酬率。回傳字典並保留數值精度。",
+    "syntax": "較早原始價格除以分割因子，讓兩價格均為新股單位。字典用大括號與 key: value 配對。必須使用每個參數，才能處理新案例。",
+    "hints": [
+      "較早調整價格 = earlier_raw / split_factor。",
+      "原始採 later_raw / earlier_raw - 1，一致分割採 later_raw / earlier_adjusted - 1，各乘以 100。"
+    ],
+    "reflection": "用股數算術說明原始 −49% 為何不證明財富損失 49%，並指出結果不含股利。",
+    "starter": "def split_report(earlier_raw, later_raw, split_factor):\n    earlier_adjusted = None  # TODO: use the post-split share basis.\n    raw_return = None  # TODO: raw interval percentage change.\n    adjusted_return = None  # TODO: split-consistent interval percentage return.\n    return dict(earlier_adjusted=earlier_adjusted,\n                raw_return=raw_return, adjusted_return=adjusted_return)\n\nif __name__ == \"__main__\":\n    print(split_report(100, 51, 2))\n",
+    "example": "# A pure two-for-one split: one old share -> two new shares.\nold_price = 120\nnew_price = 60\nnew_shares_per_old = 2\nprint(\"Wealth before:\", old_price * 1)\nprint(\"Wealth after:\", new_price * new_shares_per_old)\nprint(\"Earlier price in new-share units:\", old_price / new_shares_per_old)\n",
+    "cases": [
+      {
+        "label": "主要分割案例",
+        "function": "split_report",
+        "args": [
+          100,
+          51,
+          2
+        ],
+        "expected": {
+          "earlier_adjusted": 50,
+          "raw_return": -49,
+          "adjusted_return": 2
+        },
+        "hint": "舊價格除以每股舊股換得的新股數。"
+      },
+      {
+        "label": "純分割",
+        "function": "split_report",
+        "args": [
+          202,
+          101,
+          2
+        ],
+        "expected": {
+          "earlier_adjusted": 101,
+          "raw_return": -50,
+          "adjusted_return": 0
+        },
+        "hint": "純分割不改變財富。"
+      },
+      {
+        "label": "新的一拆三",
+        "function": "split_report",
+        "args": [
+          90,
+          31.5,
+          3
+        ],
+        "expected": {
+          "earlier_adjusted": 30,
+          "raw_return": -65,
+          "adjusted_return": 5
+        },
+        "hint": "不要將因子寫死為二。"
+      },
+      {
+        "label": "無分割",
+        "function": "split_report",
+        "args": [
+          80,
+          84,
+          1
+        ],
+        "expected": {
+          "earlier_adjusted": 80,
+          "raw_return": 5,
+          "adjusted_return": 5
+        },
+        "hint": "因子一不改變價格基礎。"
+      }
+    ]
+  },
+  {
+    "id": "ch4-summary",
+    "chapter": 4,
+    "kind": "引導練習",
+    "minutes": 15,
+    "title": "摘要一個小報酬率樣本",
+    "concept": "第 4 章 · 觀察相對次數、中心與樣本離散程度",
+    "objective": "計算虧損相對次數、算術平均、中位數與樣本標準差，說明單位與限制。",
+    "prediction": "對 [-2, 0, 2]%，執行前先預測平均、中位數、虧損相對次數及樣本標準差。",
+    "instructions": "完成字典四個值，使用已匯入的標準函式庫 statistics。輸入是百分比數值而非小數。虧損嚴格小於零，相對次數回傳 0–1。樣本標準差用 n−1，單位百分點。至少兩筆有限觀察，不用外部套件。",
+    "syntax": "字典以引號鍵對應數值。statistics.mean、median、stdev 接受清單。sum(value < 0 for value in returns_pct) 計算 True 次數，len 回傳筆數。不要用除以 n 的 pstdev。",
+    "hints": [
+      "使用 mean(returns_pct)、median(returns_pct)、stdev(returns_pct)。",
+      "計算嚴格負值筆數，除以 len(returns_pct)；零屬於補集。"
+    ],
+    "reflection": "解釋標準差為何用百分點、零為何不是虧損，以及極小虛構樣本為何不能建立未來機率。",
+    "starter": "import math\nfrom statistics import mean, median, stdev\n\ndef describe(returns_pct):\n    if len(returns_pct) < 2 or not all(math.isfinite(x) for x in returns_pct):\n        raise ValueError(\"Supply at least two finite observations.\")\n    return {\n        \"mean\": None,  # TODO_MEAN\n        \"median\": None,  # TODO_MEDIAN\n        \"sample_sd\": None,  # TODO_SD\n        \"loss_frequency\": None,  # TODO_LOSS\n    }\n\nif __name__ == \"__main__\":\n    print(describe([-3, -1, 0, 1, 2, 7]))\n",
+    "example": "from statistics import mean, median, stdev\nvalues = [-2, 0, 2]  # Hypothetical monthly returns in percentage units.\nprint(\"Mean (%):\", mean(values))  # 0\nprint(\"Median (%):\", median(values))  # 0\nprint(\"Sample SD (percentage points):\", stdev(values))  # 2\nprint(\"Observed loss frequency:\", sum(x < 0 for x in values) / len(values))\n",
+    "cases": [
+      {
+        "label": "零不是虧損",
+        "function": "describe",
+        "args": [
+          [
+            -2,
+            0,
+            2
+          ]
+        ],
+        "expected": {
+          "mean": 0,
+          "median": 0,
+          "sample_sd": 2,
+          "loss_frequency": 0.3333333333333333
+        },
+        "hint": "使用 n−1，只計入小於零者。"
+      },
+      {
+        "label": "新樣本應用",
+        "function": "describe",
+        "args": [
+          [
+            -4,
+            0,
+            4,
+            8
+          ]
+        ],
+        "expected": {
+          "mean": 2,
+          "median": 2,
+          "sample_sd": 5.163977794943222,
+          "loss_frequency": 0.25
+        },
+        "hint": "使用全部觀察，回傳數值字典。"
+      },
+      {
+        "label": "常數序列",
+        "function": "describe",
+        "args": [
+          [
+            3,
+            3,
+            3
+          ]
+        ],
+        "expected": {
+          "mean": 3,
+          "median": 3,
+          "sample_sd": 0,
+          "loss_frequency": 0
+        },
+        "hint": "常數樣本離散程度為零，不是資料缺漏。"
+      }
+    ]
+  },
+  {
+    "id": "ch4-quantile",
+    "chapter": 4,
+    "kind": "引導練習",
+    "minutes": 15,
+    "title": "明訂分位數慣例",
+    "concept": "第 4 章 · 排序後線性插值",
+    "objective": "實作 h=(n−1)p 的包含端點分位數，說明不同慣例的差異。",
+    "prediction": "對 [0, 10, 20, 40]%，依 h=(n−1)p 預測第 25 與第 75 百分位數。",
+    "instructions": "完成插值運算式。起始程式已排序並找到上下鄰值。p 為 0–1 的比例，.25 代表第 25 百分位數；p=1 時上下鄰值都是最後觀察。保留完整精度，僅列印時四捨五入。",
+    "syntax": "sorted 產生排序副本。int(h) 將非負位置截為較低整數。Python 索引從零起算。h-lower 代表從下鄰值往上鄰值移動的比例。",
+    "hints": [
+      "插值為 lower_value + fraction × (upper_value − lower_value)。",
+      "使用 ordered[lower] + (h - lower) * (ordered[upper] - ordered[lower])。"
+    ],
+    "reflection": "交代排序、零起算位置與插值慣例，並解釋不同軟體預設為何可能產生不同小樣本分位數。",
+    "starter": "import math\n\ndef inclusive_quantile(values, p):\n    if not values or not all(math.isfinite(x) for x in values) or not 0 <= p <= 1:\n        raise ValueError(\"Use finite values and p between zero and one.\")\n    ordered = sorted(values)\n    h = (len(ordered) - 1) * p\n    lower = int(h)\n    upper = min(lower + 1, len(ordered) - 1)\n    return None  # TODO_INTERPOLATE\n\nif __name__ == \"__main__\":\n    print(\"25th percentile (%):\", inclusive_quantile([0, 10, 20, 40], .25))\n",
+    "example": "ordered = [0, 10, 20, 40]\nh = (len(ordered) - 1) * .75  # 2.25\nlower = int(h)  # 2: value 20\nfraction = h - lower  # .25\nresult = ordered[lower] + fraction * (ordered[lower + 1] - ordered[lower])\nprint(\"75th percentile (%):\", result)  # 25\n",
+    "cases": [
+      {
+        "label": "插值",
+        "function": "inclusive_quantile",
+        "args": [
+          [
+            0,
+            10,
+            20,
+            40
+          ],
+          0.25
+        ],
+        "expected": 7.5,
+        "hint": "從 0 往 10 移動 .75。"
+      },
+      {
+        "label": "未排序輸入",
+        "function": "inclusive_quantile",
+        "args": [
+          [
+            20,
+            0,
+            8,
+            4
+          ],
+          0.75
+        ],
+        "expected": 11,
+        "hint": "找 2.25 位置前先排序。"
+      },
+      {
+        "label": "上端點",
+        "function": "inclusive_quantile",
+        "args": [
+          [
+            3,
+            -2,
+            9
+          ],
+          1
+        ],
+        "expected": 9,
+        "hint": "第 100 百分位數是最大值。"
+      },
+      {
+        "label": "中位數應用",
+        "function": "inclusive_quantile",
+        "args": [
+          [
+            -3,
+            -1,
+            0,
+            1,
+            2,
+            7
+          ],
+          0.5
+        ],
+        "expected": 0.5,
+        "hint": "在零起算索引 2 與 3 之間插值。"
+      }
+    ]
+  },
+  {
+    "id": "ch4-correlation",
+    "chapter": 4,
+    "kind": "遷移挑戰",
+    "minutes": 15,
+    "title": "保留日期配對",
+    "concept": "第 4 章 · Pearson 相關與無法定義的情況",
+    "objective": "實作同月份配對的 Pearson 相關，偵測零變異數並拒絕因果過度推論。",
+    "prediction": "x=[-1,0,1]、y=[-2,0,2] 時預期相關多少？若 y 是常數呢？",
+    "instructions": "完成共變異數分子與分母。每列必須已是同日期資產報酬率；起始程式拒絕重複日期。建列前先核實來源對齊。無法定義時回報 {\"defined\": 0, \"r\": 0}；旗標表示數值只是佔位，不是相關估計，不能解釋為零關聯。有定義時使用 {\"defined\": 1, \"r\": value}。不依賴 statistics.correlation，因此支援 Python 3.8。",
+    "syntax": "每列為 [date, x, y]。串列生成式擷取同日期數值，zip 配對離差而不排序，sum 累加乘積，math.sqrt 開平方根。defined 使用數字以配合共用檢核器。",
+    "hints": [
+      "分子為 sum((a - mx) * (b - my) for a, b in zip(x, y))。",
+      "分母為 math.sqrt(xx * yy)。任一平方離差和為零時，使用起始程式提供的無法定義旗標。"
+    ],
+    "reflection": "解釋列對齊的重要性、零變異數為何使 r 無法定義，以及非零樣本關聯為何不證明因果或未來穩定性。",
+    "starter": "import math\n\ndef paired_report(rows):\n    if len(rows) < 2 or len({r[0] for r in rows}) != len(rows):\n        raise ValueError(\"Supply at least two unique aligned date rows.\")\n    x = [r[1] for r in rows]\n    y = [r[2] for r in rows]\n    if not all(math.isfinite(v) for v in x + y):\n        raise ValueError(\"Returns must be finite.\")\n    if all(v == x[0] for v in x) or all(v == y[0] for v in y):\n        return {\"defined\": 0, \"r\": 0}  # Check identical observations before floating-point centring.\n    mx, my = sum(x) / len(x), sum(y) / len(y)\n    xx = sum((v - mx) ** 2 for v in x)\n    yy = sum((v - my) ** 2 for v in y)\n    if xx == 0 or yy == 0:\n        return {\"defined\": 0, \"r\": 0}  # Undefined: do not interpret placeholder as an r.\n    numerator = None  # TODO_NUMERATOR\n    denominator = None  # TODO_DENOMINATOR\n    return {\"defined\": 1, \"r\": numerator / denominator}\n\nif __name__ == \"__main__\":\n    print(paired_report([[\"Jan\", -1, -2], [\"Feb\", 0, 0], [\"Mar\", 1, 2]]))\n",
+    "example": "import math\nx, y = [-1, 0, 1], [-2, 0, 2]  # Same three dates, not sorted independently.\ncross_products = 2 + 0 + 2\nprint(\"Correlation:\", cross_products / math.sqrt(2 * 8))  # 1\nprint(\"An association in these pairs is not a causal explanation or forecast.\")\n",
+    "cases": [
+      {
+        "label": "同日期正斜率直線",
+        "function": "paired_report",
+        "args": [
+          [
+            [
+              "Jan",
+              -1,
+              -2
+            ],
+            [
+              "Feb",
+              0,
+              0
+            ],
+            [
+              "Mar",
+              1,
+              2
+            ]
+          ]
+        ],
+        "expected": {
+          "defined": 1,
+          "r": 1
+        },
+        "hint": "加總成對離差乘積。"
+      },
+      {
+        "label": "負向關聯",
+        "function": "paired_report",
+        "args": [
+          [
+            [
+              "Jan",
+              -1,
+              2
+            ],
+            [
+              "Feb",
+              0,
+              0
+            ],
+            [
+              "Mar",
+              1,
+              -2
+            ]
+          ]
+        ],
+        "expected": {
+          "defined": 1,
+          "r": -1
+        },
+        "hint": "保留原始配對與正負號。"
+      },
+      {
+        "label": "常數無法定義",
+        "function": "paired_report",
+        "args": [
+          [
+            [
+              "Jan",
+              1,
+              3
+            ],
+            [
+              "Feb",
+              2,
+              3
+            ],
+            [
+              "Mar",
+              3,
+              3
+            ]
+          ]
+        ],
+        "expected": {
+          "defined": 0,
+          "r": 0
+        },
+        "hint": "旗標標示無法定義，佔位數不是相關估計。"
+      },
+      {
+        "label": "小數常數無法定義",
+        "function": "paired_report",
+        "args": [
+          [
+            [
+              "0",
+              0.3,
+              0
+            ],
+            [
+              "1",
+              0.3,
+              1
+            ],
+            [
+              "2",
+              0.3,
+              2
+            ],
+            [
+              "3",
+              0.3,
+              3
+            ],
+            [
+              "4",
+              0.3,
+              4
+            ],
+            [
+              "5",
+              0.3,
+              5
+            ],
+            [
+              "6",
+              0.3,
+              6
+            ],
+            [
+              "7",
+              0.3,
+              7
+            ],
+            [
+              "8",
+              0.3,
+              8
+            ],
+            [
+              "9",
+              0.3,
+              9
+            ],
+            [
+              "10",
+              0.3,
+              10
+            ],
+            [
+              "11",
+              0.3,
+              11
+            ]
+          ]
+        ],
+        "expected": {
+          "defined": 0,
+          "r": 0
+        },
+        "hint": "相同小數觀察的變異數為零，即使浮點運算殘留微小誤差。"
+      },
+      {
+        "label": "零線性關聯",
+        "function": "paired_report",
+        "args": [
+          [
+            [
+              "Jan",
+              -1,
+              1
+            ],
+            [
+              "Feb",
+              0,
+              -2
+            ],
+            [
+              "Mar",
+              1,
+              1
+            ]
+          ]
+        ],
+        "expected": {
+          "defined": 1,
+          "r": 0
+        },
+        "hint": "零線性相關仍可能有非線性模式。"
+      }
+    ]
+  },
+  {
+    "id": "ch5-risk",
+    "chapter": 5,
+    "kind": "引導練習",
+    "minutes": 20,
+    "title": "把初始高點納入計算",
+    "concept": "第 5 章 · 樣本離散程度與觀察到的回撤",
+    "objective": "計算月樣本標準差、有條件的年化標準差及正值最大回撤幅度。",
+    "prediction": "比較 [-20,25]% 與 [0,0]%。兩者都回到起點，標準差與最大回撤會相同嗎？",
+    "instructions": "完成樣本標準差、年化換算、財富更新與高點損失的運算式。報酬率用百分比數值；財富從 100 開始，將它納入滾動高點。最大回撤用正幅度表示，其他系統的每期回撤也可能用負值。至少兩筆有限且高於 -100% 的報酬率。年化標準差用 sqrt(12)，條件是月報酬率獨立同分布。不含費用或外部現金流。",
+    "syntax": "stdev 使用樣本 n-1。math.sqrt 是平方根；wealth *= factor 以乘法更新變數。max 比較滾動高點與目前財富。字典回傳具名稱的數值結果。",
+    "hints": [
+      "使用 stdev(returns_pct)，再將 monthly_sd 乘以 math.sqrt(12)。",
+      "更新 wealth *= 1 + value/100；先更新高點，再算 100*(1-wealth/peak)。"
+    ],
+    "reflection": "解釋初始高點、正損失幅度慣例、標準差單位，以及時間平方根換算或月觀察值的限制。",
+    "starter": "import math\nfrom statistics import stdev\n\ndef risk_summary(returns_pct):\n    if len(returns_pct) < 2 or not all(math.isfinite(x) and x > -100 for x in returns_pct):\n        raise ValueError(\"Use at least two finite monthly returns above -100%.\")\n    monthly_sd = None  # TODO_SD\n    value, peak, largest_loss = 100.0, 100.0, 0.0\n    for monthly_return in returns_pct:\n        value *= None  # TODO_GROW\n        peak = max(peak, value)\n        loss = None  # TODO_LOSS\n        largest_loss = max(largest_loss, loss)\n    return {\"monthly_sd\": monthly_sd,\n            \"annualised_sd\": None,  # TODO_ANNUAL\n            \"maximum_drawdown\": largest_loss, \"ending_wealth\": value}\n\nif __name__ == \"__main__\":\n    print(risk_summary([-20, 25]))\n",
+    "example": "import math\nfrom statistics import stdev\nvalues = [-2, 0, 2]\nprint(\"Monthly sample SD (percentage points):\", stdev(values))\nprint(\"Annualised estimate, IID-month assumption:\", stdev(values) * math.sqrt(12))\nwealth = [100, 80, 100]  # [-20%, +25%], including initial wealth.\nprint(\"Observed maximum drawdown (% magnitude):\", 100 * (1 - min(wealth) / 100))\nprint(\"This observed loss is not a future bound.\")\n",
+    "cases": [
+      {
+        "label": "初始高點與復原",
+        "function": "risk_summary",
+        "args": [
+          [
+            -20,
+            25
+          ]
+        ],
+        "expected": {
+          "monthly_sd": 31.819805153394636,
+          "annualised_sd": 110.227038425243,
+          "maximum_drawdown": 20,
+          "ending_wealth": 100
+        },
+        "hint": "包含初始 100，樣本標準差使用 n-1。"
+      },
+      {
+        "label": "期末相同，路徑不同",
+        "function": "risk_summary",
+        "args": [
+          [
+            0,
+            0
+          ]
+        ],
+        "expected": {
+          "monthly_sd": 0,
+          "annualised_sd": 0,
+          "maximum_drawdown": 0,
+          "ending_wealth": 100
+        },
+        "hint": "固定財富沒有離散程度或觀察到的回撤。"
+      },
+      {
+        "label": "新遷移路徑",
+        "function": "risk_summary",
+        "args": [
+          [
+            -2,
+            0,
+            2
+          ]
+        ],
+        "expected": {
+          "monthly_sd": 2,
+          "annualised_sd": 6.928203230275509,
+          "maximum_drawdown": 2,
+          "ending_wealth": 99.96
+        },
+        "hint": "樣本標準差為 2；初始 100 仍須納入高點紀錄。"
+      }
+    ]
+  },
+  {
+    "id": "ch5-sharpe",
+    "chapter": 5,
+    "kind": "遷移挑戰",
+    "minutes": 15,
+    "title": "配對無風險利率的頻率",
+    "concept": "第 5 章 · 月超額報酬率與夏普比率",
+    "objective": "換算有效年無風險利率、計算明訂的年化夏普比率，並明確回報零變異數。",
+    "prediction": "對 [-1,1,3]% 月報酬率，將有效年無風險利率從 0% 提高至 12%，會改變樣本超額報酬率標準差或夏普比率嗎？",
+    "instructions": "完成有效月利率、超額報酬率清單與比率。defined=0 代表夏普比率未定義，此時 sharpe=0 只是佔位值，不是估計。起始程式已明確處理固定超額報酬率。以 sqrt(12) 年化假設月超額報酬率獨立且平穩，不能推論未來績效。全程使用百分比數值。",
+    "syntax": "** 為次方，1/12 為分數。[value - monthly_rf for value in returns_pct] 轉換每筆月報酬率；stdev 使用 n-1，mean 計算算術平均。公開檢查器使用數值旗標。",
+    "hints": [
+      "monthly_rf = 100 * ((1 + annual_effective_pct / 100) ** (1/12) - 1)。",
+      "先以月頻率計算 excess，再計算 sqrt(12) * mean(excess) / stdev(excess)。"
+    ],
+    "reflection": "交代頻率換算與樣本分母，解釋固定無風險利率平移為何不改變標準差，並說明年化換算限制。",
+    "starter": "import math\nfrom statistics import mean, stdev\n\ndef sharpe_report(returns_pct, annual_effective_pct):\n    if len(returns_pct) < 2 or not all(math.isfinite(x) for x in returns_pct):\n        raise ValueError(\"Supply two or more finite monthly returns.\")\n    if not math.isfinite(annual_effective_pct) or annual_effective_pct <= -100:\n        raise ValueError(\"Annual effective rate must exceed -100%.\")\n    monthly_rf = None  # TODO_RF\n    excess = None  # TODO_EXCESS\n    if all(x == excess[0] for x in excess):\n        return {\"defined\": 0, \"sharpe\": 0, \"monthly_rf\": monthly_rf}\n    ratio = None  # TODO_RATIO\n    return {\"defined\": 1, \"sharpe\": ratio, \"monthly_rf\": monthly_rf}\n\nif __name__ == \"__main__\":\n    print(sharpe_report([-1,1,3], 0))\n",
+    "example": "from statistics import mean, stdev\nimport math\nexcess = [-1,1,3]  # Monthly percentage-point excess, risk-free0%.\nprint(\"Mean excess:\", mean(excess), \"Sample SD:\", stdev(excess))\nprint(\"Annualised Sharpe, independent-month assumption:\", math.sqrt(12)*mean(excess)/stdev(excess))\nprint(\"Zero excess variance means undefined, not a zero Sharpe.\")\n",
+    "cases": [
+      {
+        "label": "已定義的樣本比率",
+        "function": "sharpe_report",
+        "args": [
+          [
+            -1,
+            1,
+            3
+          ],
+          0
+        ],
+        "expected": {
+          "defined": 1,
+          "sharpe": 1.7320508075688772,
+          "monthly_rf": 0
+        },
+        "hint": "平均數 1／樣本標準差 2，再乘 sqrt12。"
+      },
+      {
+        "label": "有效年利率換算",
+        "function": "sharpe_report",
+        "args": [
+          [
+            -1,
+            1,
+            3
+          ],
+          12
+        ],
+        "expected": {
+          "defined": 1,
+          "sharpe": 0.08854366104903515,
+          "monthly_rf": 0.9488792934583046
+        },
+        "hint": "先換算再從月報酬率扣除；不要直接把 12 除以 12。"
+      },
+      {
+        "label": "非二進位精確常數",
+        "function": "sharpe_report",
+        "args": [
+          [
+            0.3,
+            0.3,
+            0.3,
+            0.3,
+            0.3,
+            0.3,
+            0.3,
+            0.3,
+            0.3,
+            0.3,
+            0.3,
+            0.3
+          ],
+          0
+        ],
+        "expected": {
+          "defined": 0,
+          "sharpe": 0,
+          "monthly_rf": 0
+        },
+        "hint": "完全相同的觀察值變異數確實為零，應回報未定義。"
+      }
+    ]
+  },
+  {
+    "id": "ch6-weights",
+    "chapter": 6,
+    "kind": "引導練習",
+    "minutes": 20,
+    "title": "比較固定政策與權重漂移",
+    "concept": "第 6 章 · 加權報酬率、固定比例與買進持有",
+    "objective": "對已配對月報酬率實作兩種零成本政策，區分期末財富與目標權重。",
+    "prediction": "A 為 [+20,-20]%、B [0,0]%，初始各半配置。預測從 100 開始的固定比例與買進持有期末財富。",
+    "instructions": "完成加權報酬率、固定比例財富更新與各資產部位更新。輸入列已配對同日 A/B 總報酬率，建構前仍須核對對齊。w_a 是介於 0–1 的期初／目標比例，B 為 1-w_a。固定比例在每個後續月份前重設；買進持有保持單位數不變。不含成本、稅、現金流或借款。一條路徑較好不代表投資建議。",
+    "syntax": "for a_return, b_return in rows 逐列解包配對觀察值。部位是投入某項資產的貨幣價值，*= 以複利更新部位；用字典回傳數值。",
+    "hints": [
+      "weighted = w_a * a_return + (1 - w_a) * b_return。",
+      "mix 乘以 1+weighted/100；各初始部位分別乘以自己的月報酬率因子。"
+    ],
+    "reflection": "解釋買進持有的 A 權重為何漂移、固定比例何時重設，以及省略成本或其他路徑為何可能反轉比較。",
+    "starter": "import math\n\ndef policy_report(rows, w_a):\n    if not rows or not 0 <= w_a <= 1 or not all(math.isfinite(v) and v > -100 for row in rows for v in row):\n        raise ValueError(\"Use aligned finite return pairs above -100%, and A weight0-1.\")\n    mix, a_value, b_value = 100.0, 100*w_a, 100*(1-w_a)\n    first_return = None\n    for a_return, b_return in rows:\n        weighted = None  # TODO_WEIGHTED\n        if first_return is None:\n            first_return = weighted\n        mix *= None  # TODO_MIX\n        a_value *= None  # TODO_A\n        b_value *= None  # TODO_B\n    return {\"first_return\": first_return, \"constant_mix\": mix,\n            \"buy_hold\": a_value+b_value, \"ending_a_weight\": a_value/(a_value+b_value)}\n\nif __name__ == \"__main__\":\n    print(policy_report([[20,0],[-20,0]], .5))\n",
+    "example": "w_a = .6\nfirst_return = w_a*10 + (1-w_a)*(-5)\nprint(\"Weighted return (%):\", first_return)  # 4\nprint(\"Ending wealth:\", 100*(1+first_return/100))  # 104\nprint(\"Drifted A weight:\", 60*1.1/(60*1.1+40*.95))\nprint(\"Resetting target weights before the next month is a different policy.\")\n",
+    "cases": [
+      {
+        "label": "反轉路徑",
+        "function": "policy_report",
+        "args": [
+          [
+            [
+              20,
+              0
+            ],
+            [
+              -20,
+              0
+            ]
+          ],
+          0.5
+        ],
+        "expected": {
+          "first_return": 10,
+          "constant_mix": 99,
+          "buy_hold": 98,
+          "ending_a_weight": 0.4897959183673469
+        },
+        "hint": "買進持有兩部位為 48 和 50；固定比例先 110 再 99。"
+      },
+      {
+        "label": "趨勢反例",
+        "function": "policy_report",
+        "args": [
+          [
+            [
+              20,
+              0
+            ],
+            [
+              20,
+              0
+            ]
+          ],
+          0.5
+        ],
+        "expected": {
+          "first_return": 10,
+          "constant_mix": 121,
+          "buy_hold": 122,
+          "ending_a_weight": 0.5901639344262295
+        },
+        "hint": "趨勢路徑會反轉勝出者，沒有普遍優勝政策。"
+      },
+      {
+        "label": "新配置",
+        "function": "policy_report",
+        "args": [
+          [
+            [
+              10,
+              -5
+            ],
+            [
+              -10,
+              5
+            ]
+          ],
+          0.8
+        ],
+        "expected": {
+          "first_return": 7,
+          "constant_mix": 99.51,
+          "buy_hold": 99.15,
+          "ending_a_weight": 0.7987897125567323
+        },
+        "hint": "使用 .8/.2，不是固定 .5/.5；保留原始配對。"
+      }
+    ]
+  },
+  {
+    "id": "ch6-beta",
+    "chapter": 6,
+    "kind": "遷移挑戰",
+    "minutes": 15,
+    "title": "保留敏感度的資料配對",
+    "concept": "第 6 章 · 樣本 beta 與皮爾森相關係數",
+    "objective": "以基準變異數計算 beta，回報未定義情況，並區分斜率與相關係數。",
+    "prediction": "基準 [-1,0,1]% 與投資組合 [-2,0,2]%，預測 beta 和相關係數。投資組合尺度加倍時，哪個會改變？",
+    "instructions": "每列為 [date, portfolio, benchmark]，使用已對齊的月簡單總報酬率，不扣無風險序列。完成交叉乘積、beta 與相關係數。樣本 n-1 在比值中相消；defined 旗標區分數值零與未定義佔位值。基準固定會讓 beta 與相關係數都未定義；投資組合固定但基準變動時，beta=0、相關係數未定義。這是含截距的樣本擬合斜率，不是未來保證。",
+    "syntax": "串列生成式選取配對欄；zip 配對偏差。math.sqrt 形成相關係數分母。defined 是公開形成性檢查器所需的數值旗標，旗標為 0 時的佔位數值不是估計。",
+    "hints": [
+      "cross=sum((p-mp)*(m-mm) for p,m in zip(portfolio,market))。",
+      "Beta 使用 cross/market_squared_sum；相關係數使用 cross/sqrt(portfolio_squared_sum*market_squared_sum)。"
+    ],
+    "reflection": "區分 beta 尺度與相關係數，保留日期配對，並解釋兩種不同的零變異數情況及預測限制。",
+    "starter": "import math\n\ndef sensitivity_report(rows):\n    if len(rows) < 2 or len({r[0] for r in rows}) != len(rows):\n        raise ValueError(\"Use two or more unique same-date rows.\")\n    portfolio, market = [r[1] for r in rows], [r[2] for r in rows]\n    if not all(math.isfinite(x) for x in portfolio + market):\n        raise ValueError(\"Use finite same-frequency returns.\")\n    mp, mm = sum(portfolio)/len(rows), sum(market)/len(rows)\n    pp = 0 if all(x == portfolio[0] for x in portfolio) else sum((x-mp)**2 for x in portfolio)\n    bb = 0 if all(x == market[0] for x in market) else sum((x-mm)**2 for x in market)\n    if bb == 0:\n        return {\"beta_defined\":0,\"beta\":0,\"correlation_defined\":0,\"correlation\":0}\n    cross = None  # TODO_CROSS\n    beta = None  # TODO_BETA\n    if pp == 0:\n        return {\"beta_defined\":1,\"beta\":beta,\"correlation_defined\":0,\"correlation\":0}\n    correlation = None  # TODO_CORRELATION\n    return {\"beta_defined\":1,\"beta\":beta,\"correlation_defined\":1,\"correlation\":correlation}\n\nif __name__ == \"__main__\":\n    print(sensitivity_report([[\"Jan\",-2,-1],[\"Feb\",0,0],[\"Mar\",2,1]]))\n",
+    "example": "import math\ncross, portfolio_ss, benchmark_ss = 4, 8, 2\nprint(\"Sample beta:\", cross/benchmark_ss)  # 2\nprint(\"Sample Pearson correlation:\", cross/math.sqrt(portfolio_ss*benchmark_ss))  # 1\nprint(\"The n-1 covariance/variance factors cancel; beta is a sample slope, not a guaranteed next return.\")\n",
+    "cases": [
+      {
+        "label": "尺度與關聯",
+        "function": "sensitivity_report",
+        "args": [
+          [
+            [
+              "Jan",
+              -2,
+              -1
+            ],
+            [
+              "Feb",
+              0,
+              0
+            ],
+            [
+              "Mar",
+              2,
+              1
+            ]
+          ]
+        ],
+        "expected": {
+          "beta_defined": 1,
+          "beta": 2,
+          "correlation_defined": 1,
+          "correlation": 1
+        },
+        "hint": "Beta 為 2、相關係數為 1。Beta 分母用基準變異數。"
+      },
+      {
+        "label": "負斜率遷移案例",
+        "function": "sensitivity_report",
+        "args": [
+          [
+            [
+              "Jan",
+              1,
+              -2
+            ],
+            [
+              "Feb",
+              0,
+              0
+            ],
+            [
+              "Mar",
+              -1,
+              2
+            ]
+          ]
+        ],
+        "expected": {
+          "beta_defined": 1,
+          "beta": -0.5,
+          "correlation_defined": 1,
+          "correlation": -1
+        },
+        "hint": "保留正負號與日期配對。"
+      },
+      {
+        "label": "固定基準",
+        "function": "sensitivity_report",
+        "args": [
+          [
+            [
+              "Jan",
+              1,
+              0.3
+            ],
+            [
+              "Feb",
+              2,
+              0.3
+            ],
+            [
+              "Mar",
+              3,
+              0.3
+            ]
+          ]
+        ],
+        "expected": {
+          "beta_defined": 0,
+          "beta": 0,
+          "correlation_defined": 0,
+          "correlation": 0
+        },
+        "hint": "完全相同的基準數值代表變異數確實為零。"
+      },
+      {
+        "label": "固定投資組合",
+        "function": "sensitivity_report",
+        "args": [
+          [
+            [
+              "Jan",
+              0.3,
+              -1
+            ],
+            [
+              "Feb",
+              0.3,
+              0
+            ],
+            [
+              "Mar",
+              0.3,
+              1
+            ]
+          ]
+        ],
+        "expected": {
+          "beta_defined": 1,
+          "beta": 0,
+          "correlation_defined": 0,
+          "correlation": 0
+        },
+        "hint": "基準變動時 beta=0 有定義，但相關係數未定義。"
+      }
+    ]
+  },
+  {
+    "id": "ch7-payoffs",
+    "chapter": 7,
+    "kind": "引導練習",
+    "minutes": 15,
+    "title": "區分契約給付與損益",
+    "concept": "第 7 章 · 遠期契約、買權與權利金",
+    "objective": "計算一單位契約的遠期給付、買權給付及未折現損益。",
+    "prediction": "履約價 100、權利金 6、到期價 104：買權在價內，是否表示已獲利？",
+    "instructions": "完成遠期契約與買權的給付，以及扣除權利金的損益。金額為每單位標的的英鎊，不是百分比報酬率。遠期多頭保留負給付；買權可不履約，給付下限為零。權利金只從買權給付扣除一次。不折現，不考慮融資、稅、費用或股利。給定權利金不是本程式估計的公平價格。",
+    "syntax": "max(a, b) 選較大值，形成買權零給付下限。字典用帶引號的鍵回傳數值；保留起始程式的鍵名。",
+    "hints": [
+      "遠期契約為 terminal - strike；買權給付為 max(terminal - strike, 0)。",
+      "買權損益 = 買權給付 − premium；不要把遠期契約給付也截為零。"
+    ],
+    "reflection": "舉價內卻虧損的買權例子，並說明給付、權利金、未折現損益與百分比報酬率的差異。",
+    "starter": "import math\ndef derivative_report(terminal,strike,premium):\n    if not all(math.isfinite(x) and x >= 0 for x in [terminal,strike,premium]):\n        raise ValueError(\"Use nonnegative finite amounts.\")\n    payoff = None # TODO_CALL\n    return {\"forward\":None, # TODO_FORWARD\n            \"call\":payoff,\"profit\":None} # TODO_PROFIT\nif __name__ == \"__main__\":\n    print(derivative_report(104,100,6))\n",
+    "example": "terminal,strike,premium=104,100,6\npayoff=max(terminal-strike,0)\nprint(\"Forward payoff:\",terminal-strike)\nprint(\"Call payoff:\",payoff)\nprint(\"Undiscounted call profit:\",payoff-premium)\n",
+    "cases": [
+      {
+        "label": "價內但虧損",
+        "function": "derivative_report",
+        "args": [
+          104,
+          100,
+          6
+        ],
+        "expected": {
+          "forward": 4,
+          "call": 4,
+          "profit": -2
+        },
+        "hint": "給付先取 max(104−100,0)，再扣權利金 6。"
+      },
+      {
+        "label": "價外情況",
+        "function": "derivative_report",
+        "args": [
+          70,
+          80,
+          5
+        ],
+        "expected": {
+          "forward": -10,
+          "call": 0,
+          "profit": -5
+        },
+        "hint": "買權可不履約，但已支付的權利金不會退還。"
+      },
+      {
+        "label": "損益兩平",
+        "function": "derivative_report",
+        "args": [
+          85,
+          80,
+          5
+        ],
+        "expected": {
+          "forward": 5,
+          "call": 5,
+          "profit": 0
+        },
+        "hint": "忽略融資時，買權損益兩平價為履約價加權利金。"
+      }
+    ]
+  },
+  {
+    "id": "ch7-path",
+    "chapter": 7,
+    "kind": "遷移挑戰",
+    "minutes": 15,
+    "title": "重現固定種子的三期路徑",
+    "concept": "第 7 章 · 可重現模型與假設敏感度",
+    "objective": "將給定離散報酬率複利；重現明訂的固定種子產生器。",
+    "prediction": "初始 100、報酬率 [+10,0,-10]%，預測期末價格。幅度較大會讓每條路徑的期末結果都提高嗎？",
+    "instructions": "完成乘法運算。已提供的固定 LCG 會產生與瀏覽器相同的上漲／零／下跌索引，不要使用 random.Random 並期待相同路徑。函式以三次抽樣回傳一期末價格。種子 1–999999，幅度 5/10/20。三個獨立、等機率且有界的報酬率是教學假設，不是市場預測。",
+    "syntax": "Python 整數不會溢位，須明確使用 modulo2**32。z//(2**32//3) 並非完全相同的指定映射，請用 int((z/2**32)*3)-1。乘法會更新目前財富。",
+    "hints": [
+      "每期報酬率是 direction*spread，以百分比數值表示。",
+      "每期將 price 乘以 1+direction*spread/100。"
+    ],
+    "reflection": "說明固定種子與改幅度時哪些項目相同、哪些改變，以及數值可重現為何不代表市場模型有效。",
+    "starter": "def terminal_price(seed,spread):\n    if not isinstance(seed,int) or not 1 <= seed <= 999999 or spread not in (5,10,20):\n        raise ValueError(\"Use the declared seed and spread bounds.\")\n    z,price=seed,100.0\n    for _ in range(3):\n        z=(1664525*z+1013904223) % 2**32\n        direction=int((z/2**32)*3)-1\n        price = None # TODO_GROW\n    return price\nif __name__ == \"__main__\":\n    print(terminal_price(42,10))\n",
+    "example": "price=100\nfor return_pct in [10,0,-10]:\n    price *= 1+return_pct/100\nprint(\"Conditional terminal price:\",price) #99\nprint(\"This invented path is not a forecast.\")\n",
+    "cases": [
+      {
+        "label": "固定種子基準",
+        "function": "terminal_price",
+        "args": [
+          42,
+          10
+        ],
+        "expected": 81,
+        "hint": "第 1 條路徑的方向為下跌、下跌、零。"
+      },
+      {
+        "label": "固定種子改幅度",
+        "function": "terminal_price",
+        "args": [
+          42,
+          20
+        ],
+        "expected": 64,
+        "hint": "固定抽樣，複利兩個 -20% 報酬率。"
+      },
+      {
+        "label": "不同種子案例",
+        "function": "terminal_price",
+        "args": [
+          1,
+          5
+        ],
+        "expected": 95,
+        "hint": "種子 1 抽到下跌、零、零。"
+      }
+    ]
+  },
+  {
+    "id": "ch8-timing",
+    "chapter": 8,
+    "kind": "引導練習",
+    "minutes": 15,
+    "title": "分開訊號與執行",
+    "concept": "第8章 · 移動3筆收盤訊號",
+    "objective": "只用截至t的資訊，計算固定移動收盤目標。",
+    "prediction": "收盤100,101,102應產生什麼目標？後面的收盤改變時，這個目標應改變嗎？",
+    "instructions": "只使用closes[t-2:t+1]完成嚴格比較。訊號收盤嚴格高於平均時回傳1，否則0。目標在收盤t後才決定，不是在該收盤成交；須等下一次開盤。不可用未來收盤價。",
+    "syntax": "切片不包含上界；t+1讓收盤t納入。int(True)為1、int(False)為0。相等時持有現金。",
+    "hints": [
+      "比較closes[t]與選取的3個值平均。",
+      "回傳int(closes[t] > average)。"
+    ],
+    "reflection": "畫出訊號收盤→下一次開盤執行→再下次開盤評價。解釋修改未來收盤為何不能改變此目標。",
+    "starter": "import math\ndef target(closes,t):\n    if not isinstance(t,int) or t < 2 or t >= len(closes):\n        raise ValueError(\"Need3known closes ending at t.\")\n    observed=closes[t-2:t+1]\n    if not all(math.isfinite(x) and x > 0 for x in observed):\n        raise ValueError(\"Use finite positive observed prices.\")\n    average=sum(observed)/3\n    return None # TODO_SIGNAL\nif __name__ == \"__main__\":\n    print(target([100,101,102,1],2))\n",
+    "example": "closes=[100,101,102]\naverage=sum(closes)/3\nprint(\"Signal target:\",int(closes[-1]>average))\nprint(\"Execute at the next open,not this already-observed close.\")\n",
+    "cases": [
+      {
+        "label": "已知收盤價",
+        "function": "target",
+        "args": [
+          [
+            100,
+            101,
+            102,
+            1
+          ],
+          2
+        ],
+        "expected": 1,
+        "hint": "只用截至t的3筆收盤。"
+      },
+      {
+        "label": "擾動未來",
+        "function": "target",
+        "args": [
+          [
+            100,
+            101,
+            102,
+            999
+          ],
+          2
+        ],
+        "expected": 1,
+        "hint": "改未來收盤不得重寫過去訊號。"
+      },
+      {
+        "label": "相等時持有現金",
+        "function": "target",
+        "args": [
+          [
+            5,
+            5,
+            5
+          ],
+          2
+        ],
+        "expected": 0,
+        "hint": "嚴格大於，不是大於或等於。"
+      },
+      {
+        "label": "下跌路徑",
+        "function": "target",
+        "args": [
+          [
+            10,
+            9,
+            8
+          ],
+          2
+        ],
+        "expected": 0,
+        "hint": "收盤低於移動平均。"
+      }
+    ]
+  },
+  {
+    "id": "ch8-costs",
+    "chapter": 8,
+    "kind": "遷移挑戰",
+    "minutes": 15,
+    "title": "計入最後出場",
+    "concept": "第8章 · 先扣換手費再計報酬率",
+    "objective": "重現固定部位扣除每項費用後的資產，包含平倉。",
+    "prediction": "開盤價不變、起始1000、目標1、成本10bps：預測進場及最後出場後資產。",
+    "instructions": "positions[i]是提供的0/1目標，持有opens[i]至opens[i+1]。產生部位的訊號時序須另外查核。完成換手、先扣費再成長及最後出場費。成本為交易名目金額的bps；現金報酬率0%，不計槓桿／放空、稅或額外滑價。固定提供的部位，不搜尋有利規則。",
+    "syntax": "abs計算絕對換手比例。bps/10000轉小數。迴圈列舉各持有區間；最後目標在最後可交易開盤點賣出。",
+    "hints": [
+      "換手比例=abs(weight-previous)。",
+      "wealth*(1-c*turnover)*(1+weight*return)；迴圈後乘1-c*previous。"
+    ],
+    "reflection": "手算一個區間，解釋最後出場及為何較高費用不能改善固定路徑。",
+    "starter": "import math\ndef net_wealth(opens,positions,cost_bps,initial=1000):\n    if len(opens) != len(positions)+1 or not positions or any(w not in (0,1) for w in positions):\n        raise ValueError(\"One0/1weight per open-to-open interval.\")\n    if not all(math.isfinite(x) and x > 0 for x in opens) or not 0 <= cost_bps <= 100:\n        raise ValueError(\"Positive finite opens,costs0-100bps.\")\n    c=cost_bps/10000\n    wealth,previous=initial,0\n    for i,weight in enumerate(positions):\n        turnover=None # TODO_TURNOVER\n        interval_return=opens[i+1]/opens[i]-1\n        wealth=None # TODO_INTERVAL\n        previous=weight\n    return None # TODO_EXIT\nif __name__ == \"__main__\":\n    print(net_wealth([100,100],[1],10))\n",
+    "example": "wealth=1000*(1-.001)*(1+.10)\nprint(\"After entry and interval:\",wealth)\nwealth*=1-.001\nprint(\"After final exit:\",wealth) #1097.8011\n",
+    "cases": [
+      {
+        "label": "價格不變仍因成本虧損",
+        "function": "net_wealth",
+        "args": [
+          [
+            100,
+            100
+          ],
+          [
+            1
+          ],
+          10
+        ],
+        "expected": 998.001,
+        "hint": "進場及最後出場都付費。"
+      },
+      {
+        "label": "成長後平倉",
+        "function": "net_wealth",
+        "args": [
+          [
+            100,
+            110
+          ],
+          [
+            1
+          ],
+          10
+        ],
+        "expected": 1097.8011,
+        "hint": "先扣費再成長，最後平倉。"
+      },
+      {
+        "label": "先現金後進場",
+        "function": "net_wealth",
+        "args": [
+          [
+            100,
+            120,
+            132
+          ],
+          [
+            0,
+            1
+          ],
+          20
+        ],
+        "expected": 1095.6044,
+        "hint": "第一區間現金；第二區間賺10%，進／出成本20bps=.002。"
+      },
+      {
+        "label": "下個區間前出場",
+        "function": "net_wealth",
+        "args": [
+          [
+            100,
+            110,
+            80
+          ],
+          [
+            1,
+            0
+          ],
+          10
+        ],
+        "expected": 1097.8011,
+        "hint": "現金避開第二次價格變動，但出場成本仍在。"
+      }
+    ]
+  },
+  {
+    "id": "ch9-audit",
+    "chapter": 9,
+    "kind": "引導練習",
+    "minutes": 15,
+    "title": "查核資訊與執行日期",
+    "concept": "第9章 · 時序查核",
+    "objective": "不使用未來資訊，計算時序無效的資料列。",
+    "prediction": "訊號第3日才可用，交易卻在第2日，能使用這個訊號嗎？預測查核數量。",
+    "instructions": "每列為[available_day, execution_day]。日數是在同一合成日曆中依序排列的整數。收盤訊號必須在嚴格較晚日期執行。計算在資訊可得之前或當日執行的次數。這是機械式時序篩查，不證明沒有其他資料洩漏。",
+    "syntax": "sum(condition for row in rows)計算True數量。<=包含相等。字典輸出為數字，供共用檢查器比較。",
+    "hints": [
+      "第t日收盤才可用的訊號，不能在更早日期或同日開盤成交。",
+      "計數execution <= available，回傳total、invalid及valid數量。"
+    ],
+    "reflection": "解釋同日開盤違規，並指出這個小型日期篩查無法偵測的一種資料洩漏。",
+    "starter": "def timing_audit(rows):\n    if any(len(row) != 2 or not all(isinstance(v, int) for v in row) for row in rows):\n        raise ValueError(\"Use [available_day, execution_day] integer pairs.\")\n    invalid = None  # TODO_INVALID\n    return {\"total\": len(rows), \"invalid\": invalid, \"valid\": len(rows) - invalid}\n\nif __name__ == \"__main__\":\n    print(timing_audit([[1, 2], [3, 2], [4, 4]]))\n",
+    "example": "rows = [[1, 2], [3, 2], [4, 4]]\nfor available, execution in rows:\n    print(available, execution, \"invalid\" if execution <= available else \"later execution\")\n",
+    "cases": [
+      {
+        "label": "更早與同日錯誤",
+        "function": "timing_audit",
+        "args": [
+          [
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              4,
+              4
+            ]
+          ]
+        ],
+        "expected": {
+          "total": 3,
+          "invalid": 2,
+          "valid": 1
+        },
+        "hint": "同日開盤早於訊號收盤。"
+      },
+      {
+        "label": "更改日期",
+        "function": "timing_audit",
+        "args": [
+          [
+            [
+              5,
+              6
+            ],
+            [
+              7,
+              9
+            ],
+            [
+              8,
+              7
+            ],
+            [
+              9,
+              9
+            ]
+          ]
+        ],
+        "expected": {
+          "total": 4,
+          "invalid": 2,
+          "valid": 2
+        },
+        "hint": "用可得／執行配對，不是串列順序。"
+      },
+      {
+        "label": "沒有資料列",
+        "function": "timing_audit",
+        "args": [
+          []
+        ],
+        "expected": {
+          "total": 0,
+          "invalid": 0,
+          "valid": 0
+        },
+        "hint": "空查核計數為零，沒有建立證據。"
+      }
+    ]
+  },
+  {
+    "id": "ch9-trials",
+    "chapter": 9,
+    "kind": "遷移挑戰",
+    "minutes": 20,
+    "title": "保留虧損試驗",
+    "concept": "第9章 · 挑選與試驗保留",
+    "objective": "摘要全部試驗，不依正負篩選。",
+    "prediction": "淨試驗報酬率[-4, 0, 6, -2]%中，預期有幾個虧損試驗？平均是多少？",
+    "instructions": "輸入為全部試驗的百分比淨報酬率。完成虧損次數與算術平均。此描述平均不是未來策略期望報酬率，也不修正多重測試。零不算贏或輸。紀錄保留全部四個值。",
+    "syntax": "sum(values)/len(values)是算術平均。sum(x < 0 for x in values)計虧損。不可把輸入換成只有正報酬。",
+    "hints": [
+      "負值與零都留在分母。",
+      "計嚴格小於零的值；平均全部值，不只獲勝試驗。"
+    ],
+    "reflection": "為何只報告最大值會誤導？為何平均全部試過策略，仍不能建立可部署性？",
+    "starter": "import math\n\ndef trial_summary(values):\n    if not values or not all(math.isfinite(x) for x in values):\n        raise ValueError(\"Use a nonempty complete list of finite trial returns in %.\")\n    losses = None  # TODO_LOSSES\n    average = None  # TODO_MEAN\n    return {\"trials\": len(values), \"losses\": losses, \"mean_pct\": average, \"best_pct\": max(values)}\n\nif __name__ == \"__main__\":\n    print(trial_summary([-4, 0, 6, -2]))\n",
+    "example": "values = [-4, 0, 6, -2]\nprint(\"All trial count:\", len(values))\nprint(\"Complete-log sum (%):\", sum(values))\nprint(\"Reporting only\", max(values), \"would hide losses and selection.\")\n",
+    "cases": [
+      {
+        "label": "完整紀錄",
+        "function": "trial_summary",
+        "args": [
+          [
+            -4,
+            0,
+            6,
+            -2
+          ]
+        ],
+        "expected": {
+          "trials": 4,
+          "losses": 2,
+          "mean_pct": 0,
+          "best_pct": 6
+        },
+        "hint": "納入全部四次試驗。"
+      },
+      {
+        "label": "全部不利",
+        "function": "trial_summary",
+        "args": [
+          [
+            -1,
+            -3
+          ]
+        ],
+        "expected": {
+          "trials": 2,
+          "losses": 2,
+          "mean_pct": -2,
+          "best_pct": -1
+        },
+        "hint": "最佳試驗仍可能為負。"
+      },
+      {
+        "label": "零與變更案例",
+        "function": "trial_summary",
+        "args": [
+          [
+            0,
+            2,
+            4
+          ]
+        ],
+        "expected": {
+          "trials": 3,
+          "losses": 0,
+          "mean_pct": 2,
+          "best_pct": 4
+        },
+        "hint": "零不是虧損，不能略過。"
+      }
+    ]
+  },
+  {
+    "id": "ch10-evidence",
+    "chapter": 10,
+    "kind": "引導練習",
+    "minutes": 15,
+    "title": "追溯淨持有區間計算",
+    "concept": "第10章 · 手算與計算附件",
+    "objective": "先扣進場成本，重現第一個評估持有區間。",
+    "prediction": "£1000、進場101、出場97及10bps進場成本，期末應高於還是低於£1000？先預測約略值。",
+    "instructions": "完成從現金全額做多的end_wealth。成本在進場時先從起始資產扣除，再乘開盤間價格比率。這是一個區間，不是完整策略。若另有最後出場，會再產生成本；本函式刻意回傳該次出場前資產。",
+    "syntax": "10基點/10000 = .001。start先乘(1-cost_bps/10000)，再乘exit_open/entry_open。不要扣10%，也不要用收盤價。",
+    "hints": [
+      "市場因子=exit_open / entry_open。",
+      "完整式為start * (1 - cost_bps / 10000) * exit_open / entry_open。"
+    ],
+    "reflection": "說明資訊／執行時序，解釋為何結果不包含另外的最後出場成本。",
+    "starter": "import math\n\ndef holding_end(start, entry_open, exit_open, cost_bps):\n    if not all(math.isfinite(x) for x in [start, entry_open, exit_open, cost_bps]) or min(start, entry_open, exit_open) <= 0 or not 0 <= cost_bps <= 100:\n        raise ValueError(\"Use positive finite wealth/prices and cost 0–100bps.\")\n    return None  # TODO_END\n\nif __name__ == \"__main__\":\n    print(holding_end(1000, 101, 97, 10))\n",
+    "example": "start, entry, exit_price, bps = 1000, 100, 105, 10\nafter_entry_cost = start * (1 - bps / 10000)\nprint(\"After entry:\", after_entry_cost)\nprint(\"End before separate final exit:\", after_entry_cost * exit_price / entry)\n",
+    "cases": [
+      {
+        "label": "專題第一列",
+        "function": "holding_end",
+        "args": [
+          1000,
+          101,
+          97,
+          10
+        ],
+        "expected": 959.4356435643564,
+        "hint": "先扣£1，再乘101→97比率。"
+      },
+      {
+        "label": "改變成本",
+        "function": "holding_end",
+        "args": [
+          1000,
+          101,
+          97,
+          30
+        ],
+        "expected": 957.5148514851485,
+        "hint": "30bps為.003，不是.03。"
+      },
+      {
+        "label": "新獨立案例",
+        "function": "holding_end",
+        "args": [
+          500,
+          80,
+          88,
+          20
+        ],
+        "expected": 548.9,
+        "hint": "使用提供的起始資產及兩個開盤價。"
+      }
+    ]
+  },
+  {
+    "id": "ch10-ledger",
+    "chapter": 10,
+    "kind": "遷移挑戰",
+    "minutes": 20,
+    "title": "重現完整評估紀錄",
+    "concept": "第10章 · 規則、時序、成本與同日基準",
+    "objective": "完成固定規則紀錄，重現兩個預定成本情境。",
+    "prediction": "較高30bps成本會改善還是降低固定部位最終資產？執行兩種情境前先預測。",
+    "instructions": "起始程式提供全部原創合成開盤／收盤價、依時間的訊號／進場／出場索引、換手及最後平倉。完成訊號及扣成本資產式。程式報告數值摘要，核心匯出則保留完整逐列資料。索引t的訊號只用截至t的收盤，開盤t+1執行，賺取開盤t+1→t+2報酬率。不可把報酬率往前移。",
+    "syntax": "closes[t-2:t+1]切片含三筆已知收盤。int(condition)把規則轉為0或1。abs(position-previous)為交易比例。最後平倉對最後持有部位收費；基準付進出費。不需外部套件或檔案系統存取。",
+    "hints": [
+      "position=int(closes[t] > sum(closes[t-2:t+1])/3)。",
+      "wealth *= (1-turnover*c) * (1+position*(opens[t+2]/opens[t+1]-1))。"
+    ],
+    "reflection": "說明第一個可交易進場與最後出場，為何保留全部預定成本，以及重現合成紀錄為何不能證明真實獲利能力。",
+    "starter": "def evaluate_block(cost_bps):\n    if not 0 <= cost_bps <= 100:\n        raise ValueError(\"Use cost0–100bps.\")\n    opens = [100,103,105,101,97,94,96,99,102,98,95,97,94,92,96,99]\n    closes = [price + [1,-1,2,-2][i % 4] for i, price in enumerate(opens)]\n    c = cost_bps / 10000\n    wealth, previous, turnover_sum = 1000.0, 0, 0\n    for t in range(2, len(opens) - 2):\n        position = None  # TODO_SIGNAL\n        turnover = abs(position - previous)\n        wealth = None  # TODO_WEALTH\n        turnover_sum += turnover\n        previous = position\n    wealth *= 1 - previous * c  # final liquidation, if invested\n    benchmark = 1000 * (1-c) * opens[-1] / opens[3] * (1-c)\n    return {\"final\": wealth, \"benchmark\": benchmark, \"return_pct\": (wealth/1000-1)*100, \"traded_fraction\": turnover_sum + previous}\n\nif __name__ == \"__main__\":\n    print(\"10bps:\", evaluate_block(10))\n    print(\"30bps:\", evaluate_block(30))\n",
+    "example": "closes = [101, 102, 107]\nprint(\"Known mean:\", sum(closes) / 3)\nprint(\"Position for next open:\", int(closes[-1] > sum(closes) / 3))\nprint(\"Do not earn returns before execution; retain all cost cases and losing results.\")\n",
+    "cases": [
+      {
+        "label": "基本紀錄",
+        "function": "evaluate_block",
+        "args": [
+          10
+        ],
+        "expected": {
+          "final": 917.9113164465662,
+          "benchmark": 978.238603960396,
+          "return_pct": -8.20886835534338,
+          "traded_fraction": 4
+        },
+        "hint": "t+1進場、t+2出場，先扣成本再計持有報酬率。"
+      },
+      {
+        "label": "成本敏感度",
+        "function": "evaluate_block",
+        "args": [
+          30
+        ],
+        "expected": {
+          "final": 910.582719824624,
+          "benchmark": 974.3256534653465,
+          "return_pct": -8.94172801753761,
+          "traded_fraction": 4
+        },
+        "hint": "規則不變，報告兩種成本。"
+      },
+      {
+        "label": "零成本診斷",
+        "function": "evaluate_block",
+        "args": [
+          0
+        ],
+        "expected": {
+          "final": 921.5921592159215,
+          "benchmark": 980.1980198019802,
+          "return_pct": -7.8407840784078475,
+          "traded_fraction": 4
+        },
+        "hint": "零成本用於診斷，不是另挑的標題試驗。"
+      }
+    ]
+  }
+]

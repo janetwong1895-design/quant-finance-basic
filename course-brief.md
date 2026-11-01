@@ -20,6 +20,10 @@ Current delivery · 1 November 2026
 - Budget: no explicit monetary budget supplied. No separate paid API calls or model benchmarks authorised or initiated. Session model usage is unpriced where request telemetry is unavailable.
 - Validation status: published formative learning materials. Human learner pilots, full accessibility verification, legal/rights/commercial readiness and any staffing commitments remain separate unresolved dependencies.
 
+## Taiwan Traditional Chinese edition · 1 November 2026
+
+All ten chapters, full text routes, optional Python guidance and concept graphics also have an authored zh-Hant-TW edition, plus bilingual introduction pages. Numerical contracts and GBP units remain unchanged; progress is separate by language. Chinese capstone length is1200–1600Hancharacters, explicitly adapted from the unchanged English600–800wordrequirement and not asserted to be empirically equivalent. See docs/localization.md and review/zh-TW/review.md. Existing private audience is retained; no public enrolment or payment flow is provisioned.
+
 ## Proposal history
 
 The original 31 October 2026 proposal assumed six weeks at five hours per week, contemplated notebooks and facilitated support, and initially implemented only Chapters 1–2, then 1–4. The user subsequently requested all ten chapters and optional script practice. Earlier “planned” statuses in historical production records describe those earlier versions, not current delivery. The original course-level grading scheme and facilitator model have not been implemented as promised services.

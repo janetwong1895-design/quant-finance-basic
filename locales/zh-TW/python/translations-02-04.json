@@ -1,0 +1,921 @@
+{
+  "ch2-return": {
+    "title": "現金分配只算一次",
+    "concept": "第 2 章 · 衡量報酬率",
+    "objective": "實作總報酬率函式，區分價差與現金分配。",
+    "prediction": "以 £80 買入，期末 £76，另收到 £2，總報酬率是多少？",
+    "instructions": "取代 TODO 行。現金分配持有至期末，不賺再投資報酬；無外部存入、費用或稅負。回傳百分比數值，例如 7，而非小數 0.07。",
+    "syntax": "函式參數讓相同公式能用於新資料。函式內保留完整精度，只在列印時四捨五入。",
+    "hints": [
+      "淨獲利 = 期末 − 期初 + 現金分配。",
+      "淨獲利除以期初，再乘以 100。"
+    ],
+    "reflection": "說明虧損案例為何仍為負值。若提供的總報酬序列已含現金分配，應如何處理？",
+    "kind": "引導練習",
+    "cases": [
+      {
+        "label": "價格加現金分配",
+        "function": "total_return",
+        "args": [
+          100,
+          104,
+          3
+        ],
+        "expected": 7,
+        "hint": "現金收入只能加一次。"
+      },
+      {
+        "label": "部分抵銷損失",
+        "function": "total_return",
+        "args": [
+          80,
+          76,
+          2
+        ],
+        "expected": -2.5,
+        "hint": "分母使用期初 £80。"
+      },
+      {
+        "label": "新的獨立數值",
+        "function": "total_return",
+        "args": [
+          200,
+          210,
+          6
+        ],
+        "expected": 8,
+        "hint": "不要把範例答案寫死。"
+      }
+    ]
+  },
+  "ch2-growth": {
+    "title": "複利與年化",
+    "concept": "第 2 章 · 逐期複合成長",
+    "objective": "實作未來價值與 CAGR，診斷直接相加各期報酬率的錯誤。",
+    "prediction": "預測 £500 以 8% 成長兩年的結果，再預測 £1,000 三年成為 £1,331 的 CAGR。",
+    "instructions": "完成兩個函式。利率採百分比數值，年數為正整數；無外部存入或提領。把範例報酬清單由 [20, -20] 改為 [25, -20]，說明差異。",
+    "syntax": "Python 次方用 **，不是 ^。平方根可寫 ** (1 / 2)。百分比除以 100 變小數，小數報酬乘以 100 變百分比。",
+    "hints": [
+      "未來價值 = 本金乘以年成長因子的年數次方。",
+      "CAGR = ((end / start) ** (1 / years) - 1) * 100。"
+    ],
+    "reflection": "解釋逐年成長因子相乘為何不同於報酬率相加，並指出 CAGR 忽略的路徑資訊。",
+    "kind": "引導練習",
+    "cases": [
+      {
+        "label": "兩年複利",
+        "function": "future_value",
+        "args": [
+          500,
+          8,
+          2
+        ],
+        "expected": 583.2,
+        "hint": "次方用 **，不是把利率乘年數。"
+      },
+      {
+        "label": "三年應用",
+        "function": "future_value",
+        "args": [
+          800,
+          4,
+          3
+        ],
+        "expected": 899.8912,
+        "hint": "保留完整精度到列印時。"
+      },
+      {
+        "label": "成長年化",
+        "function": "cagr",
+        "args": [
+          1000,
+          1331,
+          3
+        ],
+        "expected": 10,
+        "hint": "期末／期初比值取立方根。"
+      },
+      {
+        "label": "虧損年化",
+        "function": "cagr",
+        "args": [
+          100,
+          81,
+          2
+        ],
+        "expected": -10,
+        "hint": "CAGR 可以為負。"
+      }
+    ]
+  },
+  "ch2-discount": {
+    "title": "逐筆依日期折現",
+    "concept": "第 2 章 · 現值與債券",
+    "objective": "將有日期的現金流時程轉成可重現的現值計算。",
+    "prediction": "第 1 年 £20、第 2 年 £1,020，採 5% 折現，時間 0 現值是多少？",
+    "instructions": "payments 是 (year, pounds) 配對清單。完成迴圈中的一個運算式。債券最後一筆已含本金。使用提供的單一有效年折現率，無違約、費用或稅負。",
+    "syntax": "for year, amount in payments 將每對值拆成兩個名稱。每筆付款有自己的次方；加總折現值，不是沒有日期的現金總額。",
+    "hints": [
+      "先把 rate_pct 轉成小數，再形成分母。",
+      "每項為 amount / (1 + rate_pct / 100) ** year。"
+    ],
+    "reflection": "說明為何一個次方無法正確折現全部債券時程，以及本金為何不能重複加總。",
+    "kind": "引導練習",
+    "cases": [
+      {
+        "label": "兩筆債券款項",
+        "function": "present_value",
+        "args": [
+          [
+            [
+              1,
+              20
+            ],
+            [
+              2,
+              1020
+            ]
+          ],
+          5
+        ],
+        "expected": 944.2176870748299,
+        "hint": "逐筆依日期折現再相加。"
+      },
+      {
+        "label": "單筆款項",
+        "function": "present_value",
+        "args": [
+          [
+            [
+              3,
+              926.1
+            ]
+          ],
+          5
+        ],
+        "expected": 800,
+        "hint": "使用指定付款年數。"
+      },
+      {
+        "label": "不同票息與利率",
+        "function": "present_value",
+        "args": [
+          [
+            [
+              1,
+              30
+            ],
+            [
+              2,
+              1030
+            ]
+          ],
+          4
+        ],
+        "expected": 981.1390532544378,
+        "hint": "最後一筆已含本金。"
+      },
+      {
+        "label": "零利率比較",
+        "function": "present_value",
+        "args": [
+          [
+            [
+              1,
+              50
+            ],
+            [
+              2,
+              1050
+            ]
+          ],
+          0
+        ],
+        "expected": 1100,
+        "hint": "折現率零時，直接加總款項。"
+      }
+    ]
+  },
+  "ch2-inflation": {
+    "title": "計算精確實質報酬率",
+    "concept": "第 2 章 · 購買力",
+    "objective": "用比值求實質報酬率，並用複合通膨調整名目餘額。",
+    "prediction": "名目成長 3%、通膨 5% 時，購買力會虧損嗎？執行前先預測正負號。",
+    "instructions": "完成兩個 TODO。兩利率涵蓋相同期間。buying_power 將已算出的名目餘額按整年通膨還原，不是以投資利率折現。",
+    "syntax": "用括號包住兩個成長因子。real_return 回傳實質百分比，buying_power 回傳英鎊金額。名稱與單位有助避免混用。",
+    "hints": [
+      "實質報酬率 =（1 + 名目報酬率）÷（1 + 通膨率）− 1。",
+      "名目餘額除以 (1 + inflation_pct / 100) ** years。"
+    ],
+    "reflection": "區分名目英鎊、期初年度購買力與未來款項現值，並說明利率相減為何只是近似。",
+    "kind": "引導練習",
+    "cases": [
+      {
+        "label": "精確比值",
+        "function": "real_return",
+        "args": [
+          6,
+          4
+        ],
+        "expected": 1.9230769230769162,
+        "hint": "相減只是近似。"
+      },
+      {
+        "label": "負實質報酬率",
+        "function": "real_return",
+        "args": [
+          3,
+          5
+        ],
+        "expected": -1.904761904761909,
+        "hint": "保留負號。"
+      },
+      {
+        "label": "一年購買力",
+        "function": "buying_power",
+        "args": [
+          1030,
+          5,
+          1
+        ],
+        "expected": 980.952380952381,
+        "hint": "結果是英鎊，不是百分比。"
+      },
+      {
+        "label": "多年應用",
+        "function": "buying_power",
+        "args": [
+          1210,
+          10,
+          2
+        ],
+        "expected": 1000,
+        "hint": "兩年都要複合通膨因子。"
+      }
+    ]
+  },
+  "ch2-transfer": {
+    "title": "重現並檢視成長實驗",
+    "concept": "第 2 章 · 計算卡與可重現性",
+    "objective": "建立小報告，分清楚名目成長、實質價值與折現。",
+    "prediction": "若只把通膨由 3% 提高到 6%，哪些輸出改變？預測名目期末、購買力與獨立款項現值。",
+    "instructions": "完成 summarise 的三個公式，回傳指定鍵名的字典。使用輸入而非範例常數。獨立未來款項以 growth_pct 作為示例機會成本率折現，並不是投資組合餘額。",
+    "syntax": "字典用文字鍵對應數值，例如 {\"nominal\": nominal}，固定其單位與意義。計算不先四捨五入，只在列印報告時處理。",
+    "hints": [
+      "nominal = principal * (1 + growth_pct / 100) ** years。",
+      "用通膨還原 nominal；用 growth_pct 折現獨立款項，兩者不同。"
+    ],
+    "reflection": "提出手算與只改通膨的比較。說明模型限制及對原先預測的具體修正，並解釋測試只能呈現程式行為，不能證明投資主張。",
+    "kind": "應用挑戰",
+    "cases": [
+      {
+        "label": "預設實驗",
+        "function": "summarise",
+        "args": [
+          1000,
+          5,
+          3,
+          10,
+          2000
+        ],
+        "expected": {
+          "nominal": 1628.894626777442,
+          "real": 1212.0505797930664,
+          "payment_pv": 1227.8265070815182
+        },
+        "hint": "通膨還原與折現使用不同利率。"
+      },
+      {
+        "label": "只改通膨",
+        "function": "summarise",
+        "args": [
+          1000,
+          5,
+          6,
+          10,
+          2000
+        ],
+        "expected": {
+          "nominal": 1628.894626777442,
+          "real": 909.566251737624,
+          "payment_pv": 1227.8265070815182
+        },
+        "hint": "只有實質餘額應改變。"
+      },
+      {
+        "label": "新本金、利率與期間",
+        "function": "summarise",
+        "args": [
+          500,
+          10,
+          0,
+          2,
+          1210
+        ],
+        "expected": {
+          "nominal": 605,
+          "real": 605,
+          "payment_pv": 1000
+        },
+        "hint": "使用各參數，不是預設值。"
+      }
+    ]
+  },
+  "ch3-order": {
+    "title": "先排序，再算報酬率",
+    "concept": "第 3 章 · 時間順序觀察",
+    "objective": "排序 ISO 日期觀察並計算相鄰區間價格報酬率。",
+    "prediction": "輸入依序為 1 月 8 日 £52.02、1 月 2 日 £50、1 月 7 日 £51，預測時間順序的第一段報酬率。",
+    "instructions": "完成兩個 TODO。csv_returns 包裝函式用 csv.DictReader 讀取 CSV，以 float 轉換價格字串，再傳入 [ISO 日期, 分割調整價格] 資料列。本題日期有效且不重複、價格為正；下一題處理品質缺陷。回傳第一與最後區間百分比及累積百分比的字典，不要回傳四捨五入字串。至少兩筆觀察；首筆無報酬率，缺口仍是觀察區間，不是日報酬率。",
+    "syntax": "csv.DictReader 讀得的欄位是字串，float 轉為數值。io.StringIO 讓文字像檔案可讀。sorted(rows, key=...) 產生排序副本；lambda row: row[0] 選 ISO 日期鍵。zip 將較早列與從第二筆開始的 ordered[1:] 配對；append 加入結果。",
+    "hints": [
+      "固定寬度 ISO 日期可按時間排序：key=lambda row: row[0]。",
+      "每對 earlier/later 使用 (later[1] / earlier[1] - 1) * 100。"
+    ],
+    "reflection": "指出實際日期區間，解釋檔案順序或日報酬標籤為何誤導，以及首筆為何無法算報酬率。",
+    "kind": "引導練習",
+    "cases": [
+      {
+        "label": "亂序但分割一致的檔案",
+        "function": "csv_returns",
+        "args": [
+          "date,adjusted\n2025-01-08,52.02\n2025-01-02,50\n2025-01-07,51\n"
+        ],
+        "expected": {
+          "first": 2,
+          "last": 2,
+          "cumulative": 4.04
+        },
+        "hint": "按日期排序，不按價格或原始列次序。"
+      },
+      {
+        "label": "下跌區間",
+        "function": "csv_returns",
+        "args": [
+          "date,adjusted\n2025-02-05,95\n2025-02-01,100\n"
+        ],
+        "expected": {
+          "first": -5,
+          "last": -5,
+          "cumulative": -5
+        },
+        "hint": "較早價格是分母。"
+      },
+      {
+        "label": "已排序但有缺口",
+        "function": "csv_returns",
+        "args": [
+          "date,adjusted\n2025-03-01,80\n2025-03-04,84\n2025-03-09,84\n"
+        ],
+        "expected": {
+          "first": 5,
+          "last": 0,
+          "cumulative": 5
+        },
+        "hint": "不要為不存在的日期插入零報酬。"
+      }
+    ]
+  },
+  "ch3-audit": {
+    "title": "記錄每項清理決策",
+    "concept": "第 3 章 · 透明品質稽核",
+    "objective": "實作保守的缺漏、重複與衝突政策，並回報稽核筆數。",
+    "prediction": "五列中有一筆完全重複，另有同日兩個不同價格。去除完全重複並隔離衝突後，保留幾列？",
+    "instructions": "每列為一致調整基礎的 [date, price]，日期皆為有效 ISO 格式。完成計數與保留 TODO，分組邏輯已提供。回傳含 retained、missing、conflicts、duplicates 的字典。除 duplicates 計算多餘副本外，計數單位是被移除的原始列。某日期有多個不同有效價格時，隔離該日全部列；未知價格先排除，不填補。",
+    "syntax": "字典對應鍵與值；set 去除相同值；len 計數；continue 跳至下一個迴圈項目。groups.setdefault(date, []).append(price) 蒐集各日有效價格。此處 None 代表未知。",
+    "hints": [
+      "每個 None 讓 missing 加一，再用 continue 避免加入 groups。",
+      "若不同價格衝突，全部 len(prices) 列都算 conflicts；否則保留一列，len(prices) - 1 算多餘副本。"
+    ],
+    "reflection": "說明每個稽核計數的單位、保留筆數，以及隔離衝突為何不能找回真實價格。",
+    "kind": "引導練習",
+    "cases": [
+      {
+        "label": "混合稽核",
+        "function": "audit_counts",
+        "args": [
+          [
+            [
+              "2025-01-02",
+              50
+            ],
+            [
+              "2025-01-03",
+              51
+            ],
+            [
+              "2025-01-03",
+              51.5
+            ],
+            [
+              "2025-01-06",
+              null
+            ],
+            [
+              "2025-01-07",
+              51
+            ],
+            [
+              "2025-01-08",
+              52.02
+            ],
+            [
+              "2025-01-08",
+              52.02
+            ]
+          ]
+        ],
+        "expected": {
+          "retained": 3,
+          "missing": 1,
+          "conflicts": 2,
+          "duplicates": 1
+        },
+        "hint": "每個原始列恰好歸為保留或移除一次。"
+      },
+      {
+        "label": "不同衝突案例",
+        "function": "audit_counts",
+        "args": [
+          [
+            [
+              "2025-02-01",
+              80
+            ],
+            [
+              "2025-02-01",
+              80
+            ],
+            [
+              "2025-02-02",
+              81
+            ],
+            [
+              "2025-02-02",
+              82
+            ],
+            [
+              "2025-02-03",
+              84
+            ]
+          ]
+        ],
+        "expected": {
+          "retained": 2,
+          "missing": 0,
+          "conflicts": 2,
+          "duplicates": 1
+        },
+        "hint": "兩筆衝突皆隔離；完全重複保留一份。"
+      },
+      {
+        "label": "全部缺漏",
+        "function": "audit_counts",
+        "args": [
+          [
+            [
+              "2025-03-01",
+              null
+            ],
+            [
+              "2025-03-02",
+              null
+            ]
+          ]
+        ],
+        "expected": {
+          "retained": 0,
+          "missing": 2,
+          "conflicts": 0,
+          "duplicates": 0
+        },
+        "hint": "不可把 None 變成零價格。"
+      }
+    ]
+  },
+  "ch3-split": {
+    "title": "維持一致股數基礎",
+    "concept": "第 3 章 · 分割調整價格報酬率",
+    "objective": "依已核實分割調整較早原始價格，再回報原始與調整區間報酬率。",
+    "prediction": "原始 £100 在一拆二後變成 £51，預測原始價格變動與一致分割基礎的報酬率。",
+    "instructions": "split_factor 是每股舊股換得的新股數。分割已獨立核實，不可從價格下跌推測。較晚價格已是分割後基礎。完成 earlier_adjusted 與兩個報酬率。無股利、其他行動、費用或稅負；僅計算價格報酬率。回傳字典並保留數值精度。",
+    "syntax": "較早原始價格除以分割因子，讓兩價格均為新股單位。字典用大括號與 key: value 配對。必須使用每個參數，才能處理新案例。",
+    "hints": [
+      "較早調整價格 = earlier_raw / split_factor。",
+      "原始採 later_raw / earlier_raw - 1，一致分割採 later_raw / earlier_adjusted - 1，各乘以 100。"
+    ],
+    "reflection": "用股數算術說明原始 −49% 為何不證明財富損失 49%，並指出結果不含股利。",
+    "kind": "應用挑戰",
+    "cases": [
+      {
+        "label": "主要分割案例",
+        "function": "split_report",
+        "args": [
+          100,
+          51,
+          2
+        ],
+        "expected": {
+          "earlier_adjusted": 50,
+          "raw_return": -49,
+          "adjusted_return": 2
+        },
+        "hint": "舊價格除以每股舊股換得的新股數。"
+      },
+      {
+        "label": "純分割",
+        "function": "split_report",
+        "args": [
+          202,
+          101,
+          2
+        ],
+        "expected": {
+          "earlier_adjusted": 101,
+          "raw_return": -50,
+          "adjusted_return": 0
+        },
+        "hint": "純分割不改變財富。"
+      },
+      {
+        "label": "新的一拆三",
+        "function": "split_report",
+        "args": [
+          90,
+          31.5,
+          3
+        ],
+        "expected": {
+          "earlier_adjusted": 30,
+          "raw_return": -65,
+          "adjusted_return": 5
+        },
+        "hint": "不要將因子寫死為二。"
+      },
+      {
+        "label": "無分割",
+        "function": "split_report",
+        "args": [
+          80,
+          84,
+          1
+        ],
+        "expected": {
+          "earlier_adjusted": 80,
+          "raw_return": 5,
+          "adjusted_return": 5
+        },
+        "hint": "因子一不改變價格基礎。"
+      }
+    ]
+  },
+  "ch4-summary": {
+    "title": "摘要一個小報酬率樣本",
+    "concept": "第 4 章 · 觀察相對次數、中心與樣本離散程度",
+    "objective": "計算虧損相對次數、算術平均、中位數與樣本標準差，說明單位與限制。",
+    "prediction": "對 [-2, 0, 2]%，執行前先預測平均、中位數、虧損相對次數及樣本標準差。",
+    "instructions": "完成字典四個值，使用已匯入的標準函式庫 statistics。輸入是百分比數值而非小數。虧損嚴格小於零，相對次數回傳 0–1。樣本標準差用 n−1，單位百分點。至少兩筆有限觀察，不用外部套件。",
+    "syntax": "字典以引號鍵對應數值。statistics.mean、median、stdev 接受清單。sum(value < 0 for value in returns_pct) 計算 True 次數，len 回傳筆數。不要用除以 n 的 pstdev。",
+    "hints": [
+      "使用 mean(returns_pct)、median(returns_pct)、stdev(returns_pct)。",
+      "計算嚴格負值筆數，除以 len(returns_pct)；零屬於補集。"
+    ],
+    "reflection": "解釋標準差為何用百分點、零為何不是虧損，以及極小虛構樣本為何不能建立未來機率。",
+    "kind": "引導練習",
+    "cases": [
+      {
+        "label": "零不是虧損",
+        "function": "describe",
+        "args": [
+          [
+            -2,
+            0,
+            2
+          ]
+        ],
+        "expected": {
+          "mean": 0,
+          "median": 0,
+          "sample_sd": 2,
+          "loss_frequency": 0.3333333333333333
+        },
+        "hint": "使用 n−1，只計入小於零者。"
+      },
+      {
+        "label": "新樣本應用",
+        "function": "describe",
+        "args": [
+          [
+            -4,
+            0,
+            4,
+            8
+          ]
+        ],
+        "expected": {
+          "mean": 2,
+          "median": 2,
+          "sample_sd": 5.163977794943222,
+          "loss_frequency": 0.25
+        },
+        "hint": "使用全部觀察，回傳數值字典。"
+      },
+      {
+        "label": "常數序列",
+        "function": "describe",
+        "args": [
+          [
+            3,
+            3,
+            3
+          ]
+        ],
+        "expected": {
+          "mean": 3,
+          "median": 3,
+          "sample_sd": 0,
+          "loss_frequency": 0
+        },
+        "hint": "常數樣本離散程度為零，不是資料缺漏。"
+      }
+    ]
+  },
+  "ch4-quantile": {
+    "title": "明訂分位數慣例",
+    "concept": "第 4 章 · 排序後線性插值",
+    "objective": "實作 h=(n−1)p 的包含端點分位數，說明不同慣例的差異。",
+    "prediction": "對 [0, 10, 20, 40]%，依 h=(n−1)p 預測第 25 與第 75 百分位數。",
+    "instructions": "完成插值運算式。起始程式已排序並找到上下鄰值。p 為 0–1 的比例，.25 代表第 25 百分位數；p=1 時上下鄰值都是最後觀察。保留完整精度，僅列印時四捨五入。",
+    "syntax": "sorted 產生排序副本。int(h) 將非負位置截為較低整數。Python 索引從零起算。h-lower 代表從下鄰值往上鄰值移動的比例。",
+    "hints": [
+      "插值為 lower_value + fraction × (upper_value − lower_value)。",
+      "使用 ordered[lower] + (h - lower) * (ordered[upper] - ordered[lower])。"
+    ],
+    "reflection": "交代排序、零起算位置與插值慣例，並解釋不同軟體預設為何可能產生不同小樣本分位數。",
+    "kind": "引導練習",
+    "cases": [
+      {
+        "label": "插值",
+        "function": "inclusive_quantile",
+        "args": [
+          [
+            0,
+            10,
+            20,
+            40
+          ],
+          0.25
+        ],
+        "expected": 7.5,
+        "hint": "從 0 往 10 移動 .75。"
+      },
+      {
+        "label": "未排序輸入",
+        "function": "inclusive_quantile",
+        "args": [
+          [
+            20,
+            0,
+            8,
+            4
+          ],
+          0.75
+        ],
+        "expected": 11,
+        "hint": "找 2.25 位置前先排序。"
+      },
+      {
+        "label": "上端點",
+        "function": "inclusive_quantile",
+        "args": [
+          [
+            3,
+            -2,
+            9
+          ],
+          1
+        ],
+        "expected": 9,
+        "hint": "第 100 百分位數是最大值。"
+      },
+      {
+        "label": "中位數應用",
+        "function": "inclusive_quantile",
+        "args": [
+          [
+            -3,
+            -1,
+            0,
+            1,
+            2,
+            7
+          ],
+          0.5
+        ],
+        "expected": 0.5,
+        "hint": "在零起算索引 2 與 3 之間插值。"
+      }
+    ]
+  },
+  "ch4-correlation": {
+    "title": "保留日期配對",
+    "concept": "第 4 章 · Pearson 相關與無法定義的情況",
+    "objective": "實作同月份配對的 Pearson 相關，偵測零變異數並拒絕因果過度推論。",
+    "prediction": "x=[-1,0,1]、y=[-2,0,2] 時預期相關多少？若 y 是常數呢？",
+    "instructions": "完成共變異數分子與分母。每列必須已是同日期資產報酬率；起始程式拒絕重複日期。建列前先核實來源對齊。無法定義時回報 {\"defined\": 0, \"r\": 0}；旗標表示數值只是佔位，不是相關估計，不能解釋為零關聯。有定義時使用 {\"defined\": 1, \"r\": value}。不依賴 statistics.correlation，因此支援 Python 3.8。",
+    "syntax": "每列為 [date, x, y]。串列生成式擷取同日期數值，zip 配對離差而不排序，sum 累加乘積，math.sqrt 開平方根。defined 使用數字以配合共用檢核器。",
+    "hints": [
+      "分子為 sum((a - mx) * (b - my) for a, b in zip(x, y))。",
+      "分母為 math.sqrt(xx * yy)。任一平方離差和為零時，使用起始程式提供的無法定義旗標。"
+    ],
+    "reflection": "解釋列對齊的重要性、零變異數為何使 r 無法定義，以及非零樣本關聯為何不證明因果或未來穩定性。",
+    "kind": "應用挑戰",
+    "cases": [
+      {
+        "label": "同日期正斜率直線",
+        "function": "paired_report",
+        "args": [
+          [
+            [
+              "Jan",
+              -1,
+              -2
+            ],
+            [
+              "Feb",
+              0,
+              0
+            ],
+            [
+              "Mar",
+              1,
+              2
+            ]
+          ]
+        ],
+        "expected": {
+          "defined": 1,
+          "r": 1
+        },
+        "hint": "加總成對離差乘積。"
+      },
+      {
+        "label": "負向關聯",
+        "function": "paired_report",
+        "args": [
+          [
+            [
+              "Jan",
+              -1,
+              2
+            ],
+            [
+              "Feb",
+              0,
+              0
+            ],
+            [
+              "Mar",
+              1,
+              -2
+            ]
+          ]
+        ],
+        "expected": {
+          "defined": 1,
+          "r": -1
+        },
+        "hint": "保留原始配對與正負號。"
+      },
+      {
+        "label": "常數無法定義",
+        "function": "paired_report",
+        "args": [
+          [
+            [
+              "Jan",
+              1,
+              3
+            ],
+            [
+              "Feb",
+              2,
+              3
+            ],
+            [
+              "Mar",
+              3,
+              3
+            ]
+          ]
+        ],
+        "expected": {
+          "defined": 0,
+          "r": 0
+        },
+        "hint": "旗標標示無法定義，佔位數不是相關估計。"
+      },
+      {
+        "label": "小數常數無法定義",
+        "function": "paired_report",
+        "args": [
+          [
+            [
+              "0",
+              0.3,
+              0
+            ],
+            [
+              "1",
+              0.3,
+              1
+            ],
+            [
+              "2",
+              0.3,
+              2
+            ],
+            [
+              "3",
+              0.3,
+              3
+            ],
+            [
+              "4",
+              0.3,
+              4
+            ],
+            [
+              "5",
+              0.3,
+              5
+            ],
+            [
+              "6",
+              0.3,
+              6
+            ],
+            [
+              "7",
+              0.3,
+              7
+            ],
+            [
+              "8",
+              0.3,
+              8
+            ],
+            [
+              "9",
+              0.3,
+              9
+            ],
+            [
+              "10",
+              0.3,
+              10
+            ],
+            [
+              "11",
+              0.3,
+              11
+            ]
+          ]
+        ],
+        "expected": {
+          "defined": 0,
+          "r": 0
+        },
+        "hint": "相同小數觀察的變異數為零，即使浮點運算殘留微小誤差。"
+      },
+      {
+        "label": "零線性關聯",
+        "function": "paired_report",
+        "args": [
+          [
+            [
+              "Jan",
+              -1,
+              1
+            ],
+            [
+              "Feb",
+              0,
+              -2
+            ],
+            [
+              "Mar",
+              1,
+              1
+            ]
+          ]
+        ],
+        "expected": {
+          "defined": 1,
+          "r": 0
+        },
+        "hint": "零線性相關仍可能有非線性模式。"
+      }
+    ]
+  }
+}

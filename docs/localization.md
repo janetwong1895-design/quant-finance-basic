@@ -1,0 +1,21 @@
+# English and Taiwan Traditional Chinese editions
+
+Learner entry points: `/learn/` and `/zh-tw/learn/`. Existing English Chapter1 stays at `/`; the Chinese counterpart is `/zh-tw/`. Every served HTML page has a language counterpart link. The switch preserves the current query and hash. Each language uses its own local-storage namespace; nothing copies, deletes or merges the other language's work.
+
+`locales/zh-TW/` contains authored translations and localized chapter modules. Numerical data, identifiers, route IDs, Python code, test arguments and expected answers retain their English contracts. The Chapter1 reading flow is rewritten in Taiwan Chinese around the original objectives and evidence gates; its paper route is generated from those same translated views. Chapters2–10 contain complete translated lesson, practice, transfer, feedback and paper-route assets. Repeated Chapters5–7 chrome is translated at render time; that helper explicitly skips user textarea/pre/code content. It is a local authored dictionary, not a browser translation service or external API.
+
+Python metadata is divided into four translation JSON files under `locales/zh-TW/python/`; these authoring fragments are not served. All26 activity metadata sets must exist or the build fails. Code, identifiers, comments and native interpreter errors may remain English. The Chinese guide and downloadable pack include all26 activities, translated checks/README and no reference solutions. `check.py all` runs all scripts and exits1 for incomplete TODOs,0 only when all pass; argparse errors exit2. Single-script commands retain their IDs.
+
+The Chinese capstone uses1200–1600 Han characters, excluding Latin text, digits, punctuation and whitespace. Its existing function name `wordCount` is kept for call compatibility, but it counts U+3400–U+4DBF, U+4E00–U+9FFF and U+F900–U+FAFF. This is an explicitly adapted length check, not a validated equivalence claim. The English600–800-word criterion is unchanged. GBP£, ISO dates, synthetic data and source/version IDs are not converted into Taiwan currency or regulatory claims.
+
+## Build order
+
+`npm run build:all` sequentially regenerates English guides, Python assets, navigation, bilingual landing pages and the Taiwan edition. `npm run build:zh-tw` rebuilds only the translated edition plus language links, using the current English assets. `dist/zh-tw/` is generated and may be removed/rebuilt; edit locale sources instead. The locale builder copies current English code/data assets, overlays translations, namespaces storage, regenerates Chinese Chapter1/Python/visual guides, produces a reproducible ZIP and injects language links. It omits authoring metadata and local guide-builder scripts from the learner output.
+
+New English changes are not automatically translated. Update the corresponding locale source and metadata, regenerate, then run the contract tests and independent linguistic/numerical review. Preserve code and data interfaces. Avoid translating JavaScript method names or learner-entered content. Existing review findings and fixes are recorded in `review/zh-TW/`.
+
+## Validation boundaries
+
+Automated parity checks cover the ten chapters' IDs, minutes, data and critical answer contracts, all26 Python code/test schemas, storage separation, Chinese capstone counting, visual frame mapping and counterpart links. Browser walkthroughs and independent reviews supplement those checks. They do not establish target-learner effectiveness, full assistive-technology compatibility or commercial readiness.
+
+Both landing pages contain a worked hypothetical percentage example, audience fit, learning outcomes, sequence, optional Python route, privacy and limitations. They do not collect leads, invent testimonials, process payment or change the existing private audience. Public access/enrolment would require a separately authorised hosting change and product decisions.

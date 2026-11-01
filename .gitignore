@@ -11,5 +11,6 @@ qf-chapter-*-runs.csv
 
 # Deliberately published learner download, not a deployment archive.
 !dist/python/learner-pack.zip
+!dist/zh-tw/python/learner-pack.zip
 __pycache__/
 *.pyc

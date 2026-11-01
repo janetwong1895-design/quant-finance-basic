@@ -1,0 +1,425 @@
+{
+  "ch8-timing": {
+    "title": "分開訊號與執行",
+    "concept": "第8章 · 移動3筆收盤訊號",
+    "objective": "只用截至t的資訊，計算固定移動收盤目標。",
+    "prediction": "收盤100,101,102應產生什麼目標？後面的收盤改變時，這個目標應改變嗎？",
+    "instructions": "只使用closes[t-2:t+1]完成嚴格比較。訊號收盤嚴格高於平均時回傳1，否則0。目標在收盤t後才決定，不是在該收盤成交；須等下一次開盤。不可用未來收盤價。",
+    "syntax": "切片不包含上界；t+1讓收盤t納入。int(True)為1、int(False)為0。相等時持有現金。",
+    "hints": [
+      "比較closes[t]與選取的3個值平均。",
+      "回傳int(closes[t] > average)。"
+    ],
+    "reflection": "畫出訊號收盤→下一次開盤執行→再下次開盤評價。解釋修改未來收盤為何不能改變此目標。",
+    "kind": "引導練習",
+    "cases": [
+      {
+        "label": "已知收盤價",
+        "function": "target",
+        "args": [
+          [
+            100,
+            101,
+            102,
+            1
+          ],
+          2
+        ],
+        "expected": 1,
+        "hint": "只用截至t的3筆收盤。"
+      },
+      {
+        "label": "擾動未來",
+        "function": "target",
+        "args": [
+          [
+            100,
+            101,
+            102,
+            999
+          ],
+          2
+        ],
+        "expected": 1,
+        "hint": "改未來收盤不得重寫過去訊號。"
+      },
+      {
+        "label": "相等時持有現金",
+        "function": "target",
+        "args": [
+          [
+            5,
+            5,
+            5
+          ],
+          2
+        ],
+        "expected": 0,
+        "hint": "嚴格大於，不是大於或等於。"
+      },
+      {
+        "label": "下跌路徑",
+        "function": "target",
+        "args": [
+          [
+            10,
+            9,
+            8
+          ],
+          2
+        ],
+        "expected": 0,
+        "hint": "收盤低於移動平均。"
+      }
+    ]
+  },
+  "ch8-costs": {
+    "title": "計入最後出場",
+    "concept": "第8章 · 先扣換手費再計報酬率",
+    "objective": "重現固定部位扣除每項費用後的資產，包含平倉。",
+    "prediction": "開盤價不變、起始1000、目標1、成本10bps：預測進場及最後出場後資產。",
+    "instructions": "positions[i]是提供的0/1目標，持有opens[i]至opens[i+1]。產生部位的訊號時序須另外查核。完成換手、先扣費再成長及最後出場費。成本為交易名目金額的bps；現金報酬率0%，不計槓桿／放空、稅或額外滑價。固定提供的部位，不搜尋有利規則。",
+    "syntax": "abs計算絕對換手比例。bps/10000轉小數。迴圈列舉各持有區間；最後目標在最後可交易開盤點賣出。",
+    "hints": [
+      "換手比例=abs(weight-previous)。",
+      "wealth*(1-c*turnover)*(1+weight*return)；迴圈後乘1-c*previous。"
+    ],
+    "reflection": "手算一個區間，解釋最後出場及為何較高費用不能改善固定路徑。",
+    "kind": "遷移挑戰",
+    "cases": [
+      {
+        "label": "價格不變仍因成本虧損",
+        "function": "net_wealth",
+        "args": [
+          [
+            100,
+            100
+          ],
+          [
+            1
+          ],
+          10
+        ],
+        "expected": 998.001,
+        "hint": "進場及最後出場都付費。"
+      },
+      {
+        "label": "成長後平倉",
+        "function": "net_wealth",
+        "args": [
+          [
+            100,
+            110
+          ],
+          [
+            1
+          ],
+          10
+        ],
+        "expected": 1097.8011,
+        "hint": "先扣費再成長，最後平倉。"
+      },
+      {
+        "label": "先現金後進場",
+        "function": "net_wealth",
+        "args": [
+          [
+            100,
+            120,
+            132
+          ],
+          [
+            0,
+            1
+          ],
+          20
+        ],
+        "expected": 1095.6044,
+        "hint": "第一區間現金；第二區間賺10%，進／出成本20bps=.002。"
+      },
+      {
+        "label": "下個區間前出場",
+        "function": "net_wealth",
+        "args": [
+          [
+            100,
+            110,
+            80
+          ],
+          [
+            1,
+            0
+          ],
+          10
+        ],
+        "expected": 1097.8011,
+        "hint": "現金避開第二次價格變動，但出場成本仍在。"
+      }
+    ]
+  },
+  "ch9-audit": {
+    "title": "查核資訊與執行日期",
+    "concept": "第9章 · 時序查核",
+    "objective": "不使用未來資訊，計算時序無效的資料列。",
+    "prediction": "訊號第3日才可用，交易卻在第2日，能使用這個訊號嗎？預測查核數量。",
+    "instructions": "每列為[available_day, execution_day]。日數是在同一合成日曆中依序排列的整數。收盤訊號必須在嚴格較晚日期執行。計算在資訊可得之前或當日執行的次數。這是機械式時序篩查，不證明沒有其他資料洩漏。",
+    "syntax": "sum(condition for row in rows)計算True數量。<=包含相等。字典輸出為數字，供共用檢查器比較。",
+    "hints": [
+      "第t日收盤才可用的訊號，不能在更早日期或同日開盤成交。",
+      "計數execution <= available，回傳total、invalid及valid數量。"
+    ],
+    "reflection": "解釋同日開盤違規，並指出這個小型日期篩查無法偵測的一種資料洩漏。",
+    "kind": "引導練習",
+    "cases": [
+      {
+        "label": "更早與同日錯誤",
+        "function": "timing_audit",
+        "args": [
+          [
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              4,
+              4
+            ]
+          ]
+        ],
+        "expected": {
+          "total": 3,
+          "invalid": 2,
+          "valid": 1
+        },
+        "hint": "同日開盤早於訊號收盤。"
+      },
+      {
+        "label": "更改日期",
+        "function": "timing_audit",
+        "args": [
+          [
+            [
+              5,
+              6
+            ],
+            [
+              7,
+              9
+            ],
+            [
+              8,
+              7
+            ],
+            [
+              9,
+              9
+            ]
+          ]
+        ],
+        "expected": {
+          "total": 4,
+          "invalid": 2,
+          "valid": 2
+        },
+        "hint": "用可得／執行配對，不是串列順序。"
+      },
+      {
+        "label": "沒有資料列",
+        "function": "timing_audit",
+        "args": [
+          []
+        ],
+        "expected": {
+          "total": 0,
+          "invalid": 0,
+          "valid": 0
+        },
+        "hint": "空查核計數為零，沒有建立證據。"
+      }
+    ]
+  },
+  "ch9-trials": {
+    "title": "保留虧損試驗",
+    "concept": "第9章 · 挑選與試驗保留",
+    "objective": "摘要全部試驗，不依正負篩選。",
+    "prediction": "淨試驗報酬率[-4, 0, 6, -2]%中，預期有幾個虧損試驗？平均是多少？",
+    "instructions": "輸入為全部試驗的百分比淨報酬率。完成虧損次數與算術平均。此描述平均不是未來策略期望報酬率，也不修正多重測試。零不算贏或輸。紀錄保留全部四個值。",
+    "syntax": "sum(values)/len(values)是算術平均。sum(x < 0 for x in values)計虧損。不可把輸入換成只有正報酬。",
+    "hints": [
+      "負值與零都留在分母。",
+      "計嚴格小於零的值；平均全部值，不只獲勝試驗。"
+    ],
+    "reflection": "為何只報告最大值會誤導？為何平均全部試過策略，仍不能建立可部署性？",
+    "kind": "遷移挑戰",
+    "cases": [
+      {
+        "label": "完整紀錄",
+        "function": "trial_summary",
+        "args": [
+          [
+            -4,
+            0,
+            6,
+            -2
+          ]
+        ],
+        "expected": {
+          "trials": 4,
+          "losses": 2,
+          "mean_pct": 0,
+          "best_pct": 6
+        },
+        "hint": "納入全部四次試驗。"
+      },
+      {
+        "label": "全部不利",
+        "function": "trial_summary",
+        "args": [
+          [
+            -1,
+            -3
+          ]
+        ],
+        "expected": {
+          "trials": 2,
+          "losses": 2,
+          "mean_pct": -2,
+          "best_pct": -1
+        },
+        "hint": "最佳試驗仍可能為負。"
+      },
+      {
+        "label": "零與變更案例",
+        "function": "trial_summary",
+        "args": [
+          [
+            0,
+            2,
+            4
+          ]
+        ],
+        "expected": {
+          "trials": 3,
+          "losses": 0,
+          "mean_pct": 2,
+          "best_pct": 4
+        },
+        "hint": "零不是虧損，不能略過。"
+      }
+    ]
+  },
+  "ch10-evidence": {
+    "title": "追溯淨持有區間計算",
+    "concept": "第10章 · 手算與計算附件",
+    "objective": "先扣進場成本，重現第一個評估持有區間。",
+    "prediction": "£1000、進場101、出場97及10bps進場成本，期末應高於還是低於£1000？先預測約略值。",
+    "instructions": "完成從現金全額做多的end_wealth。成本在進場時先從起始資產扣除，再乘開盤間價格比率。這是一個區間，不是完整策略。若另有最後出場，會再產生成本；本函式刻意回傳該次出場前資產。",
+    "syntax": "10基點/10000 = .001。start先乘(1-cost_bps/10000)，再乘exit_open/entry_open。不要扣10%，也不要用收盤價。",
+    "hints": [
+      "市場因子=exit_open / entry_open。",
+      "完整式為start * (1 - cost_bps / 10000) * exit_open / entry_open。"
+    ],
+    "reflection": "說明資訊／執行時序，解釋為何結果不包含另外的最後出場成本。",
+    "kind": "引導練習",
+    "cases": [
+      {
+        "label": "專題第一列",
+        "function": "holding_end",
+        "args": [
+          1000,
+          101,
+          97,
+          10
+        ],
+        "expected": 959.4356435643564,
+        "hint": "先扣£1，再乘101→97比率。"
+      },
+      {
+        "label": "改變成本",
+        "function": "holding_end",
+        "args": [
+          1000,
+          101,
+          97,
+          30
+        ],
+        "expected": 957.5148514851485,
+        "hint": "30bps為.003，不是.03。"
+      },
+      {
+        "label": "新獨立案例",
+        "function": "holding_end",
+        "args": [
+          500,
+          80,
+          88,
+          20
+        ],
+        "expected": 548.9,
+        "hint": "使用提供的起始資產及兩個開盤價。"
+      }
+    ]
+  },
+  "ch10-ledger": {
+    "title": "重現完整評估紀錄",
+    "concept": "第10章 · 規則、時序、成本與同日基準",
+    "objective": "完成固定規則紀錄，重現兩個預定成本情境。",
+    "prediction": "較高30bps成本會改善還是降低固定部位最終資產？執行兩種情境前先預測。",
+    "instructions": "起始程式提供全部原創合成開盤／收盤價、依時間的訊號／進場／出場索引、換手及最後平倉。完成訊號及扣成本資產式。程式報告數值摘要，核心匯出則保留完整逐列資料。索引t的訊號只用截至t的收盤，開盤t+1執行，賺取開盤t+1→t+2報酬率。不可把報酬率往前移。",
+    "syntax": "closes[t-2:t+1]切片含三筆已知收盤。int(condition)把規則轉為0或1。abs(position-previous)為交易比例。最後平倉對最後持有部位收費；基準付進出費。不需外部套件或檔案系統存取。",
+    "hints": [
+      "position=int(closes[t] > sum(closes[t-2:t+1])/3)。",
+      "wealth *= (1-turnover*c) * (1+position*(opens[t+2]/opens[t+1]-1))。"
+    ],
+    "reflection": "說明第一個可交易進場與最後出場，為何保留全部預定成本，以及重現合成紀錄為何不能證明真實獲利能力。",
+    "kind": "遷移挑戰",
+    "cases": [
+      {
+        "label": "基本紀錄",
+        "function": "evaluate_block",
+        "args": [
+          10
+        ],
+        "expected": {
+          "final": 917.9113164465662,
+          "benchmark": 978.238603960396,
+          "return_pct": -8.20886835534338,
+          "traded_fraction": 4
+        },
+        "hint": "t+1進場、t+2出場，先扣成本再計持有報酬率。"
+      },
+      {
+        "label": "成本敏感度",
+        "function": "evaluate_block",
+        "args": [
+          30
+        ],
+        "expected": {
+          "final": 910.582719824624,
+          "benchmark": 974.3256534653465,
+          "return_pct": -8.94172801753761,
+          "traded_fraction": 4
+        },
+        "hint": "規則不變，報告兩種成本。"
+      },
+      {
+        "label": "零成本診斷",
+        "function": "evaluate_block",
+        "args": [
+          0
+        ],
+        "expected": {
+          "final": 921.5921592159215,
+          "benchmark": 980.1980198019802,
+          "return_pct": -7.8407840784078475,
+          "traded_fraction": 4
+        },
+        "hint": "零成本用於診斷，不是另挑的標題試驗。"
+      }
+    ]
+  }
+}

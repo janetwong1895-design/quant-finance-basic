@@ -1,0 +1,480 @@
+{
+  "ch5-risk": {
+    "title": "把初始高點納入計算",
+    "concept": "第 5 章 · 樣本離散程度與觀察到的回撤",
+    "objective": "計算月樣本標準差、有條件的年化標準差及正值最大回撤幅度。",
+    "prediction": "比較 [-20,25]% 與 [0,0]%。兩者都回到起點，標準差與最大回撤會相同嗎？",
+    "instructions": "完成樣本標準差、年化換算、財富更新與高點損失的運算式。報酬率用百分比數值；財富從 100 開始，將它納入滾動高點。最大回撤用正幅度表示，其他系統的每期回撤也可能用負值。至少兩筆有限且高於 -100% 的報酬率。年化標準差用 sqrt(12)，條件是月報酬率獨立同分布。不含費用或外部現金流。",
+    "syntax": "stdev 使用樣本 n-1。math.sqrt 是平方根；wealth *= factor 以乘法更新變數。max 比較滾動高點與目前財富。字典回傳具名稱的數值結果。",
+    "hints": [
+      "使用 stdev(returns_pct)，再將 monthly_sd 乘以 math.sqrt(12)。",
+      "更新 wealth *= 1 + value/100；先更新高點，再算 100*(1-wealth/peak)。"
+    ],
+    "reflection": "解釋初始高點、正損失幅度慣例、標準差單位，以及時間平方根換算或月觀察值的限制。",
+    "kind": "引導練習",
+    "cases": [
+      {
+        "label": "初始高點與復原",
+        "function": "risk_summary",
+        "args": [
+          [
+            -20,
+            25
+          ]
+        ],
+        "expected": {
+          "monthly_sd": 31.819805153394636,
+          "annualised_sd": 110.227038425243,
+          "maximum_drawdown": 20,
+          "ending_wealth": 100
+        },
+        "hint": "包含初始 100，樣本標準差使用 n-1。"
+      },
+      {
+        "label": "期末相同，路徑不同",
+        "function": "risk_summary",
+        "args": [
+          [
+            0,
+            0
+          ]
+        ],
+        "expected": {
+          "monthly_sd": 0,
+          "annualised_sd": 0,
+          "maximum_drawdown": 0,
+          "ending_wealth": 100
+        },
+        "hint": "固定財富沒有離散程度或觀察到的回撤。"
+      },
+      {
+        "label": "新遷移路徑",
+        "function": "risk_summary",
+        "args": [
+          [
+            -2,
+            0,
+            2
+          ]
+        ],
+        "expected": {
+          "monthly_sd": 2,
+          "annualised_sd": 6.928203230275509,
+          "maximum_drawdown": 2,
+          "ending_wealth": 99.96
+        },
+        "hint": "樣本標準差為 2；初始 100 仍須納入高點紀錄。"
+      }
+    ]
+  },
+  "ch5-sharpe": {
+    "title": "配對無風險利率的頻率",
+    "concept": "第 5 章 · 月超額報酬率與夏普比率",
+    "objective": "換算有效年無風險利率、計算明訂的年化夏普比率，並明確回報零變異數。",
+    "prediction": "對 [-1,1,3]% 月報酬率，將有效年無風險利率從 0% 提高至 12%，會改變樣本超額報酬率標準差或夏普比率嗎？",
+    "instructions": "完成有效月利率、超額報酬率清單與比率。defined=0 代表夏普比率未定義，此時 sharpe=0 只是佔位值，不是估計。起始程式已明確處理固定超額報酬率。以 sqrt(12) 年化假設月超額報酬率獨立且平穩，不能推論未來績效。全程使用百分比數值。",
+    "syntax": "** 為次方，1/12 為分數。[value - monthly_rf for value in returns_pct] 轉換每筆月報酬率；stdev 使用 n-1，mean 計算算術平均。公開檢查器使用數值旗標。",
+    "hints": [
+      "monthly_rf = 100 * ((1 + annual_effective_pct / 100) ** (1/12) - 1)。",
+      "先以月頻率計算 excess，再計算 sqrt(12) * mean(excess) / stdev(excess)。"
+    ],
+    "reflection": "交代頻率換算與樣本分母，解釋固定無風險利率平移為何不改變標準差，並說明年化換算限制。",
+    "kind": "遷移挑戰",
+    "cases": [
+      {
+        "label": "已定義的樣本比率",
+        "function": "sharpe_report",
+        "args": [
+          [
+            -1,
+            1,
+            3
+          ],
+          0
+        ],
+        "expected": {
+          "defined": 1,
+          "sharpe": 1.7320508075688772,
+          "monthly_rf": 0
+        },
+        "hint": "平均數 1／樣本標準差 2，再乘 sqrt12。"
+      },
+      {
+        "label": "有效年利率換算",
+        "function": "sharpe_report",
+        "args": [
+          [
+            -1,
+            1,
+            3
+          ],
+          12
+        ],
+        "expected": {
+          "defined": 1,
+          "sharpe": 0.08854366104903515,
+          "monthly_rf": 0.9488792934583046
+        },
+        "hint": "先換算再從月報酬率扣除；不要直接把 12 除以 12。"
+      },
+      {
+        "label": "非二進位精確常數",
+        "function": "sharpe_report",
+        "args": [
+          [
+            0.3,
+            0.3,
+            0.3,
+            0.3,
+            0.3,
+            0.3,
+            0.3,
+            0.3,
+            0.3,
+            0.3,
+            0.3,
+            0.3
+          ],
+          0
+        ],
+        "expected": {
+          "defined": 0,
+          "sharpe": 0,
+          "monthly_rf": 0
+        },
+        "hint": "完全相同的觀察值變異數確實為零，應回報未定義。"
+      }
+    ]
+  },
+  "ch6-weights": {
+    "title": "比較固定政策與權重漂移",
+    "concept": "第 6 章 · 加權報酬率、固定比例與買進持有",
+    "objective": "對已配對月報酬率實作兩種零成本政策，區分期末財富與目標權重。",
+    "prediction": "A 為 [+20,-20]%、B [0,0]%，初始各半配置。預測從 100 開始的固定比例與買進持有期末財富。",
+    "instructions": "完成加權報酬率、固定比例財富更新與各資產部位更新。輸入列已配對同日 A/B 總報酬率，建構前仍須核對對齊。w_a 是介於 0–1 的期初／目標比例，B 為 1-w_a。固定比例在每個後續月份前重設；買進持有保持單位數不變。不含成本、稅、現金流或借款。一條路徑較好不代表投資建議。",
+    "syntax": "for a_return, b_return in rows 逐列解包配對觀察值。部位是投入某項資產的貨幣價值，*= 以複利更新部位；用字典回傳數值。",
+    "hints": [
+      "weighted = w_a * a_return + (1 - w_a) * b_return。",
+      "mix 乘以 1+weighted/100；各初始部位分別乘以自己的月報酬率因子。"
+    ],
+    "reflection": "解釋買進持有的 A 權重為何漂移、固定比例何時重設，以及省略成本或其他路徑為何可能反轉比較。",
+    "kind": "引導練習",
+    "cases": [
+      {
+        "label": "反轉路徑",
+        "function": "policy_report",
+        "args": [
+          [
+            [
+              20,
+              0
+            ],
+            [
+              -20,
+              0
+            ]
+          ],
+          0.5
+        ],
+        "expected": {
+          "first_return": 10,
+          "constant_mix": 99,
+          "buy_hold": 98,
+          "ending_a_weight": 0.4897959183673469
+        },
+        "hint": "買進持有兩部位為 48 和 50；固定比例先 110 再 99。"
+      },
+      {
+        "label": "趨勢反例",
+        "function": "policy_report",
+        "args": [
+          [
+            [
+              20,
+              0
+            ],
+            [
+              20,
+              0
+            ]
+          ],
+          0.5
+        ],
+        "expected": {
+          "first_return": 10,
+          "constant_mix": 121,
+          "buy_hold": 122,
+          "ending_a_weight": 0.5901639344262295
+        },
+        "hint": "趨勢路徑會反轉勝出者，沒有普遍優勝政策。"
+      },
+      {
+        "label": "新配置",
+        "function": "policy_report",
+        "args": [
+          [
+            [
+              10,
+              -5
+            ],
+            [
+              -10,
+              5
+            ]
+          ],
+          0.8
+        ],
+        "expected": {
+          "first_return": 7,
+          "constant_mix": 99.51,
+          "buy_hold": 99.15,
+          "ending_a_weight": 0.7987897125567323
+        },
+        "hint": "使用 .8/.2，不是固定 .5/.5；保留原始配對。"
+      }
+    ]
+  },
+  "ch6-beta": {
+    "title": "保留敏感度的資料配對",
+    "concept": "第 6 章 · 樣本 beta 與皮爾森相關係數",
+    "objective": "以基準變異數計算 beta，回報未定義情況，並區分斜率與相關係數。",
+    "prediction": "基準 [-1,0,1]% 與投資組合 [-2,0,2]%，預測 beta 和相關係數。投資組合尺度加倍時，哪個會改變？",
+    "instructions": "每列為 [date, portfolio, benchmark]，使用已對齊的月簡單總報酬率，不扣無風險序列。完成交叉乘積、beta 與相關係數。樣本 n-1 在比值中相消；defined 旗標區分數值零與未定義佔位值。基準固定會讓 beta 與相關係數都未定義；投資組合固定但基準變動時，beta=0、相關係數未定義。這是含截距的樣本擬合斜率，不是未來保證。",
+    "syntax": "串列生成式選取配對欄；zip 配對偏差。math.sqrt 形成相關係數分母。defined 是公開形成性檢查器所需的數值旗標，旗標為 0 時的佔位數值不是估計。",
+    "hints": [
+      "cross=sum((p-mp)*(m-mm) for p,m in zip(portfolio,market))。",
+      "Beta 使用 cross/market_squared_sum；相關係數使用 cross/sqrt(portfolio_squared_sum*market_squared_sum)。"
+    ],
+    "reflection": "區分 beta 尺度與相關係數，保留日期配對，並解釋兩種不同的零變異數情況及預測限制。",
+    "kind": "遷移挑戰",
+    "cases": [
+      {
+        "label": "尺度與關聯",
+        "function": "sensitivity_report",
+        "args": [
+          [
+            [
+              "Jan",
+              -2,
+              -1
+            ],
+            [
+              "Feb",
+              0,
+              0
+            ],
+            [
+              "Mar",
+              2,
+              1
+            ]
+          ]
+        ],
+        "expected": {
+          "beta_defined": 1,
+          "beta": 2,
+          "correlation_defined": 1,
+          "correlation": 1
+        },
+        "hint": "Beta 為 2、相關係數為 1。Beta 分母用基準變異數。"
+      },
+      {
+        "label": "負斜率遷移案例",
+        "function": "sensitivity_report",
+        "args": [
+          [
+            [
+              "Jan",
+              1,
+              -2
+            ],
+            [
+              "Feb",
+              0,
+              0
+            ],
+            [
+              "Mar",
+              -1,
+              2
+            ]
+          ]
+        ],
+        "expected": {
+          "beta_defined": 1,
+          "beta": -0.5,
+          "correlation_defined": 1,
+          "correlation": -1
+        },
+        "hint": "保留正負號與日期配對。"
+      },
+      {
+        "label": "固定基準",
+        "function": "sensitivity_report",
+        "args": [
+          [
+            [
+              "Jan",
+              1,
+              0.3
+            ],
+            [
+              "Feb",
+              2,
+              0.3
+            ],
+            [
+              "Mar",
+              3,
+              0.3
+            ]
+          ]
+        ],
+        "expected": {
+          "beta_defined": 0,
+          "beta": 0,
+          "correlation_defined": 0,
+          "correlation": 0
+        },
+        "hint": "完全相同的基準數值代表變異數確實為零。"
+      },
+      {
+        "label": "固定投資組合",
+        "function": "sensitivity_report",
+        "args": [
+          [
+            [
+              "Jan",
+              0.3,
+              -1
+            ],
+            [
+              "Feb",
+              0.3,
+              0
+            ],
+            [
+              "Mar",
+              0.3,
+              1
+            ]
+          ]
+        ],
+        "expected": {
+          "beta_defined": 1,
+          "beta": 0,
+          "correlation_defined": 0,
+          "correlation": 0
+        },
+        "hint": "基準變動時 beta=0 有定義，但相關係數未定義。"
+      }
+    ]
+  },
+  "ch7-payoffs": {
+    "title": "區分契約給付與損益",
+    "concept": "第 7 章 · 遠期契約、買權與權利金",
+    "objective": "計算一單位契約的遠期給付、買權給付及未折現損益。",
+    "prediction": "履約價 100、權利金 6、到期價 104：買權在價內，是否表示已獲利？",
+    "instructions": "完成遠期契約與買權的給付，以及扣除權利金的損益。金額為每單位標的的英鎊，不是百分比報酬率。遠期多頭保留負給付；買權可不履約，給付下限為零。權利金只從買權給付扣除一次。不折現，不考慮融資、稅、費用或股利。給定權利金不是本程式估計的公平價格。",
+    "syntax": "max(a, b) 選較大值，形成買權零給付下限。字典用帶引號的鍵回傳數值；保留起始程式的鍵名。",
+    "hints": [
+      "遠期契約為 terminal - strike；買權給付為 max(terminal - strike, 0)。",
+      "買權損益 = 買權給付 − premium；不要把遠期契約給付也截為零。"
+    ],
+    "reflection": "舉價內卻虧損的買權例子，並說明給付、權利金、未折現損益與百分比報酬率的差異。",
+    "kind": "引導練習",
+    "cases": [
+      {
+        "label": "價內但虧損",
+        "function": "derivative_report",
+        "args": [
+          104,
+          100,
+          6
+        ],
+        "expected": {
+          "forward": 4,
+          "call": 4,
+          "profit": -2
+        },
+        "hint": "給付先取 max(104−100,0)，再扣權利金 6。"
+      },
+      {
+        "label": "價外情況",
+        "function": "derivative_report",
+        "args": [
+          70,
+          80,
+          5
+        ],
+        "expected": {
+          "forward": -10,
+          "call": 0,
+          "profit": -5
+        },
+        "hint": "買權可不履約，但已支付的權利金不會退還。"
+      },
+      {
+        "label": "損益兩平",
+        "function": "derivative_report",
+        "args": [
+          85,
+          80,
+          5
+        ],
+        "expected": {
+          "forward": 5,
+          "call": 5,
+          "profit": 0
+        },
+        "hint": "忽略融資時，買權損益兩平價為履約價加權利金。"
+      }
+    ]
+  },
+  "ch7-path": {
+    "title": "重現固定種子的三期路徑",
+    "concept": "第 7 章 · 可重現模型與假設敏感度",
+    "objective": "將給定離散報酬率複利；重現明訂的固定種子產生器。",
+    "prediction": "初始 100、報酬率 [+10,0,-10]%，預測期末價格。幅度較大會讓每條路徑的期末結果都提高嗎？",
+    "instructions": "完成乘法運算。已提供的固定 LCG 會產生與瀏覽器相同的上漲／零／下跌索引，不要使用 random.Random 並期待相同路徑。函式以三次抽樣回傳一期末價格。種子 1–999999，幅度 5/10/20。三個獨立、等機率且有界的報酬率是教學假設，不是市場預測。",
+    "syntax": "Python 整數不會溢位，須明確使用 modulo2**32。z//(2**32//3) 並非完全相同的指定映射，請用 int((z/2**32)*3)-1。乘法會更新目前財富。",
+    "hints": [
+      "每期報酬率是 direction*spread，以百分比數值表示。",
+      "每期將 price 乘以 1+direction*spread/100。"
+    ],
+    "reflection": "說明固定種子與改幅度時哪些項目相同、哪些改變，以及數值可重現為何不代表市場模型有效。",
+    "kind": "遷移挑戰",
+    "cases": [
+      {
+        "label": "固定種子基準",
+        "function": "terminal_price",
+        "args": [
+          42,
+          10
+        ],
+        "expected": 81,
+        "hint": "第 1 條路徑的方向為下跌、下跌、零。"
+      },
+      {
+        "label": "固定種子改幅度",
+        "function": "terminal_price",
+        "args": [
+          42,
+          20
+        ],
+        "expected": 64,
+        "hint": "固定抽樣，複利兩個 -20% 報酬率。"
+      },
+      {
+        "label": "不同種子案例",
+        "function": "terminal_price",
+        "args": [
+          1,
+          5
+        ],
+        "expected": 95,
+        "hint": "種子 1 抽到下跌、零、零。"
+      }
+    ]
+  }
+}

@@ -1,21 +1,35 @@
 # Quantitative Finance Foundations
 
-A proposed 30-hour beginner course, with the ten chapters implemented as self-paced, browser-based learning experiences.
+A beginner course with ten self-paced chapters, an estimated30-hour core and English / Taiwan Traditional Chinese editions.
+
+## Choose your edition
+
+| Entry | English | 繁體中文（臺灣） |
+| --- | --- | --- |
+| Course introduction and interactive preview | [Landing page](dist/learn/index.html) | [課程介紹頁](dist/zh-tw/learn/index.html) |
+| Ten-chapter course map | [Course map](dist/course/index.html) | [完整課程地圖](dist/zh-tw/course/index.html) |
+| Python setup and full text route | [Python guide](dist/python/guide.html) | [Python 指南](dist/zh-tw/python/guide.html) |
+| Concept graphics | [Visual guides](dist/visuals/index.html) | [概念圖解](dist/zh-tw/visuals/index.html) |
+
+[Read the Taiwan Traditional Chinese README](README.zh-TW.md). The Taiwan edition includes all ten chapters, practice/assessment feedback, text routes, 26 Python activities and ten concept graphics. Numerical examples and £ sterling units are preserved; Python syntax, identifiers, code comments and some native errors remain English. Language versions keep separate browser progress. The Chinese capstone uses an explicit1,200–1,600 Han-character length requirement; English remains600–800 words. See [localization and build details](docs/localization.md).
+
+Hosted entry points: [English introduction](https://quant-finance-foundations-chapter-one.dreamy-shore-0573.chatgpt.site/learn/) and [繁體中文介紹頁](https://quant-finance-foundations-chapter-one.dreamy-shore-0573.chatgpt.site/zh-tw/learn/). The existing site's private audience is preserved; these pages do not add public enrolment, lead collection or payment.
+
 
 | Chapter | Content | Status |
 | --- | --- | --- |
-| [1 · Start with a good question](dist/index.html) | Markets, instruments, benchmarks, an allocation lab and a research card | Interactive prototype |
-| [2 · Make the numbers comparable](dist/chapter-02/index.html) | Total returns, compounding/CAGR, present value, bond cash flows and purchasing power | Interactive prototype |
-| [3 · Trust the table](dist/chapter-03/index.html) | CSV inspection, dates, duplicates, missing prices, split adjustments and a cleaning audit | Interactive prototype |
-| [4 · Describe the evidence](dist/chapter-04/index.html) | Probability, mean/median, sample spread, quantiles, correlation and resampling | Interactive prototype |
-| [5 · Risk and performance](dist/chapter-05/index.html) | Volatility, drawdown and a defined Sharpe ratio | Interactive prototype |
-| [6 · Portfolio diversification](dist/chapter-06/index.html) | Weights, concentration, rebalancing, correlation and beta | Interactive prototype |
-| [7 · Simulation and payoffs](dist/chapter-07/index.html) | Seeded scenarios, forwards and calls after premium | Interactive prototype |
-| [8 · A transparent backtest](dist/chapter-08/index.html) | Signal timing, execution, costs and matching benchmark | Interactive prototype |
-| [9 · Research reliability](dist/chapter-09/index.html) | Bias audit, complete trial logs and a frozen plan | Interactive prototype |
-| [10 · Capstone and communication](dist/chapter-10/index.html) | Reproduce evidence, draft and revise a research memo | Interactive prototype |
+| [1 · Start with a good question](dist/index.html) | Markets, instruments, benchmarks, an allocation lab and a research card | Self-paced learning |
+| [2 · Make the numbers comparable](dist/chapter-02/index.html) | Total returns, compounding/CAGR, present value, bond cash flows and purchasing power | Self-paced learning |
+| [3 · Trust the table](dist/chapter-03/index.html) | CSV inspection, dates, duplicates, missing prices, split adjustments and a cleaning audit | Self-paced learning |
+| [4 · Describe the evidence](dist/chapter-04/index.html) | Probability, mean/median, sample spread, quantiles, correlation and resampling | Self-paced learning |
+| [5 · Risk and performance](dist/chapter-05/index.html) | Volatility, drawdown and a defined Sharpe ratio | Self-paced learning |
+| [6 · Portfolio diversification](dist/chapter-06/index.html) | Weights, concentration, rebalancing, correlation and beta | Self-paced learning |
+| [7 · Simulation and payoffs](dist/chapter-07/index.html) | Seeded scenarios, forwards and calls after premium | Self-paced learning |
+| [8 · A transparent backtest](dist/chapter-08/index.html) | Signal timing, execution, costs and matching benchmark | Self-paced learning |
+| [9 · Research reliability](dist/chapter-09/index.html) | Bias audit, complete trial logs and a frozen plan | Self-paced learning |
+| [10 · Capstone and communication](dist/chapter-10/index.html) | Reproduce evidence, draft and revise a research memo | Self-paced learning |
 
-Start with the [complete course map](dist/course/index.html). All ten chapters are formative prototypes: completion does not certify research quality or award a credential.
+Start with the [complete course map](dist/course/index.html). All ten chapters provide formative self-learning: completion does not certify research quality or award a credential.
 
 Each chapter has worked examples, guided practice, independent self-checks, targeted feedback, revisions, local progress and a text/paper alternative. Suggested chapter time is three hours, including activities and assessment. Learner timings and educational effectiveness have not yet been validated.
 
@@ -27,7 +41,7 @@ Use Python 3 to serve the static learner site:
 python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 ```
 
-Open [Chapter 1](http://127.0.0.1:8765/), [Chapter 2](http://127.0.0.1:8765/chapter-02/), [Chapter 3](http://127.0.0.1:8765/chapter-03/) or the [ten-chapter course map](http://127.0.0.1:8765/course/). JavaScript modules require HTTP(S); double-clicking `index.html` is not a supported way to launch the interactive route. Learners visiting a hosted copy need no installation.
+Open the [English introduction](http://127.0.0.1:8765/learn/), [繁體中文介紹頁](http://127.0.0.1:8765/zh-tw/learn/), [Chapter 1](http://127.0.0.1:8765/), [Chapter 2](http://127.0.0.1:8765/chapter-02/), [Chapter 3](http://127.0.0.1:8765/chapter-03/) or the [ten-chapter course map](http://127.0.0.1:8765/course/). JavaScript modules require HTTP(S); double-clicking `index.html` is not a supported way to launch the interactive route. Learners visiting a hosted copy need no installation.
 
 The core chapters have no runtime npm dependencies, external fonts, remote calculation APIs or required market-data accounts. The optional Python workspace downloads pinned Pyodide from jsDelivr on first execution; the downloadable scripts run locally without third-party Python packages. Text/paper alternatives are available at `dist/chapter-guide.html` and each later chapter’s `guide.html`.
 
@@ -36,10 +50,8 @@ The core chapters have no runtime npm dependencies, external fonts, remote calcu
 Developer checks require Node.js 24 or later. No `npm install` is needed.
 
 ```sh
+npm run build:all
 npm test
-npm run build:guide
-npm run build:python
-node scripts/build-course-navigation.mjs
 npm run test:python
 ```
 
@@ -75,11 +87,11 @@ Answers and progress stay in the learner's browser using separate chapter storag
 
 The package has undergone automated checks, browser walkthroughs and independent agent reviews. Real-learner pilots, full screen-reader verification, validated completion timings and commercial-release checks remain outstanding. Review records describe the precise scope and remaining limits. Agent review does not establish accessibility conformance or learning effectiveness.
 
-The original prototype's hosting configuration, deployment archives and machine-specific authentication settings are intentionally absent. To host this repository, serve `dist/` from any static web server and configure the destination separately. Source review hashes refer to the inspected development snapshots; machine-local documentation paths have been normalised for this repository.
+The original hosting configuration, deployment archives and machine-specific authentication settings are intentionally absent. To host this repository, serve `dist/` from any static web server and configure the destination separately. Source review hashes refer to the inspected development snapshots; machine-local documentation paths have been normalised for this repository.
 
-## Prototype validation
+## Validation evidence
 
-The complete prototype has 65 JavaScript tests and five Python test methods covering the 26-activity pack. Independent review and observed browser workflows are recorded in [the release evidence](review/chapters-05-10/verification.md). Human learner timing, full assistive-technology compatibility and educational effectiveness remain unvalidated.
+The automated suite covers financial calculations, state and feedback mechanics, graphics, locale contracts and both downloadable Python packs. Current counts and scoped checks are recorded with each release. Independent review and observed browser workflows are recorded in [the release evidence](review/chapters-05-10/verification.md). Human learner timing, full assistive-technology compatibility and educational effectiveness remain unvalidated.
 
 ## License
 
