@@ -1,0 +1,5 @@
+"Step","Stage","Explanation"
+"1","Terminal price £80","Strike £100; premium £5. Payoff=max(80−100,0)=£0. Profit=payoff−5=£-5. The premium is paid even when the option expires without value."
+"2","Terminal price £100","Strike £100; premium £5. Payoff=max(100−100,0)=£0. Profit=payoff−5=£-5. The premium is paid even when the option expires without value."
+"3","Terminal price £105","Strike £100; premium £5. Payoff=max(105−100,0)=£5. Profit=payoff−5=£0. Break-even occurs at £105, not £100."
+"4","Terminal price £120","Strike £100; premium £5. Payoff=max(120−100,0)=£20. Profit=payoff−5=£15. The premium is paid even when the option expires without value."

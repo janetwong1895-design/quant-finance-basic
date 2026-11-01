@@ -1,0 +1,7 @@
+"Step","Stage","Explanation"
+"1","A weight 0.00%","A 0.00%, B 100.00%. Weighted contributions 0.00 and -5.00 percentage points; portfolio return -5.00%."
+"2","A weight 25.00%","A 25.00%, B 75.00%. Weighted contributions 2.50 and -3.75 percentage points; portfolio return -1.25%."
+"3","A weight 33.33%","A 33.33%, B 66.67%. Weighted contributions 3.33 and -3.33 percentage points; portfolio return 0.00%."
+"4","A weight 50.00%","A 50.00%, B 50.00%. Weighted contributions 5.00 and -2.50 percentage points; portfolio return 2.50%."
+"5","A weight 75.00%","A 75.00%, B 25.00%. Weighted contributions 7.50 and -1.25 percentage points; portfolio return 6.25%."
+"6","A weight 100.00%","A 100.00%, B 0.00%. Weighted contributions 10.00 and 0.00 percentage points; portfolio return 10.00%."

@@ -1,0 +1,5 @@
+"Step","Stage","Explanation"
+"1","Choose starting weights","Cash 20%, bonds 40%, shares 40% of starting wealth £1,000. Weights sum to 100%."
+"2","Apply one return to each sleeve","Hypothetical one-year returns: cash 2%, bonds 3%, shares 8%. No fees, flows or rebalancing."
+"3","Add the contributions","0.20×2 +0.40×3 +0.40×8 =4.8%. The return contributions are 0.4, 1.2 and 3.2 percentage points."
+"4","Translate return into wealth","£1,000×1.048 =£1,048. Shares contribute 3.2 percentage points, not 40. A different scenario can produce a loss."

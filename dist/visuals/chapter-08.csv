@@ -1,0 +1,5 @@
+"Step","Stage","Explanation"
+"1","Observe the close","At day t close, the three required closes are now known. Earlier prices cannot be traded retroactively."
+"2","Form the signal","Compare close[t] with the trailing three-close mean. The signal uses no later close."
+"3","Execute at the next open","The earliest eligible trade in this lesson is open[t+1]. Pay the declared transaction cost at execution."
+"4","Earn the holding-period return","The chosen position earns open[t+1]→open[t+2], then later signals control later intervals. Cash earns the declared cash rate."

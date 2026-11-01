@@ -1,0 +1,7 @@
+"Step","Stage","Explanation"
+"1","Year 0","Starting £100, constant 10% annual effective rate: compound £100.00; simple growth £100.00. Both begin at the same £100."
+"2","Year 1","Starting £100, constant 10% annual effective rate: compound £110.00; simple growth £110.00. Compound growth applies to the previous balance."
+"3","Year 2","Starting £100, constant 10% annual effective rate: compound £121.00; simple growth £120.00. Compound growth applies to the previous balance."
+"4","Year 3","Starting £100, constant 10% annual effective rate: compound £133.10; simple growth £130.00. Compound growth applies to the previous balance."
+"5","Year 4","Starting £100, constant 10% annual effective rate: compound £146.41; simple growth £140.00. Compound growth applies to the previous balance."
+"6","Year 5","Starting £100, constant 10% annual effective rate: compound £161.05; simple growth £150.00. Compound growth applies to the previous balance."

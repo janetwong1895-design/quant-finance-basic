@@ -9,3 +9,5 @@ import './build-chapter-07-guide.mjs';
 import './build-chapter-08-guide.mjs';
 import './build-chapter-09-guide.mjs';
 import './build-chapter-10-guide.mjs';
+
+await import('./build-visual-guides.mjs');

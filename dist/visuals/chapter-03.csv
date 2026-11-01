@@ -1,0 +1,5 @@
+"Step","Stage","Explanation"
+"1","Before the split","One share at £100: holding value £100."
+"2","Change the units","A two-for-one split replaces one share with two. The mechanical price per share becomes £50."
+"3","Check the holding","Two shares×£50 =£100. The split alone did not halve wealth. Raw100→50 looks like−50% if the unit change is ignored."
+"4","Compare a consistent basis","Restate the old price on the new-share basis:50→50 gives0% price return for this split-only example. Distributions and market moves require separate treatment."

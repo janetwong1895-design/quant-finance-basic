@@ -1,0 +1,5 @@
+"Step","Stage","Explanation"
+"1","Keep every observation","Six invented monthly returns:−3,−1,0,1,2,7 percent. Each bar is one observation, not a future probability."
+"2","Locate the mean","The sum is6%; divide by six observations to get mean 1%."
+"3","Keep the deviations","Deviations from 1% are−4,−2,−1,0,1,6 percentage points. The squared deviations sum to 58."
+"4","Use the sample denominator","Sample SD=√(58/(6−1))≈3.406 percentage points. Dividing by n−1 is the sample convention. Neither mean nor SD is a future guarantee."

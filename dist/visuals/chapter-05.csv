@@ -1,0 +1,4 @@
+"Step","Stage","Explanation"
+"1","Start with the initial peak","Wealth 100; running peak 100. Current loss from peak0%. Include starting wealth in the comparison."
+"2","Fall below the peak","Wealth 80 after−20%. Loss from peak=(1−80/100)×100=20%."
+"3","Recover to the peak","Wealth 100 after+25% on 80. Current drawdown returns to 0%, but the largest previously observed loss remains 20%."
