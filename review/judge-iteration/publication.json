@@ -1,0 +1,17 @@
+{
+  "github_implementation_commit": "599ae92",
+  "site_source_commit": "fa013508cb949b820d51e53063fa4c4f560df105",
+  "deployment_id": "appgdep_6ae72eb7ee508191b341f788018cbd73",
+  "version_id": "appgprj_6ae634c5fe48819199f34c5ff6a3c1a2~appgver_9af10b754018819199a39bdf80fa3c14",
+  "status": "succeeded",
+  "url": "https://quant-finance-foundations-chapter-one.dreamy-shore-0573.chatgpt.site",
+  "audience": "existing owner-private",
+  "ratings": [
+    13,
+    17,
+    18
+  ],
+  "rating_maximum": 18,
+  "rating_scope": "Fixed internal artifact-review rubric; no claim of learner effectiveness or full accessibility validation",
+  "verification": "Published worked-memo page opened, its disclosure and current numeric evidence confirmed visually; screenshot saved."
+}
