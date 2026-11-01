@@ -1,0 +1,20 @@
+{
+  "github_implementation_commit": "8599a24",
+  "site_source_commit": "eda26734929c72faa94f3fb2eae602e89f6c69c3",
+  "deployment_id": "appgdep_6ae7563ae7fc8191bb184d0e353ec584",
+  "version_id": "appgprj_6ae634c5fe48819199f34c5ff6a3c1a2~appgver_11f0beab5980819182269f2572eec7a1",
+  "status": "succeeded",
+  "url": "https://quant-finance-foundations-chapter-one.dreamy-shore-0573.chatgpt.site",
+  "audience": "existing owner-private, unchanged",
+  "entry_points": {
+    "english": "/learn/",
+    "taiwan_traditional_chinese": "/zh-tw/learn/",
+    "chinese_course": "/zh-tw/course/"
+  },
+  "tests": {
+    "node": 79,
+    "python": 8
+  },
+  "verification": "Published Taiwan landing opened successfully; Chinese heading, interactive preview, start/map actions and language switch visible. Screenshot saved.",
+  "capstone_localization": "Taiwan edition1200–1600Hancharacters; English600–800words unchanged; no empirically validated equivalence claimed"
+}
