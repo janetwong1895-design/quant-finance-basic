@@ -1,0 +1,20 @@
+{
+  "github_implementation_commit": "78cdc82",
+  "site_source_commit": "37bb36a0ea07f38f08a37b58d7e2236439477963",
+  "deployment_id": "appgdep_6ae74a94dde881918cc715fa961229f0",
+  "version_id": "appgprj_6ae634c5fe48819199f34c5ff6a3c1a2~appgver_aa77dfc835a081918ad96fec6015479d",
+  "status": "succeeded",
+  "url": "https://quant-finance-foundations-chapter-one.dreamy-shore-0573.chatgpt.site",
+  "audience": "existing owner-private",
+  "verification": "Published Chapter2 compounding walkthrough advanced through all six frames; final £161.05 compound / £150 simple comparison visible. Screenshot saved.",
+  "tests": {
+    "node": 71,
+    "python": 6
+  },
+  "scope": {
+    "chapter_graphics": 10,
+    "explanatory_frames": 43,
+    "static_guides": 10,
+    "csv_transcripts": 10
+  }
+}
