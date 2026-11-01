@@ -1,0 +1,14 @@
+{
+  "github_implementation_commit": "d03e94bcea9888973900cfe47cf741963a435953",
+  "site_source_commit": "7cadf0772d479eb3a0c4213eb49ab55ca22954e2",
+  "deployment_id": "appgdep_6ae76805dc708191a4a4f4b3931caede",
+  "version_id": "appgprj_6ae634c5fe48819199f34c5ff6a3c1a2~appgver_f40d6ea10efc8191a6a39380b973c95d",
+  "status": "succeeded",
+  "url": "https://quant-finance-foundations-chapter-one.dreamy-shore-0573.chatgpt.site/zh-tw/learn/",
+  "audience": "existing owner-private unchanged",
+  "verification": "Published landing displays 新臺幣 NT$ and1,234.56, NT$100 preview and hypothetical-not-FX disclosure. Local browser calculation displays NT$1,628.89 from NT$1,000 at5% over10years. Screenshot saved.",
+  "tests": {
+    "node": 80,
+    "python": 8
+  }
+}
