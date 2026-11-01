@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Ten-chapter self-learning quantitative finance foundations course with optional Python.",
+  "description": "English and Taiwan Traditional Chinese self-learning quantitative finance course with optional Python.",
   "engines": {
     "node": ">=24"
   },
@@ -13,6 +13,9 @@
     "start": "python3 -m http.server 8765 --bind 127.0.0.1 --directory dist",
     "test:python": "python3 -m unittest discover -s tests -p \"test_python_*.py\"",
     "build:python": "python3 scripts/build-python-practice.py",
-    "build:navigation": "node scripts/build-course-navigation.mjs"
+    "build:navigation": "node scripts/build-course-navigation.mjs",
+    "build:all": "node scripts/build-course.mjs",
+    "build:zh-tw": "node scripts/build-zh-tw.mjs",
+    "build:landing": "node scripts/build-landing.mjs"
   }
 }
