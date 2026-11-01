@@ -7,6 +7,8 @@ def paired_report(rows):
     y = [r[2] for r in rows]
     if not all(math.isfinite(v) for v in x + y):
         raise ValueError("Returns must be finite.")
+    if all(v == x[0] for v in x) or all(v == y[0] for v in y):
+        return {"defined": 0, "r": 0}  # Check identical observations before floating-point centring.
     mx, my = sum(x) / len(x), sum(y) / len(y)
     xx = sum((v - mx) ** 2 for v in x)
     yy = sum((v - my) ** 2 for v in y)

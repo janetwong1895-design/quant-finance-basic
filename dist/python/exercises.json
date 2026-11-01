@@ -992,7 +992,7 @@
       "The denominator is math.sqrt(xx * yy); when either squared-deviation sum is zero, use the explicit undefined flag supplied in the starter."
     ],
     "reflection": "Explain why row alignment matters, why zero variance makes r undefined, and why a nonzero sample association proves neither causation nor future stability.",
-    "starter": "import math\n\ndef paired_report(rows):\n    if len(rows) < 2 or len({r[0] for r in rows}) != len(rows):\n        raise ValueError(\"Supply at least two unique aligned date rows.\")\n    x = [r[1] for r in rows]\n    y = [r[2] for r in rows]\n    if not all(math.isfinite(v) for v in x + y):\n        raise ValueError(\"Returns must be finite.\")\n    mx, my = sum(x) / len(x), sum(y) / len(y)\n    xx = sum((v - mx) ** 2 for v in x)\n    yy = sum((v - my) ** 2 for v in y)\n    if xx == 0 or yy == 0:\n        return {\"defined\": 0, \"r\": 0}  # Undefined: do not interpret placeholder as an r.\n    numerator = None  # TODO_NUMERATOR\n    denominator = None  # TODO_DENOMINATOR\n    return {\"defined\": 1, \"r\": numerator / denominator}\n\nif __name__ == \"__main__\":\n    print(paired_report([[\"Jan\", -1, -2], [\"Feb\", 0, 0], [\"Mar\", 1, 2]]))\n",
+    "starter": "import math\n\ndef paired_report(rows):\n    if len(rows) < 2 or len({r[0] for r in rows}) != len(rows):\n        raise ValueError(\"Supply at least two unique aligned date rows.\")\n    x = [r[1] for r in rows]\n    y = [r[2] for r in rows]\n    if not all(math.isfinite(v) for v in x + y):\n        raise ValueError(\"Returns must be finite.\")\n    if all(v == x[0] for v in x) or all(v == y[0] for v in y):\n        return {\"defined\": 0, \"r\": 0}  # Check identical observations before floating-point centring.\n    mx, my = sum(x) / len(x), sum(y) / len(y)\n    xx = sum((v - mx) ** 2 for v in x)\n    yy = sum((v - my) ** 2 for v in y)\n    if xx == 0 or yy == 0:\n        return {\"defined\": 0, \"r\": 0}  # Undefined: do not interpret placeholder as an r.\n    numerator = None  # TODO_NUMERATOR\n    denominator = None  # TODO_DENOMINATOR\n    return {\"defined\": 1, \"r\": numerator / denominator}\n\nif __name__ == \"__main__\":\n    print(paired_report([[\"Jan\", -1, -2], [\"Feb\", 0, 0], [\"Mar\", 1, 2]]))\n",
     "example": "import math\nx, y = [-1, 0, 1], [-2, 0, 2]  # Same three dates, not sorted independently.\ncross_products = 2 + 0 + 2\nprint(\"Correlation:\", cross_products / math.sqrt(2 * 8))  # 1\nprint(\"An association in these pairs is not a causal explanation or forecast.\")\n",
     "cases": [
       {
@@ -1078,6 +1078,79 @@
           "r": 0
         },
         "hint": "The flag marks an undefined value; the placeholder is not a correlation."
+      },
+      {
+        "label": "Undefined decimal constant",
+        "function": "paired_report",
+        "args": [
+          [
+            [
+              "0",
+              0.3,
+              0
+            ],
+            [
+              "1",
+              0.3,
+              1
+            ],
+            [
+              "2",
+              0.3,
+              2
+            ],
+            [
+              "3",
+              0.3,
+              3
+            ],
+            [
+              "4",
+              0.3,
+              4
+            ],
+            [
+              "5",
+              0.3,
+              5
+            ],
+            [
+              "6",
+              0.3,
+              6
+            ],
+            [
+              "7",
+              0.3,
+              7
+            ],
+            [
+              "8",
+              0.3,
+              8
+            ],
+            [
+              "9",
+              0.3,
+              9
+            ],
+            [
+              "10",
+              0.3,
+              10
+            ],
+            [
+              "11",
+              0.3,
+              11
+            ]
+          ]
+        ],
+        "expected": {
+          "defined": 0,
+          "r": 0
+        },
+        "hint": "Identical decimal observations have zero variance even when arithmetic rounding leaves a tiny residual."
       },
       {
         "label": "Zero linear association",

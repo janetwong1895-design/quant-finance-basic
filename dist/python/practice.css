@@ -7,3 +7,5 @@ nav .group-label{letter-spacing:0;font-size:.78rem;font-weight:650;color:var(--i
 @media(max-width:700px){.code-editor{font-size:16px}}
 
 @media print{.code-editor{color:#182c49;background:#fff;border-color:#999;min-height:0}.console,.code-block{color:#182c49;background:#fff}}
+.mobile-activity-picker{display:none}
+@media(max-width:700px){.mobile-activity-picker{display:block}.sidebar #activities,.sidebar .sidebar-bottom,.sidebar .sidebar-title,.sidebar>.mini{display:none}.sidebar .course-label{margin-top:16px}.mobile-activity-picker .field{margin-top:10px}.workspace main{scroll-margin-top:12px}}

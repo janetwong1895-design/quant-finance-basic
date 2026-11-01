@@ -2,6 +2,8 @@
 
 Version 0.1 · 31 October 2026 · Research-backed curriculum proposal
 
+> Historical design proposal. Current delivery is documented in [course-brief.md](course-brief.md): all ten self-learning chapters and 26 optional Python script activities are implemented. Notebook services, facilitated support, coursewide grading and original production-status statements below remain proposal history. The 30-hour core and additional Python timing have not been learner validated.
+
 ## Recommendation
 
 Offer a 30-hour introduction for adults who want to interpret financial data and evaluate basic investment research. The course follows one question: **Does a simple investment rule provide convincing evidence of improvement over a reasonable benchmark, after risk and costs?**

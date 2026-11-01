@@ -102,6 +102,8 @@ EXERCISES = [
                 y = [r[2] for r in rows]
                 if not all(math.isfinite(v) for v in x + y):
                     raise ValueError("Returns must be finite.")
+                if all(v == x[0] for v in x) or all(v == y[0] for v in y):
+                    return {"defined": 0, "r": 0}  # Check identical observations before floating-point centring.
                 mx, my = sum(x) / len(x), sum(y) / len(y)
                 xx = sum((v - mx) ** 2 for v in x)
                 yy = sum((v - my) ** 2 for v in y)
@@ -125,5 +127,6 @@ EXERCISES = [
          cases=[case('Positive aligned line', 'paired_report', [[['Jan',-1,-2],['Feb',0,0],['Mar',1,2]]],{'defined':1,'r':1},'Sum paired deviation products.'),
                 case('Negative association', 'paired_report', [[['Jan',-1,2],['Feb',0,0],['Mar',1,-2]]],{'defined':1,'r':-1},'Keep original pairs and signs.'),
                 case('Undefined constant series', 'paired_report', [[['Jan',1,3],['Feb',2,3],['Mar',3,3]]],{'defined':0,'r':0},'The flag marks an undefined value; the placeholder is not a correlation.'),
+                case('Undefined decimal constant', 'paired_report', [[[str(i), .3, i] for i in range(12)]],{'defined':0,'r':0},'Identical decimal observations have zero variance even when arithmetic rounding leaves a tiny residual.'),
                 case('Zero linear association', 'paired_report', [[['Jan',-1,1],['Feb',0,-2],['Mar',1,1]]],{'defined':1,'r':0},'Zero linear correlation can coexist with a nonlinear pattern.')])
 ]

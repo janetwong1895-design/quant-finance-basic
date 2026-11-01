@@ -59,6 +59,16 @@ class PythonPracticeTests(unittest.TestCase):
             result = json.loads(CHECK({case["function"]: lambda *args: invalid}, json.dumps([case])))
             self.assertFalse(result[0]["passed"])
 
+    def test_decimal_constant_correlation_is_undefined(self):
+        report = runpy.run_path(str(OUT / "reference/ch4-correlation.py"))["paired_report"]
+        for rows in [[[str(i), .3, .3] for i in range(12)],
+                     [[str(i), .3, i] for i in range(12)],
+                     [[str(i), i, .3] for i in range(12)]]:
+            self.assertEqual(report(rows), {"defined": 0, "r": 0})
+        small = [[str(i), .3 + i * 1e-8, .3 + i * 1e-8] for i in range(3)]
+        self.assertEqual(report(small)["defined"], 1)
+        self.assertAlmostEqual(report(small)["r"], 1)
+
     def test_learner_pack_is_self_contained_and_has_no_solutions(self):
         with tempfile.TemporaryDirectory() as tmp, zipfile.ZipFile(OUT / "learner-pack.zip") as archive:
             self.assertNotIn("reference/", " ".join(archive.namelist()))

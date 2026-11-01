@@ -10,3 +10,13 @@ test('pacing and state isolation; all evidence edits invalidate completion',()=>
 test('restoration recalculates scores and rejects malformed and stale completion claims',()=>{assert.deepEqual(restoreState('broken'),freshState());const s=freshState();s.done.assessment=true;s.done.lab=true;assert.deepEqual(restoreState(JSON.stringify(s)).done,{});for(const changes of [{fields:{p1:1}},{fields:'bad'},{checked:[]},{done:'yes'},{runs:[{}]},{attempts:[{}]}])assert.deepEqual(restoreState(JSON.stringify({...s,...changes})),freshState());s.fields.p1='0.33';s.checked.p1=true;s.fields.p2='.75';s.checked.p2=true;s.fields.probabilityReflection='Zero is not a loss; count two of six observations.';s.fields.probabilityCriteria='yes';assert.equal(restoreState(JSON.stringify(s)).done.probability,true);s.fields.p1='.6';assert.equal(restoreState(JSON.stringify(s)).done.probability,undefined);const answers=Object.fromEntries(ASSESSMENTS.map(q=>[q.id,String(q.answer)]));const t=freshState();t.attempts.push({answers,time:'now',passed:false,revision:'I verified that the sample denominator uses n minus one.'});for(const[k,v]of Object.entries(answers))t.fields['quiz-'+k]=v;assert.equal(restoreState(JSON.stringify(t)).done.assessment,true);t.fields['quiz-a1']='.9';assert.equal(restoreState(JSON.stringify(t)).done.assessment,undefined);});
 
 test('lab completion is bound to current prediction and latest recorded seed',()=>{const s=freshState();s.runs=[42,99].map(seed=>({seed,rows:resample(seed),prediction:'Not every resampled mean will equal the original mean.',time:'now'}));Object.assign(s.fields,{seed:'99',prediction:s.runs[1].prediction,hand:String(s.runs[1].rows[0].mean),handVerified:'yes',labReflection:'These runs reuse six invented returns and assume independent observations; they do not forecast future returns.',labCriteria:'yes'});assert.equal(labEvidence(s),true);assert.equal(restoreState(JSON.stringify(s)).done.lab,true);s.fields.prediction='Changed prediction not yet run';assert.equal(labEvidence(s),false);assert.equal(restoreState(JSON.stringify(s)).done.lab,undefined);s.fields.prediction=s.runs[1].prediction;s.fields.seed='100';assert.equal(labEvidence(s),false);assert.equal(restoreState(JSON.stringify(s)).done.lab,undefined);});
+
+test('decimal constant samples have exact zero spread and undefined correlation',()=>{
+ const constant=Array(12).fill(.3),varying=Array.from({length:12},(_,i)=>i);
+ assert.equal(sampleSD(constant),0);
+ assert.equal(correlation(constant,constant),null);
+ assert.equal(correlation(constant,varying),null);
+ assert.equal(correlation(varying,constant),null);
+ const small=[.3,.3+1e-8,.3+2e-8];
+ assert.ok(sampleSD(small)>0);near(correlation(small,small),1);
+});

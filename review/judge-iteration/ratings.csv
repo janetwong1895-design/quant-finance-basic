@@ -1,0 +1,4 @@
+round,artifact,alignment,assessment_feedback,quantitative_validity,reproducibility,accessibility_learner_experience,product_truth,total,maximum,scope
+baseline,402603a,2,2,1,3,2,3,13,18,Independent artifact review plus local execution; not learner effectiveness
+revision,working-tree-after-main-fixes,3,2,3,3,3,3,17,18,Same rubric; feedback continuity remained minor
+final-targeted-recheck,working-tree-final,3,3,3,3,3,3,18,18,Same scoped dimensions; full assistive technology and human pilot remain untested

@@ -1,38 +1,25 @@
 # Course brief
 
-Version: 0.1 · Date: 31 October 2026
+Current delivery · 1 November 2026
 
 - Title: Quantitative Finance Foundations: Data, Risk and Investment Decisions.
-- Workflow: installed `qf-studio` (Quant Finance Course Studio), with `qf-curriculum` and `qf-costing` guidance.
-- Owner: user; course author/support team to be assigned.
-- Requested state (updated): implement self-learning Chapters 1–4 with relevant optional Python consolidation, publish to the existing private site and push to the existing GitHub repository. Chapters 5–10 remain proposed.
-- Confirmed requirements: quantitative finance; beginner level; 30 hours; research-informed proposal; studio workflow.
-- Assumed audience: adult beginners, early-career finance staff, students and career changers.
-- Assumed delivery: English; asynchronous; six weeks at five hours per week; guided Python plus an equivalent no-code route.
-- Time definition: 30 total learner hours including diagnostic, setup, practice, assessment and revision; breaks excluded.
-- Prerequisites: arithmetic, percentages, simple algebra and ordinary file handling. No prior programming or finance study assumed.
-- Diagnostic and bridge: embedded in M01; more extensive remedial needs would require separately disclosed preparation.
-- Authentic decision: assess whether a supplied strategy improves a stated risk/return trade-off against a benchmark after costs.
-- Evidence: calculation checks, practical portfolio, research memo and reproducible supporting files.
-- Accessibility: equivalent calculation/interpretation route, tables, chart descriptions, readable notation and captions if needed; WCAG 2.2 AA target, untested.
-- Support: proposed facilitator response target of two working days; resources and staffing unconfirmed.
-- Data: original synthetic core datasets planned; optional historical data contingent on rights and quality verification.
-- Full outcomes, alignment, module contracts, workload, lab contract and proficiency criteria: `course-proposal.md`.
-- Budget: no explicit budget supplied; no additional paid model benchmark or separate API dispatch authorised or initiated.
-- Release state: course proposal plus published formative prototypes; real-learner pilot, full accessibility and commercial readiness remain pending.
-- Unresolved decisions: audience priority, contact versus total hours, format, Python depth, staffing, budget and destination.
+- Audience: adult beginners, early-career finance staff, students and career changers.
+- Delivery: ten standalone, asynchronous web chapters with explanations, worked examples, checked practice, formative transfer, feedback, revision and complete text/paper routes.
+- Duration: ten estimated 180-minute noncoding chapters, totalling a 30-hour core. These estimates include setup, practice, assessment and revision; breaks excluded. Learner timing and effectiveness remain unvalidated.
+- Python: 26 optional browser/local standard-library script activities across Chapters 1–10 add 400 minutes, plus 10–15 minutes of first setup. They supplement the core; no equivalent-time replacement or notebook service is claimed.
+- Prerequisites: arithmetic, percentages, simple algebra and ordinary file handling. No prior programming or finance study is assumed. Chapter 1 includes a diagnostic; chapter explanations provide the conventions needed for each task.
+- Authentic decision: assess whether a supplied synthetic investment rule improves a stated risk/return trade-off against a matching benchmark after declared costs. Rejecting a rule or finding insufficient evidence is a valid conclusion.
+- Evidence: calculation checks, all trial records, self-reviewed explanations, research cards and a reproducible capstone memo. Local browser progress is separate by chapter/Python; exports are records, not restore or sync.
+- Assessment: formative, with numerical checks and learner self-review of reasoning. No secure examination, independently validated course grade or accredited credential is provided. The proposal's coursewide weights remain design history.
+- Data/research boundary: original synthetic teaching data; no broker account, execution, live feed or personal financial data required. Public source/data and local plan gates cannot establish genuine unseen-data validation or external preregistration.
+- Accessibility: text/table alternatives, labelled controls and keyboard routes are provided. WCAG 2.2 AA is a target, not a compliance claim. Full manual assistive-technology checks and target-learner pilots remain pending.
+- Support: the delivered course is self-learning without an instructor response dependency. No facilitated support service or response-time promise is provisioned.
+- Destination: existing GitHub repository and owner-private course site; preserve its audience.
+- Course map and exact assets: `docs/prototype-manifest.md`. Original proposed outcomes, alignment and module contracts: `course-proposal.md`, labelled historical where superseded.
+- Production: qf-studio curriculum, assessment, quantitative review and release guidance. The judge-iteration log records review evidence and scoped ratings.
+- Budget: no explicit monetary budget supplied. No separate paid API calls or model benchmarks authorised or initiated. Session model usage is unpriced where request telemetry is unavailable.
+- Validation status: published formative learning materials. Human learner pilots, full accessibility verification, legal/rights/commercial readiness and any staffing commitments remain separate unresolved dependencies.
 
+## Proposal history
 
-## Python implementation amendment · 31 October 2026
-
-The original proposal describes a possible equivalent Python/notebook route. The currently delivered implementation instead supplies eight optional Python script activities for Chapters 1–2, adding an estimated 40 and 65 minutes respectively, plus 10–15 minutes for first setup, beyond the proposed 30-hour noncoding core. No equivalent-time replacement or notebook route has been validated. Chapters 3–4 now extend this optional script route to data cleaning and descriptive statistics; their per-activity extra times are shown in the workspace. Chapters 5–10 remain proposed. See [Python practice](docs/python-practice.md).
-
-
-## Current implementation status · Chapters 3–4 update
-
-Chapters 1–4 are implemented as formative self-learning web prototypes with text routes, local progress, worked/guided/transfer tasks and optional Python scripts. The original proposal’s notebook and facilitated-support plans remain proposals; no notebook service or facilitator response has been provisioned. Each chapter’s 180-minute noncoding estimate and additional Python times need a learner pilot. The proposal’s course-level assessment weights and capstone pass rules are not an awarded credential or implemented course-wide grading system. Chapters 5–10 remain planned.
-
-
-## Full prototype implementation amendment
-
-At the user’s request, all ten chapters now have self-learning web prototypes with worked examples, guided practice, formative independent transfer, feedback/revision and text routes. Suitable concepts have optional browser/local Python scripts with extra time separately disclosed. The intended noncoding core remains ten estimated 180-minute chapters (30hours); timings and educational effectiveness remain unvalidated. No notebook service, facilitator response promise, secure examination, independently verified preregistration or accredited credential is provisioned. Earlier “planned” descriptions record proposal history; see docs/prototype-manifest.md for the current assets and scope. The capstone uses a public synthetic dataset and a pedagogical local plan gate, which cannot establish genuine unseen-data validation. Full learner pilots, assistive-technology verification and commercial readiness remain pending.
+The original 31 October 2026 proposal assumed six weeks at five hours per week, contemplated notebooks and facilitated support, and initially implemented only Chapters 1–2, then 1–4. The user subsequently requested all ten chapters and optional script practice. Earlier “planned” statuses in historical production records describe those earlier versions, not current delivery. The original course-level grading scheme and facilitator model have not been implemented as promised services.
