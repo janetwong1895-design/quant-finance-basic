@@ -6,7 +6,7 @@ export function visualSvg(chapter,index){
  const v=VISUALS[chapter],frame=v.frames[index],W=640,H=300;let content='';
  if(v.kind==='compound'){
   const x=n=>65+n*100,y=n=>245-(n-100)*2;
-  content=text(65,24,'財富（英鎊）')+line(65,245,565,245,'axis')+line(65,245,65,50,'axis');
+  content=text(65,24,'財富（新臺幣）')+line(65,245,565,245,'axis')+line(65,245,65,50,'axis');
   for(const n of [100,125,150,175])content+=line(65,y(n),565,y(n),'grid')+text(22,y(n)+5,n);
   for(let n=0;n<=5;n++)content+=text(x(n)-7,273,n);
   content+=text(270,295,'年')+poly(Array.from({length:6},(_,i)=>[x(i),y(compound(i).simple)]),'series secondary-series')+poly(Array.from({length:index+1},(_,i)=>[x(i),y(compound(i).compound)]),'series');
@@ -21,13 +21,13 @@ export function visualSvg(chapter,index){
   const parts=v.kind==='allocation'?[20,40,40]:[frame.weight,100-frame.weight],labels=v.kind==='allocation'?['現金','債券','股票']:['資產 A','資產 B'];let left=45;
   content=text(45,32,'期初權重（%）');
   for(let i=0;i<parts.length;i++){let width=parts[i]/100*550;content+=`<rect x="${left}" y="65" width="${width}" height="60" class="sleeve sleeve-${i}"/>`;left+=width;content+=text(45+i*(v.kind==='allocation'?185:280),161,`${labels[i]} ${parts[i].toFixed(2)}%`);}
-  if(v.kind==='allocation')content+=text(45,205,index>=2?'貢獻：0.4 + 1.2 + 3.2 = 4.8 個百分點':'相同起始資金，分成不同部位')+text(45,251,index===3?'期末金額 £1,048':'各權重乘以對應報酬率');
+  if(v.kind==='allocation')content+=text(45,205,index>=2?'貢獻：0.4 + 1.2 + 3.2 = 4.8 個百分點':'相同起始資金，分成不同部位')+text(45,251,index===3?'期末金額 NT$1,048':'各權重乘以對應報酬率');
   else{const a=allocation(frame.weight);content+=text(45,208,`(+10% × ${a.weightA.toFixed(2)}%) + (−5% × ${a.weightB.toFixed(2)}%)`)+text(45,257,`組合報酬率 ${a.returnPct.toFixed(2)}%`,'big-value');}
  }else if(v.kind==='split'){
-  content=text(45,30,'股數單位的改變')+`<rect x="45" y="65" width="200" height="130" class="sleeve sleeve-0"/>`+text(76,223,'1 股×£100');
+  content=text(45,30,'股數單位的改變')+`<rect x="45" y="65" width="200" height="130" class="sleeve sleeve-0"/>`+text(76,223,'1 股×NT$100');
   content+=line(220,130,340,130,'series');
-  if(index>=1)content+=`<rect x="370" y="65" width="100" height="130" class="sleeve sleeve-1"/><rect x="480" y="65" width="100" height="130" class="sleeve sleeve-2"/>`+text(415,223,'2 股×£50');
-  content+=text(64,270,'價值 £100')+(index>=2?text(437,270,'價值 £100'):text(380,270,'下一步：分成兩股'));
+  if(index>=1)content+=`<rect x="370" y="65" width="100" height="130" class="sleeve sleeve-1"/><rect x="480" y="65" width="100" height="130" class="sleeve sleeve-2"/>`+text(415,223,'2 股×NT$50');
+  content+=text(64,270,'價值 NT$100')+(index>=2?text(437,270,'價值 NT$100'):text(380,270,'下一步：分成兩股'));
  }else if(v.kind==='sample'){
   const a=[-3,-1,0,1,2,7],y=n=>218-n*22;
   content=text(30,25,'月報酬率（%）')+line(55,y(0),600,y(0),'axis');
@@ -36,10 +36,10 @@ export function visualSvg(chapter,index){
   if(index>=1)content+=line(55,y(1),605,y(1),'peak-line')+text(425,180,'平均 1%（虛線）');
  }else if(v.kind==='call'){
   const x=p=>65+(p-60)*6,y=profit=>225-profit*4;
-  content=text(18,24,'到期淨損益（英鎊）')+line(65,y(0),555,y(0),'axis')+line(65,70,65,260,'axis')+poly([60,80,100,105,120,140].map(p=>[x(p),y(callProfit(p))]),'series');
+  content=text(18,24,'到期淨損益（新臺幣）')+line(65,y(0),555,y(0),'axis')+line(65,70,65,260,'axis')+poly([60,80,100,105,120,140].map(p=>[x(p),y(callProfit(p))]),'series');
   for(const p of [60,80,100,120,140])content+=text(x(p)-13,283,p);
   for(const profit of [-5,0,15,35])content+=text(18,y(profit)+5,profit);
-  content+=`<circle cx="${x(frame.price)}" cy="${y(callProfit(frame.price))}" r="8" class="marker"/>`+text(280,299,'到期標的價格（英鎊）')+text(270,28,'兩平 105；履約價 100');
+  content+=`<circle cx="${x(frame.price)}" cy="${y(callProfit(frame.price))}" r="8" class="marker"/>`+text(280,299,'到期標的價格（新臺幣）')+text(270,28,'兩平 105；履約價 100');
  }else{
   const labels=chapter===8?['收盤[t]','訊號[t]','開盤[t+1]','開盤[t+2]']:chapter===9?['開發','固定計畫','評估','揭露']:['輸入','計畫／明細','備忘錄','修正'];
   content=text(30,30,'由左讀到右；不能回頭使用較晚才取得的證據');

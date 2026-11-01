@@ -7,7 +7,7 @@
     "title": "把百分比寫成 Python",
     "concept": "第 1 章｜起點與百分比變動",
     "objective": "讀懂變數、算術與函式，解釋百分比為何要相對於起始值。",
-    "prediction": "先預測 £200 變成 £210 的百分比變動。分母為什麼是 200？",
+    "prediction": "先預測 NT$200 變成 NT$210 的百分比變動。分母為什麼是 200？",
     "instructions": "第一支程式已完整寫好。先執行，檢查具名輸入與印出結果，再把 ending_value 改成 190，先預測再執行。檢查前請還原原始範例。",
     "syntax": "= 儲存數值；# 開始註解；/ 是除法，* 是乘法。def 定義可重複使用的函式；函式內以四個空白縮排。return 傳回結果，print 顯示內容。呼叫函式時把輸入值放進括號。",
     "hints": [
@@ -151,16 +151,16 @@
     "title": "補回遺漏成本，公平比較",
     "concept": "第 1 章｜公平基準與選做成本延伸",
     "objective": "計算扣除固定費用後的期末金額，並採相同規則比較。",
-    "prediction": "瀏覽器初始實驗假設零成本。£1,000 賺 4.8%，若年底扣 £5，期末還有多少？",
-    "instructions": "用三個輸入完成 ending_value。這項延伸在成長之後、年底扣一次固定英鎊費用。兩組合要採相同時點；這不是完整交易成本或稅務模型。",
-    "syntax": "用括號組合 1 + return_pct / 100。英鎊費用要從英鎊餘額扣除，不能把金額直接減在百分比上。",
+    "prediction": "瀏覽器初始實驗假設零成本。NT$1,000 賺 4.8%，若年底扣 NT$5，期末還有多少？",
+    "instructions": "用三個輸入完成 ending_value。這項延伸在成長之後、年底扣一次固定新臺幣費用。兩組合要採相同時點；這不是完整交易成本或稅務模型。",
+    "syntax": "用括號組合 1 + return_pct / 100。新臺幣費用要從新臺幣餘額扣除，不能把金額直接減在百分比上。",
     "hints": [
       "先算未扣費的期末金額。",
-      "start 乘上 (1 + return_pct / 100)，再扣 fee_gbp。"
+      "start 乘上 (1 + return_pct / 100)，再扣 fee_twd。"
     ],
-    "reflection": "解釋為什麼 £5 相當於起始 £1,000 的 0.5 個百分點。指出扣費時點，以及為何比較必須一致。",
-    "starter": "def ending_value(start, return_pct, fee_gbp):\n    # TODO: replace the next line with a calculation and return its result.\n    raise NotImplementedError(\"Calculate growth, then deduct the end-year pound fee.\")\n\nif __name__ == \"__main__\":\n    print(\"Baseline after fee (£):\", ending_value(1000, 4.8, 5))\n    print(\"Alternative after fee (£):\", ending_value(1000, 3.0, 5))\n",
-    "example": "starting_pounds = 500\nreturn_pct = 2\nend_year_fee_pounds = 3\ngross_end = starting_pounds * (1 + return_pct / 100)\nprint(\"Net ending pounds:\", gross_end - end_year_fee_pounds)  # 507\n",
+    "reflection": "解釋為什麼 NT$5 相當於起始 NT$1,000 的 0.5 個百分點。指出扣費時點，以及為何比較必須一致。",
+    "starter": "def ending_value(start, return_pct, fee_twd):\n    # TODO: replace the next line with a calculation and return its result.\n    raise NotImplementedError(\"Calculate growth, then deduct the end-year TWD fee.\")\n\nif __name__ == \"__main__\":\n    print(\"Baseline after fee (NT$):\", ending_value(1000, 4.8, 5))\n    print(\"Alternative after fee (NT$):\", ending_value(1000, 3.0, 5))\n",
+    "example": "starting_twd = 500\nreturn_pct = 2\nend_year_fee_twd = 3\ngross_end = starting_twd * (1 + return_pct / 100)\nprint(\"Net ending TWD:\", gross_end - end_year_fee_twd)  # 507\n",
     "cases": [
       {
         "label": "含費用的基準",
@@ -171,7 +171,7 @@
           5
         ],
         "expected": 1043,
-        "hint": "費用是 £5，不是 5%。"
+        "hint": "費用是 NT$5，不是 5%。"
       },
       {
         "label": "相同費用的另一配置",
@@ -216,7 +216,7 @@
     "title": "現金分配只算一次",
     "concept": "第 2 章 · 衡量報酬率",
     "objective": "實作總報酬率函式，區分價差與現金分配。",
-    "prediction": "以 £80 買入，期末 £76，另收到 £2，總報酬率是多少？",
+    "prediction": "以 NT$80 買入，期末 NT$76，另收到 NT$2，總報酬率是多少？",
     "instructions": "取代 TODO 行。現金分配持有至期末，不賺再投資報酬；無外部存入、費用或稅負。回傳百分比數值，例如 7，而非小數 0.07。",
     "syntax": "函式參數讓相同公式能用於新資料。函式內保留完整精度，只在列印時四捨五入。",
     "hints": [
@@ -247,7 +247,7 @@
           2
         ],
         "expected": -2.5,
-        "hint": "分母使用期初 £80。"
+        "hint": "分母使用期初 NT$80。"
       },
       {
         "label": "新的獨立數值",
@@ -270,7 +270,7 @@
     "title": "複利與年化",
     "concept": "第 2 章 · 逐期複合成長",
     "objective": "實作未來價值與 CAGR，診斷直接相加各期報酬率的錯誤。",
-    "prediction": "預測 £500 以 8% 成長兩年的結果，再預測 £1,000 三年成為 £1,331 的 CAGR。",
+    "prediction": "預測 NT$500 以 8% 成長兩年的結果，再預測 NT$1,000 三年成為 NT$1,331 的 CAGR。",
     "instructions": "完成兩個函式。利率採百分比數值，年數為正整數；無外部存入或提領。把範例報酬清單由 [20, -20] 改為 [25, -20]，說明差異。",
     "syntax": "Python 次方用 **，不是 ^。平方根可寫 ** (1 / 2)。百分比除以 100 變小數，小數報酬乘以 100 變百分比。",
     "hints": [
@@ -278,8 +278,8 @@
       "CAGR = ((end / start) ** (1 / years) - 1) * 100。"
     ],
     "reflection": "解釋逐年成長因子相乘為何不同於報酬率相加，並指出 CAGR 忽略的路徑資訊。",
-    "starter": "def future_value(principal, rate_pct, years):\n    raise NotImplementedError(\"TODO: compound the annual growth factor.\")\n\ndef cagr(start, end, years):\n    raise NotImplementedError(\"TODO: find the equivalent annual percentage rate.\")\n\nif __name__ == \"__main__\":\n    print(\"Future value (£):\", future_value(500, 8, 2))\n    print(\"CAGR (%):\", cagr(1000, 1331, 3))\n",
-    "example": "balance = 100\nreturns_pct = [20, -20]\nfor rate in returns_pct:\n    balance *= 1 + rate / 100\nprint(\"Ending balance (£):\", balance)  # 96\nprint(\"Cumulative return (%):\", (balance / 100 - 1) * 100)  # -4\n",
+    "starter": "def future_value(principal, rate_pct, years):\n    raise NotImplementedError(\"TODO: compound the annual growth factor.\")\n\ndef cagr(start, end, years):\n    raise NotImplementedError(\"TODO: find the equivalent annual percentage rate.\")\n\nif __name__ == \"__main__\":\n    print(\"Future value (NT$):\", future_value(500, 8, 2))\n    print(\"CAGR (%):\", cagr(1000, 1331, 3))\n",
+    "example": "balance = 100\nreturns_pct = [20, -20]\nfor rate in returns_pct:\n    balance *= 1 + rate / 100\nprint(\"Ending balance (NT$):\", balance)  # 96\nprint(\"Cumulative return (%):\", (balance / 100 - 1) * 100)  # -4\n",
     "cases": [
       {
         "label": "兩年複利",
@@ -335,16 +335,16 @@
     "title": "逐筆依日期折現",
     "concept": "第 2 章 · 現值與債券",
     "objective": "將有日期的現金流時程轉成可重現的現值計算。",
-    "prediction": "第 1 年 £20、第 2 年 £1,020，採 5% 折現，時間 0 現值是多少？",
-    "instructions": "payments 是 (year, pounds) 配對清單。完成迴圈中的一個運算式。債券最後一筆已含本金。使用提供的單一有效年折現率，無違約、費用或稅負。",
+    "prediction": "第 1 年 NT$20、第 2 年 NT$1,020，採 5% 折現，時間 0 現值是多少？",
+    "instructions": "payments 是 (year, TWD) 配對清單。完成迴圈中的一個運算式。債券最後一筆已含本金。使用提供的單一有效年折現率，無違約、費用或稅負。",
     "syntax": "for year, amount in payments 將每對值拆成兩個名稱。每筆付款有自己的次方；加總折現值，不是沒有日期的現金總額。",
     "hints": [
       "先把 rate_pct 轉成小數，再形成分母。",
       "每項為 amount / (1 + rate_pct / 100) ** year。"
     ],
     "reflection": "說明為何一個次方無法正確折現全部債券時程，以及本金為何不能重複加總。",
-    "starter": "def present_value(payments, rate_pct):\n    total = 0\n    for year, amount in payments:\n        discounted = None  # TODO: discount this payment using its year.\n        total += discounted\n    return total\n\nif __name__ == \"__main__\":\n    bond = [(1, 20), (2, 1020)]\n    print(\"Present value (£):\", round(present_value(bond, 5), 2))\n",
-    "example": "future_payment = 1210\ndiscount_rate = 10 / 100\nyears = 2\nprint(\"Present value (£):\", future_payment / (1 + discount_rate) ** years)  # 1000\n",
+    "starter": "def present_value(payments, rate_pct):\n    total = 0\n    for year, amount in payments:\n        discounted = None  # TODO: discount this payment using its year.\n        total += discounted\n    return total\n\nif __name__ == \"__main__\":\n    bond = [(1, 20), (2, 1020)]\n    print(\"Present value (NT$):\", round(present_value(bond, 5), 2))\n",
+    "example": "future_payment = 1210\ndiscount_rate = 10 / 100\nyears = 2\nprint(\"Present value (NT$):\", future_payment / (1 + discount_rate) ** years)  # 1000\n",
     "cases": [
       {
         "label": "兩筆債券款項",
@@ -430,13 +430,13 @@
     "objective": "用比值求實質報酬率，並用複合通膨調整名目餘額。",
     "prediction": "名目成長 3%、通膨 5% 時，購買力會虧損嗎？執行前先預測正負號。",
     "instructions": "完成兩個 TODO。兩利率涵蓋相同期間。buying_power 將已算出的名目餘額按整年通膨還原，不是以投資利率折現。",
-    "syntax": "用括號包住兩個成長因子。real_return 回傳實質百分比，buying_power 回傳英鎊金額。名稱與單位有助避免混用。",
+    "syntax": "用括號包住兩個成長因子。real_return 回傳實質百分比，buying_power 回傳新臺幣金額。名稱與單位有助避免混用。",
     "hints": [
       "實質報酬率 =（1 + 名目報酬率）÷（1 + 通膨率）− 1。",
       "名目餘額除以 (1 + inflation_pct / 100) ** years。"
     ],
-    "reflection": "區分名目英鎊、期初年度購買力與未來款項現值，並說明利率相減為何只是近似。",
-    "starter": "def real_return(nominal_pct, inflation_pct):\n    raise NotImplementedError(\"TODO: return the exact real percentage.\")\n\ndef buying_power(nominal_balance, inflation_pct, years):\n    raise NotImplementedError(\"TODO: return starting-year purchasing power in pounds.\")\n\nif __name__ == \"__main__\":\n    print(\"Real return (%):\", real_return(3, 5))\n    print(\"Buying power (£):\", round(buying_power(1030, 5, 1), 2))\n",
+    "reflection": "區分名目新臺幣、期初年度購買力與未來款項現值，並說明利率相減為何只是近似。",
+    "starter": "def real_return(nominal_pct, inflation_pct):\n    raise NotImplementedError(\"TODO: return the exact real percentage.\")\n\ndef buying_power(nominal_balance, inflation_pct, years):\n    raise NotImplementedError(\"TODO: return starting-year purchasing power in TWD.\")\n\nif __name__ == \"__main__\":\n    print(\"Real return (%):\", real_return(3, 5))\n    print(\"Buying power (NT$):\", round(buying_power(1030, 5, 1), 2))\n",
     "example": "nominal_pct, inflation_pct = 6, 4\nreal_pct = ((1 + nominal_pct / 100) / (1 + inflation_pct / 100) - 1) * 100\nprint(\"Exact real return (%):\", round(real_pct, 2))  # 1.92, not exactly 2\n",
     "cases": [
       {
@@ -468,7 +468,7 @@
           1
         ],
         "expected": 980.952380952381,
-        "hint": "結果是英鎊，不是百分比。"
+        "hint": "結果是新臺幣，不是百分比。"
       },
       {
         "label": "多年應用",
@@ -499,8 +499,8 @@
       "用通膨還原 nominal；用 growth_pct 折現獨立款項，兩者不同。"
     ],
     "reflection": "提出手算與只改通膨的比較。說明模型限制及對原先預測的具體修正，並解釋測試只能呈現程式行為，不能證明投資主張。",
-    "starter": "def summarise(principal, growth_pct, inflation_pct, years, future_payment):\n    nominal = None  # TODO: compound the principal.\n    real = None  # TODO: express nominal balance in starting-year pounds.\n    payment_pv = None  # TODO: discount the separate future payment.\n    return {\"nominal\": nominal, \"real\": real, \"payment_pv\": payment_pv}\n\nif __name__ == \"__main__\":\n    for inflation in [3, 6]:\n        result = summarise(1000, 5, inflation, 10, 2000)\n        print(\"Inflation scenario (%):\", inflation)\n        for label, amount in result.items():\n            print(label, \"(pounds):\", round(amount, 2))\n",
-    "example": "# Dictionary syntax before building your report.\nreport = {\"nominal\": 1100, \"real\": 1000}\nfor label, amount in report.items():\n    print(label, \"(pounds):\", amount)\n",
+    "starter": "def summarise(principal, growth_pct, inflation_pct, years, future_payment):\n    nominal = None  # TODO: compound the principal.\n    real = None  # TODO: express nominal balance in starting-year TWD.\n    payment_pv = None  # TODO: discount the separate future payment.\n    return {\"nominal\": nominal, \"real\": real, \"payment_pv\": payment_pv}\n\nif __name__ == \"__main__\":\n    for inflation in [3, 6]:\n        result = summarise(1000, 5, inflation, 10, 2000)\n        print(\"Inflation scenario (%):\", inflation)\n        for label, amount in result.items():\n            print(label, \"(TWD):\", round(amount, 2))\n",
+    "example": "# Dictionary syntax before building your report.\nreport = {\"nominal\": 1100, \"real\": 1000}\nfor label, amount in report.items():\n    print(label, \"(TWD):\", amount)\n",
     "cases": [
       {
         "label": "預設實驗",
@@ -563,7 +563,7 @@
     "title": "先排序，再算報酬率",
     "concept": "第 3 章 · 時間順序觀察",
     "objective": "排序 ISO 日期觀察並計算相鄰區間價格報酬率。",
-    "prediction": "輸入依序為 1 月 8 日 £52.02、1 月 2 日 £50、1 月 7 日 £51，預測時間順序的第一段報酬率。",
+    "prediction": "輸入依序為 1 月 8 日 NT$52.02、1 月 2 日 NT$50、1 月 7 日 NT$51，預測時間順序的第一段報酬率。",
     "instructions": "完成兩個 TODO。csv_returns 包裝函式用 csv.DictReader 讀取 CSV，以 float 轉換價格字串，再傳入 [ISO 日期, 分割調整價格] 資料列。本題日期有效且不重複、價格為正；下一題處理品質缺陷。回傳第一與最後區間百分比及累積百分比的字典，不要回傳四捨五入字串。至少兩筆觀察；首筆無報酬率，缺口仍是觀察區間，不是日報酬率。",
     "syntax": "csv.DictReader 讀得的欄位是字串，float 轉為數值。io.StringIO 讓文字像檔案可讀。sorted(rows, key=...) 產生排序副本；lambda row: row[0] 選 ISO 日期鍵。zip 將較早列與從第二筆開始的 ordered[1:] 配對；append 加入結果。",
     "hints": [
@@ -745,7 +745,7 @@
     "title": "維持一致股數基礎",
     "concept": "第 3 章 · 分割調整價格報酬率",
     "objective": "依已核實分割調整較早原始價格，再回報原始與調整區間報酬率。",
-    "prediction": "原始 £100 在一拆二後變成 £51，預測原始價格變動與一致分割基礎的報酬率。",
+    "prediction": "原始 NT$100 在一拆二後變成 NT$51，預測原始價格變動與一致分割基礎的報酬率。",
     "instructions": "split_factor 是每股舊股換得的新股數。分割已獨立核實，不可從價格下跌推測。較晚價格已是分割後基礎。完成 earlier_adjusted 與兩個報酬率。無股利、其他行動、費用或稅負；僅計算價格報酬率。回傳字典並保留數值精度。",
     "syntax": "較早原始價格除以分割因子，讓兩價格均為新股單位。字典用大括號與 key: value 配對。必須使用每個參數，才能處理新案例。",
     "hints": [
@@ -1582,7 +1582,7 @@
     "concept": "第 7 章 · 遠期契約、買權與權利金",
     "objective": "計算一單位契約的遠期給付、買權給付及未折現損益。",
     "prediction": "履約價 100、權利金 6、到期價 104：買權在價內，是否表示已獲利？",
-    "instructions": "完成遠期契約與買權的給付，以及扣除權利金的損益。金額為每單位標的的英鎊，不是百分比報酬率。遠期多頭保留負給付；買權可不履約，給付下限為零。權利金只從買權給付扣除一次。不折現，不考慮融資、稅、費用或股利。給定權利金不是本程式估計的公平價格。",
+    "instructions": "完成遠期契約與買權的給付，以及扣除權利金的損益。金額為每單位標的的新臺幣，不是百分比報酬率。遠期多頭保留負給付；買權可不履約，給付下限為零。權利金只從買權給付扣除一次。不折現，不考慮融資、稅、費用或股利。給定權利金不是本程式估計的公平價格。",
     "syntax": "max(a, b) 選較大值，形成買權零給付下限。字典用帶引號的鍵回傳數值；保留起始程式的鍵名。",
     "hints": [
       "遠期契約為 terminal - strike；買權給付為 max(terminal - strike, 0)。",
@@ -2031,7 +2031,7 @@
     "title": "追溯淨持有區間計算",
     "concept": "第10章 · 手算與計算附件",
     "objective": "先扣進場成本，重現第一個評估持有區間。",
-    "prediction": "£1000、進場101、出場97及10bps進場成本，期末應高於還是低於£1000？先預測約略值。",
+    "prediction": "NT$1,000、進場101、出場97及10bps進場成本，期末應高於還是低於NT$1,000？先預測約略值。",
     "instructions": "完成從現金全額做多的end_wealth。成本在進場時先從起始資產扣除，再乘開盤間價格比率。這是一個區間，不是完整策略。若另有最後出場，會再產生成本；本函式刻意回傳該次出場前資產。",
     "syntax": "10基點/10000 = .001。start先乘(1-cost_bps/10000)，再乘exit_open/entry_open。不要扣10%，也不要用收盤價。",
     "hints": [
@@ -2052,7 +2052,7 @@
           10
         ],
         "expected": 959.4356435643564,
-        "hint": "先扣£1，再乘101→97比率。"
+        "hint": "先扣NT$1，再乘101→97比率。"
       },
       {
         "label": "改變成本",

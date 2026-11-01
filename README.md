@@ -11,7 +11,7 @@ A beginner course with ten self-paced chapters, an estimated30-hour core and Eng
 | Python setup and full text route | [Python guide](dist/python/guide.html) | [Python 指南](dist/zh-tw/python/guide.html) |
 | Concept graphics | [Visual guides](dist/visuals/index.html) | [概念圖解](dist/zh-tw/visuals/index.html) |
 
-[Read the Taiwan Traditional Chinese README](README.zh-TW.md). The Taiwan edition includes all ten chapters, practice/assessment feedback, text routes, 26 Python activities and ten concept graphics. Numerical examples and £ sterling units are preserved; Python syntax, identifiers, code comments and some native errors remain English. Language versions keep separate browser progress. The Chinese capstone uses an explicit1,200–1,600 Han-character length requirement; English remains600–800 words. See [localization and build details](docs/localization.md).
+- Taiwan edition: hypothetical monetary examples are denominated in New Taiwan dollars (TWD / NT$), with zh-TW number formatting (1,234.56). This is a teaching-context adaptation, not an FX conversion; underlying numerical relationships remain consistent.
 
 Hosted entry points: [English introduction](https://quant-finance-foundations-chapter-one.dreamy-shore-0573.chatgpt.site/learn/) and [繁體中文介紹頁](https://quant-finance-foundations-chapter-one.dreamy-shore-0573.chatgpt.site/zh-tw/learn/). The existing site's private audience is preserved; these pages do not add public enrolment, lead collection or payment.
 

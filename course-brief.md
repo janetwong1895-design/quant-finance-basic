@@ -22,7 +22,7 @@ Current delivery · 1 November 2026
 
 ## Taiwan Traditional Chinese edition · 1 November 2026
 
-All ten chapters, full text routes, optional Python guidance and concept graphics also have an authored zh-Hant-TW edition, plus bilingual introduction pages. Numerical contracts and GBP units remain unchanged; progress is separate by language. Chinese capstone length is1200–1600Hancharacters, explicitly adapted from the unchanged English600–800wordrequirement and not asserted to be empirically equivalent. See docs/localization.md and review/zh-TW/review.md. Existing private audience is retained; no public enrolment or payment flow is provisioned.
+- 臺灣版金額採新臺幣（TWD／NT$），數字採臺灣格式（1,234.56）。這是假設教學情境的在地化，並非匯率換算；公式、報酬率與評量數值關係保持一致。計算金額可保留小數以供驗算，不代表現金最小支付單位。
 
 ## Proposal history
 

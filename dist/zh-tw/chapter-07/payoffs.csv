@@ -1,4 +1,4 @@
-terminal_gbp,forward_payoff_gbp,call_payoff_gbp,call_profit_gbp
+terminal_twd,forward_payoff_twd,call_payoff_twd,call_profit_twd
 70,-30,0,-6
 90,-10,0,-6
 100,0,0,-6

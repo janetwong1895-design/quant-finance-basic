@@ -41,6 +41,8 @@ for a,b in {'Expected behaviour matched.':'預期行為相符。','Expected a fi
 (out/'check.py').write_text(check,encoding='utf-8')
 readme='''量化金融基礎｜臺灣繁體中文 Python 學習包
 
+金額採新臺幣（TWD／NT$），為假設教學情境，並非匯率換算。
+數字顯示例如 NT$1,234.56；程式計算使用未加千位逗號的數值。
 需要 Python 3.8 以上，僅使用標準函式庫，不需 pip 安裝。
 在此資料夾執行 python3 check.py ch1-change；Windows 可用 py。
 把活動代碼換成其他檔名（不含 .py）即可檢查，all 表示全部。

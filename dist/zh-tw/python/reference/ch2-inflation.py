@@ -6,4 +6,4 @@ def buying_power(nominal_balance, inflation_pct, years):
 
 if __name__ == "__main__":
     print("Real return (%):", real_return(3, 5))
-    print("Buying power (£):", round(buying_power(1030, 5, 1), 2))
+    print("Buying power (NT$):", round(buying_power(1030, 5, 1), 2))

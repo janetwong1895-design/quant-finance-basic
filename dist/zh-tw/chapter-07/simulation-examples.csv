@@ -1,4 +1,4 @@
-seed,spread_pct,path,r1_pct,r2_pct,r3_pct,terminal_gbp,forward_payoff_gbp,call_payoff_gbp,call_profit_gbp
+seed,spread_pct,path,r1_pct,r2_pct,r3_pct,terminal_twd,forward_payoff_twd,call_payoff_twd,call_profit_twd
 42,10,1,-10,-10,0,81,-19,0,-6
 42,10,2,-10,0,-10,81,-19,0,-6
 42,10,3,0,-10,10,99.00000000000001,-0.9999999999999858,0,-6

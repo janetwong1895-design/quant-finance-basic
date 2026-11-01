@@ -1,3 +1,4 @@
+import {taiwanCurrency} from '../scripts/taiwan-currency.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
@@ -25,7 +26,8 @@ test('all26 translated Python activities retain executable code and test inputs/
  const en=JSON.parse(read('python/exercises.json')),zh=JSON.parse(read('zh-tw/python/exercises.json'));
  assert.equal(zh.length,26);
  for(let i=0;i<en.length;i++){
-  for(const key of ['id','chapter','minutes','starter','example'])assert.deepEqual(zh[i][key],en[i][key]);
+  for(const key of ['id','chapter','minutes'])assert.deepEqual(zh[i][key],en[i][key]);
+  for(const key of ['starter','example'])assert.equal(zh[i][key],taiwanCurrency(en[i][key]));
   for(const key of ['title','objective','prediction','instructions','syntax','reflection'])assert.ok(han(zh[i][key]),`${en[i].id} ${key}`);
   assert.ok(zh[i].hints.every(h=>han(h)||h.includes('=')), `${en[i].id}: translated explanation or an unchanged formula`);
   assert.deepEqual(zh[i].cases.map(({function:f,args,expected})=>({function:f,args,expected})),en[i].cases.map(({function:f,args,expected})=>({function:f,args,expected})));
@@ -98,4 +100,17 @@ test('language links track section changes after initial page load',async()=>{
  vm.runInNewContext(read('language-switch.mjs'),{URL,location,document:{querySelectorAll:()=>[link]},window:{addEventListener(type,fn){if(type==='hashchange')hashHandler=fn;}}});
  assert.equal(link.href,'https://course.test/zh-tw/chapter-05/index.html?practice=1#start');
  location.hash='#assessment';hashHandler();assert.equal(new URL(link.href).hash,'#assessment');
+});
+
+test('Taiwan currency and number conventions are visible and consistent across all generated assets',async()=>{
+ const {readdir}=await import('node:fs/promises');
+ async function walk(dir){let files=[];for(const d of await readdir(dir,{withFileTypes:true})){const u=new URL(d.name+(d.isDirectory()?'/':''),dir);if(d.isDirectory())files.push(...await walk(u));else files.push(u);}return files;}
+ for(const p of await walk(new URL('zh-tw/',root)))if(/\.(html|js|mjs|json|csv|py|txt)$/.test(p.pathname))assert.doesNotMatch(readFileSync(p,'utf8'),/便士|\bpence\b|新臺幣，不是新臺幣|£|GBP|gbp|英鎊|en-GB|\bpounds?\b|_pounds?\b/,p.pathname);
+ assert.match(read('zh-tw/learn/index.html'),/NT\$100/);
+ assert.match(read('zh-tw/learn/index.html'),/新臺幣 NT\$ · 1,234\.56/);
+ assert.match(read('zh-tw/python/guide.html'),/並非按匯率換算/);
+ assert.match(read('zh-tw/chapter-02/app.js'),/Intl.NumberFormat\('zh-TW'/);
+ assert.match(read('zh-tw/python/scripts/ch1-comparison.py'),/fee_twd/);
+ assert.match(read('learn/index.html'),/£100/);
+ assert.equal(taiwanCurrency('£1234.56, fee_gbp, starting_pounds; compound'), 'NT$1,234.56, fee_twd, starting_twd; compound');
 });

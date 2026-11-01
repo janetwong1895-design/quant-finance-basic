@@ -5,5 +5,5 @@ def cagr(start, end, years):
     return ((end / start) ** (1 / years) - 1) * 100
 
 if __name__ == "__main__":
-    print("Future value (£):", future_value(500, 8, 2))
+    print("Future value (NT$):", future_value(500, 8, 2))
     print("CAGR (%):", cagr(1000, 1331, 3))
