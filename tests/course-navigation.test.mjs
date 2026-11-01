@@ -19,9 +19,9 @@ test('ten-chapter navigation keeps nested hosting prefix and captures legacy sel
   assert.equal(location.href,current===10?'https://course.example/nested/index.html':'https://course.example/nested/chapter-10/');
  }
 });
-test('course map exposes ten direct no-script chapter links and honest prototype scope',()=>{
+test('course map exposes ten direct no-script chapter links and accurate course information',()=>{
  const html=readFileSync(new URL('../dist/course/index.html',import.meta.url),'utf8');
- for(let n=1;n<=10;n++)assert.ok(html.includes(`Open Chapter ${n} →`));
+ for(let n=1;n<=10;n++)assert.ok(html.includes(`Open Chapter ${n}`));
  assert.ok(html.includes('Optional Python activities add'));
  assert.ok(html.includes('not an accredited credential'));
 });

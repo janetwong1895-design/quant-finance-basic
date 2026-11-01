@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Ten-chapter self-learning quantitative finance foundations prototype with optional Python.",
+  "description": "Ten-chapter self-learning quantitative finance foundations course with optional Python.",
   "engines": {
     "node": ">=24"
   },

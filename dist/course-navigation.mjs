@@ -1,4 +1,4 @@
-// A single table keeps all ten prototype chapters discoverable.
+// A single table keeps all ten chapters discoverable.
 export const CHAPTERS=[
  [1,'A good question','Markets, instruments and a fair comparison'],
  [2,'Financial mathematics','Returns, compounding, present value and inflation'],
@@ -17,4 +17,4 @@ const current=Number(location.pathname.match(/chapter-(\d+)/)?.[1]||1);
 const selector=document.getElementById('chapter-select');
 if(selector){selector.innerHTML=CHAPTERS.map(([n,title])=>`<option value="${n}" ${n===current?'selected':''}>${String(n).padStart(2,'0')} · ${title}</option>`).join('');selector.addEventListener('change',event=>{event.stopImmediatePropagation();const n=Number(selector.value);if(CHAPTERS.some(([id])=>id===n)&&n!==current)location.href=route(n);},true);}
 const sidebar=document.querySelector('.sidebar');
-if(sidebar&&!sidebar.querySelector('[data-course-home]')){const a=document.createElement('a');a.href=new URL('course/',root).href;a.className='text-button';a.dataset.courseHome='true';a.textContent='All 10 prototype chapters →';const anchor=sidebar.querySelector('.sidebar-title');if(anchor)anchor.before(a);else sidebar.append(a);}
+if(sidebar&&!sidebar.querySelector('[data-course-home]')){const a=document.createElement('a');a.href=new URL('course/',root).href;a.className='text-button';a.dataset.courseHome='true';a.textContent='Course map';const anchor=sidebar.querySelector('.sidebar-title');if(anchor)anchor.before(a);else sidebar.append(a);}
